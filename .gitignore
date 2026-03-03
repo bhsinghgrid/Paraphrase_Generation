@@ -1,66 +1,91 @@
-# Python-generated files
+# Python / cache
 __pycache__/
 *.py[oc]
+
+# Build / packaging
 build/
 dist/
 wheels/
 *.egg-info
-production_model3
-production_model4
-production_model_debug
+
+# Virtual env
+.venv
+venv/
+env/
+
+# Model outputs / checkpoints / large weights
+production_model3/
+production_model4/
+production_model_debug/
+NBaseline/production_model4/
+baseline/production_model4/
+*.pt
+*.pth
+*.ckpt
+*.bin
+
+# Experiment outputs / results / specific files
 results/
+results/best_d3pm_cross_attention.pt
+results/             # keep as folder-level ignore (redundant entry safe)
+
+# Large tokenizer file
 sanskrit_tokenizer_m4pro.json
+
+# Specific baseline checkpoint files (if you prefer explicit)
 baseline/production_model4/best_baseline_cross_attention.pt
 baseline/production_model4/best_baseline_encoder_decoder.pt
 baseline/production_model4/best_baseline_encoder_decoder_neg.pt
 
+# Configs, front-end and inference (explicit as requested)
 config/
 Frontend/
 inference/cross_in_out.py
 inference/new_in_out.py
-inference/typescript
+inference/typescript/
 
+# Specific model source files (you asked to ignore these)
 model/d3pm_model.py
 model/new_d3pm_model.py
 
-NBaseline/production_model4
-
-results/best_d3pm_cross_attention.pt
-
+# Named scripts, logs and training files you listed
 bl_cross_train.py
 bl_ed_train.py
+main.py
+test_cross.py
+test_ed.py
+train_cross.py
+train_cross_neg.py
+train_crossbs_neg.py
+train_crossbs_neg.py    # duplicate entry kept (harmless)
+train_ed.py
+train_ed_neg.py
+train_ed_output.py
+train_edB.py
+train_edB_negBC.py
+tran_crossb.py
+
+# Log files / many training logs
+*.log
 cross_neg_output.log
 cross_output.log
 crossb_neg_output.log
 crossb_neg_outputBC.log
 crossb_output.log
-main.py
 output_cross.log
-sanskrit_tokenizer_m4pro.json
-test_cross.py
-test_ed.py
 train1_cross_output.log
-train_cross.py
-train_cross_neg.py
 train_cross_negT.log
-train_crossbs_neg.py
-train_crossbs_neg.py
-train_ed.py
-train_ed_neg.py
 train_ed_negB_output.log
 train_ed_output.log
-train_ed_output.py
-train_edB.py
-train_edB_negBC.py
 train_edB_negBC_output.log
 trainc_output.log
 tran_crossb.log
-tran_crossb.py
 trans_crossb1.log
 
-
-# Virtual environments
-.venv
+# Any other temporary / local files you don't want tracked
+.gradio/
+.DS_Store
+Thumbs.db
 
 ## Python Cache Files
 #__pycache__/

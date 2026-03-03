@@ -1,121 +1,121 @@
-## Python-generated files
-#__pycache__/
-#*.py[oc]
-#build/
-#dist/
-#wheels/
-#*.egg-info
-#production_model3
-#production_model4
-#production_model_debug
-#results/
-#sanskrit_tokenizer_m4pro.json
-#baseline/production_model4/best_baseline_cross_attention.pt
-#baseline/production_model4/best_baseline_encoder_decoder.pt
-#baseline/production_model4/best_baseline_encoder_decoder_neg.pt
-#
-#config/
-#Frontend/
-#inference/cross_in_out.py
-#inference/new_in_out.py
-#inference/typescript
-#
-#model/d3pm_model.py
-#model/new_d3pm_model.py
-#
-#NBaseline/production_model4
-#
-#results/best_d3pm_cross_attention.pt
-#
-#bl_cross_train.py
-#bl_ed_train.py
-#cross_neg_output.log
-#cross_output.log
-#crossb_neg_output.log
-#crossb_neg_outputBC.log
-#crossb_output.log
-#main.py
-#output_cross.log
-#sanskrit_tokenizer_m4pro.json
-#test_cross.py
-#test_ed.py
-#train1_cross_output.log
-#train_cross.py
-#train_cross_neg.py
-#train_cross_negT.log
-#train_crossbs_neg.py
-#train_crossbs_neg.py
-#train_ed.py
-#train_ed_neg.py
-#train_ed_negB_output.log
-#train_ed_output.log
-#train_ed_output.py
-#train_edB.py
-#train_edB_negBC.py
-#train_edB_negBC_output.log
-#trainc_output.log
-#tran_crossb.log
-#tran_crossb.py
-#trans_crossb1.log
-#
-#
-## Virtual environments
-#.venv
-
-# Python Cache Files
+# Python-generated files
 __pycache__/
-*.py[cod]
-*$py.class
-
-# Virtual Environments
-.venv/
-venv/
-env/
-
-# Build / Packaging
+*.py[oc]
 build/
 dist/
 wheels/
-*.egg-info/
-*.egg
-pip-wheel-metadata/
-
-# IDE / Editor Files
-.idea/
-.vscode/
-*.iml
-
-# OS Files
-
-.DS_Store
-Thumbs.db
-
-# Logs
-*.log
-
-# Model Weights (VERY IMPORTANT - prevents 100MB error)
-*.pt
-*.pth
-*.ckpt
-*.bin
-
-# Experiment Outputs
+*.egg-info
+production_model3
+production_model4
+production_model_debug
 results/
-generated_results/
-production_model*/
-baseline/production_model*/
-NBaseline/production_model*/
+sanskrit_tokenizer_m4pro.json
+baseline/production_model4/best_baseline_cross_attention.pt
+baseline/production_model4/best_baseline_encoder_decoder.pt
+baseline/production_model4/best_baseline_encoder_decoder_neg.pt
 
-# Gradio
-.gradio/
+config/
+Frontend/
+inference/cross_in_out.py
+inference/new_in_out.py
+inference/typescript
 
-# Python Version Files
-.python-version
+model/d3pm_model.py
+model/new_d3pm_model.py
 
-# Lock Files (optional - remove if you want tracked)
-uv.lock
+NBaseline/production_model4
 
-# ==================================================
-# Large Tokenizer (optional - uncomment if large)
-# ==================================================
-# sanskrit_tokenizer_m4pro.json
+results/best_d3pm_cross_attention.pt
+
+bl_cross_train.py
+bl_ed_train.py
+cross_neg_output.log
+cross_output.log
+crossb_neg_output.log
+crossb_neg_outputBC.log
+crossb_output.log
+main.py
+output_cross.log
+sanskrit_tokenizer_m4pro.json
+test_cross.py
+test_ed.py
+train1_cross_output.log
+train_cross.py
+train_cross_neg.py
+train_cross_negT.log
+train_crossbs_neg.py
+train_crossbs_neg.py
+train_ed.py
+train_ed_neg.py
+train_ed_negB_output.log
+train_ed_output.log
+train_ed_output.py
+train_edB.py
+train_edB_negBC.py
+train_edB_negBC_output.log
+trainc_output.log
+tran_crossb.log
+tran_crossb.py
+trans_crossb1.log
+
+
+# Virtual environments
+.venv
+
+## Python Cache Files
+#__pycache__/
+#*.py[cod]
+#*$py.class
+#
+## Virtual Environments
+#.venv/
+#venv/
+#env/
+#
+## Build / Packaging
+#build/
+#dist/
+#wheels/
+#*.egg-info/
+#*.egg
+#pip-wheel-metadata/
+#
+## IDE / Editor Files
+#.idea/
+#.vscode/
+#*.iml
+#
+## OS Files
+#
+#.DS_Store
+#Thumbs.db
+#
+## Logs
+#*.log
+#
+## Model Weights (VERY IMPORTANT - prevents 100MB error)
+#*.pt
+#*.pth
+#*.ckpt
+#*.bin
+#
+## Experiment Outputs
+#results/
+#generated_results/
+#production_model*/
+#baseline/production_model*/
+#NBaseline/production_model*/
+#
+## Gradio
+#.gradio/
+#
+## Python Version Files
+#.python-version
+#
+## Lock Files (optional - remove if you want tracked)
+#uv.lock
+#
+## ==================================================
+## Large Tokenizer (optional - uncomment if large)
+## ==================================================
+## sanskrit_tokenizer_m4pro.json

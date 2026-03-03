@@ -1,0 +1,72 @@
+[
+    {
+        "model_type": "d3pm_encoder_decoder",
+        "input_text": "yaḥ śūnyatāṃ prajānāti īdṛśaṃ rūpalakṣaṇam / na cāsau mārakoṭībhirbhūyaḥ śakya parājitum",
+        "output_text": "यः शून्य तां प्रजा नाति ईदृ शं रूप वि । न चा सौभाग्य मार योजन भूयः भूयः मान् परा जि तुम्",
+        "diversity_level": "low",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "length_penalty": 1.0,
+        "timestamp": "2026-03-02T22:26:06.090864"
+    },
+    {
+        "model_type": "d3pm_encoder_decoder",
+        "input_text": "yaḥ śūnyatāṃ prajānāti īdṛśaṃ rūpalakṣaṇam / na cāsau mārakoṭībhirbhūyaḥ śakya parājitum",
+        "output_text": "यः शून्य तां प्रजा नाति ईदृ शं रूप वि । न चा सौभाग्य मार योजन भूयः भूयः मान् परा जि तुम्",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "length_penalty": 1.0,
+        "timestamp": "2026-03-02T22:27:11.275002"
+    },
+    {
+        "model_type": "d3pm_encoder_decoder",
+        "input_text": "yaḥ śūnyatāṃ prajānāti īdṛśaṃ rūpalakṣaṇam / na cāsau mārakoṭībhirbhūyaḥ śakya parājitum",
+        "output_text": "ष्यं शून्य तां प्रजा नाति ईदृ शं रूप । । चा चा सौ च्च सं भूयः भ ेन परा व्य तुम् ॥",
+        "diversity_level": "high",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "length_penalty": 1.0,
+        "timestamp": "2026-03-02T22:27:25.022582"
+    },
+    {
+        "model_type": "d3pm_encoder_decoder",
+        "input_text": "yaḥ śūnyatāṃ prajānāti īdṛśaṃ rūpalakṣaṇam / na cāsau mārakoṭībhirbhūyaḥ śakya parājitum",
+        "output_text": "चित्रं पारमिता भिः न्तु नाति छ सर्वत्र रूप ल न विन्द चा ेन ेण कला द्यो ताभ्यां चिन्त रत्न ही शाम् नम् श्रियम् च बलम् ।॥ । गे संकल्प मसि क्वचित्",
+        "diversity_level": "high",
+        "repetition_penalty": 1.5,
+        "diversity_penalty": 0.5,
+        "length_penalty": 1.0,
+        "timestamp": "2026-03-02T22:27:39.220031"
+    },
+    {
+        "model_type": "d3pm_encoder_decoder",
+        "input_text": "yaḥ śūnyatāṃ prajānāti īdṛśaṃ rūpalakṣaṇam / na cāsau mārakoṭībhirbhūyaḥ śakya parājitum",
+        "output_text": "्यः शून्य तां प्रजा नाति श् शं रूप । । न चा सौभाग्य मार योजन भ भ ह्य ह्य जि ॥ ॥",
+        "diversity_level": "low",
+        "repetition_penalty": 1.5,
+        "diversity_penalty": 0.5,
+        "length_penalty": 1.0,
+        "timestamp": "2026-03-02T22:27:50.222049"
+    },
+    {
+        "model_type": "d3pm_encoder_decoder",
+        "input_text": "yaḥ śūnyatāṃ prajānāti īdṛśaṃ rūpalakṣaṇam / na cāsau mārakoṭībhirbhūyaḥ śakya parājitum",
+        "output_text": "्यः शून्य तां प्रजा नाति श् शं रूप । । न चा सौभाग्य मार योजन भ भ ह्य ह्य जि ॥ ॥",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.5,
+        "diversity_penalty": 0.5,
+        "length_penalty": 1.0,
+        "timestamp": "2026-03-02T22:27:59.335260"
+    },
+    {
+        "model_type": "d3pm_encoder_decoder",
+        "input_text": "yaḥ śūnyatāṃ prajānāti īdṛśaṃ rūpalakṣaṇam / na cāsau mārakoṭībhirbhūyaḥ śakya parājitum",
+        "output_text": "यः शून्य तां प्रजा नाति ईदृ शं रूप वि । न चा सौभाग्य मार योजन भूयः भूयः मान् परा जि तुम्",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "length_penalty": 1.0,
+        "timestamp": "2026-03-02T22:29:30.990627"
+    }
+]

@@ -1,0 +1,15 @@
+
+
+
+🔒 Seed set to 42 (Deterministic mode enabled)
+🔥 Training Started
+🎓 Training new Sanskrit tokenizer...
+✅ [MASK] token confirmed at ID=0
+✅ Tokenizer trained (50k samples → 16k vocab)
+📥 Loading 'train' split of the dataset...
+✅ Dataset loaded successfully! Total samples: 404741
+✅ Train: 48000 | Val: 12000
+✅ Model params: 37,249,216
+🔥 Model type: d3pm_cross_attention
+
+🔥 EPOCH 1

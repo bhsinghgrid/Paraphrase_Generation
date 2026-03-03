@@ -1,0 +1,62 @@
+[
+    {
+        "model_type": "d3pm_encoder_decoder",
+        "input_text": "yaḥ śūnyatāṃ prajānāti īdṛśaṃ rūpalakṣaṇam / na cāsau mārakoṭībhirbhūyaḥ śakya parājitum",
+        "output_text": "यः शून्य तां प्रजा नाति ईदृ शं रूप वि । न चा सौभाग्य मार योजन भूयः भूयः मान् परा जि तुम्",
+        "diversity_level": "low",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "length_penalty": 1.0,
+        "timestamp": "2026-03-02T22:30:07.562711"
+    },
+    {
+        "model_type": "d3pm_encoder_decoder",
+        "input_text": "yaḥ śūnyatāṃ prajānāti īdṛśaṃ rūpalakṣaṇam / na cāsau mārakoṭībhirbhūyaḥ śakya parājitum",
+        "output_text": "्यः शून्य तां प्रजा नाति श् शं रूप वि । न चा सौभाग्य मार योजन भ भ ह्य ह्य जि ॥ ॥",
+        "diversity_level": "low",
+        "repetition_penalty": 1.5,
+        "diversity_penalty": 0.0,
+        "length_penalty": 1.0,
+        "timestamp": "2026-03-02T22:30:29.535861"
+    },
+    {
+        "model_type": "d3pm_encoder_decoder",
+        "input_text": "yaḥ śūnyatāṃ prajānāti īdṛśaṃ rūpalakṣaṇam / na cāsau mārakoṭībhirbhūyaḥ śakya parājitum",
+        "output_text": "त्र्य शून्य मल प्रजा नाति श् अग्र पद्म वि नु । तेन सुराणां वादि चक्षु व्य भि भ इ ौ ः षाम् ।। ते । ।॥ अग हृदय लम्",
+        "diversity_level": "high",
+        "repetition_penalty": 1.5,
+        "diversity_penalty": 0.0,
+        "length_penalty": 1.0,
+        "timestamp": "2026-03-02T22:30:41.652792"
+    },
+    {
+        "model_type": "d3pm_encoder_decoder",
+        "input_text": "yaḥ śūnyatāṃ prajānāti īdṛśaṃ rūpalakṣaṇam / na cāsau mārakoṭībhirbhūyaḥ śakya parājitum",
+        "output_text": "्यः शून्य तां प्रजा नाति श् शं रूप वि । न चा सौभाग्य मार योजन भ भ ह्य ह्य जि ॥ ॥",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.5,
+        "diversity_penalty": 0.0,
+        "length_penalty": 1.0,
+        "timestamp": "2026-03-02T22:30:51.418223"
+    },
+    {
+        "model_type": "d3pm_encoder_decoder",
+        "input_text": "{vajra:: māraṇa} raktotpalasya mūlaiśca meghanādasya kuḍmalaiḥ / piṇḍitairveṣṭitaṃ dhmātaṃ vajraṃ bhasma bhavatyalam",
+        "output_text": "म्य वज्र चर्म मार ण म र भग त्पल स्य मूल ैश्च स्ते नाद सुरा कु े े रैः । पि सं ल ल ैक मा र च रं च च र लम् ॥",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.5,
+        "diversity_penalty": 0.0,
+        "length_penalty": 1.0,
+        "timestamp": "2026-03-02T22:31:10.949251"
+    },
+    {
+        "model_type": "d3pm_encoder_decoder",
+        "input_text": "{vajra:: māraṇa} raktotpalasya mūlaiśca meghanādasya kuḍmalaiḥ / piṇḍitairveṣṭitaṃ dhmātaṃ vajraṃ bhasma bhavatyalam",
+        "output_text": "{ वज्र रत्न मार ण म र क्तो त्पल स्य मूल ैश्च मेघ नाद सुरा कु म मल ैः । पि ितम् ितम् ल ैक मा मा ं रं च धू वां लम्",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.2,
+        "diversity_penalty": 0.5,
+        "length_penalty": 1.0,
+        "timestamp": "2026-03-02T22:31:37.886717"
+    }
+]

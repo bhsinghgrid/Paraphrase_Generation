@@ -1,0 +1,40 @@
+🔒 Seed set to 42 (Deterministic mode enabled)
+🔥 Training Started
+📖 Loading existing Sanskrit tokenizer...
+✅ [MASK] token confirmed at ID=0
+📥 Loading 'train' split of the dataset...
+✅ Dataset loaded successfully! Total samples: 404741
+✅ Train: 48000 | Val: 12000
+✅ Model params: 37,211,776
+🔥 Model type: baseline_cross_attention
+
+🔥 EPOCH 1
+📊 Train: 1.5725 | Val: 0.1010 | BERT F1: 0.8391
+🎉 Best model saved.
+
+🔥 EPOCH 2
+📊 Train: 0.7279 | Val: 0.0846 | BERT F1: 0.8391
+🎉 Best model saved.
+
+🔥 EPOCH 3
+📊 Train: 0.6976 | Val: 0.0931 | BERT F1: 0.8391
+🎉 Best model saved.
+
+🔥 EPOCH 4
+📊 Train: 0.6888 | Val: 0.0579 | BERT F1: 0.8391
+🎉 Best model saved.
+
+🔥 EPOCH 5
+📊 Train: 0.6859 | Val: 0.0549 | BERT F1: 0.8391
+🎉 Best model saved.
+
+🔥 EPOCH 6
+📊 Train: 0.6854 | Val: 0.0541 | BERT F1: 0.8391
+🎉 Best model saved.
+
+🔥 EPOCH 7
+📊 Train: 0.6852 | Val: 0.0538 | BERT F1: 0.8391
+🎉 Best model saved.
+
+
+

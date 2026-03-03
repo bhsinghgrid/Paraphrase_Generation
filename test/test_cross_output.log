@@ -1,0 +1,10 @@
+🔒 Seed set to 42
+🧪 Starting TRUE Generative Evaluation...
+
+📖 Loading existing Sanskrit tokenizer...
+✅ [MASK] token confirmed at ID=0
+✅ Loaded model: d3pm_cross_attention
+📥 Loading 'test' split of the dataset...
+✅ Dataset loaded successfully! Total samples: 44972
+📦 Test Samples: 5000
+

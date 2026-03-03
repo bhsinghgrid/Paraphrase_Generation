@@ -401,7 +401,7 @@ import torch.nn.functional as F
 from types import MethodType
 
 # ----------------------------
-# Directory to save generated JSON results
+# Directory to save generated JSON results1
 # ----------------------------
 RESULTS_DIR = "generated_results"
 os.makedirs(RESULTS_DIR, exist_ok=True)
@@ -416,7 +416,7 @@ if not os.path.exists(RESULTS_FILE):
         json.dump([], f, ensure_ascii=False, indent=4)
 
 # ----------------------------
-# Modified generate_text function to save results as JSON
+# Modified generate_text function to save results1 as JSON
 # ----------------------------
 @torch.no_grad()
 def generate_text_and_save_json(input_text: str,

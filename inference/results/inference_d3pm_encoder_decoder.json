@@ -1,0 +1,22 @@
+[
+    {
+        "model": "d3pm_encoder_decoder",
+        "input": "pranaṣṭe gandhatanmātre bhavaty urvī jalātmikā āpas tadā pravṛttās tu vegavatyo mahāsvanāḥ",
+        "output": "प्र न ष्टे गन्ध तन्त्र मात्रे भवत्य् ुर् वी जला त् मिका आप तदा तदा प्रवृत्त ा तु तु वत् वत् महा स्व नाः"
+    },
+    {
+        "model": "d3pm_encoder_decoder",
+        "input": "yaḥ śūnyatāṃ prajānāti īdṛśaṃ rūpalakṣaṇam / na cāsau mārakoṭībhirbhūyaḥ śakya parājitum",
+        "output": "यः शून्य तां प्रजा ईदृ ईदृ शं रूप लक्षणम् । न चा सौ मार भिर् भिर् भूयः शक्य परा जि"
+    },
+    {
+        "model": "d3pm_encoder_decoder",
+        "input": "",
+        "output": "अचिन्ति"
+    },
+    {
+        "model": "d3pm_encoder_decoder",
+        "input": "yaḥ śūnyatāṃ prajānāti īdṛśaṃ rūpalakṣaṇam / na cāsau mārakoṭībhirbhūyaḥ śakya parājitum",
+        "output": "यः शून्य तां प्रजा ईदृ ईदृ शं रूप लक्षणम् । न चा सौ मार भिर् भिर् भूयः शक्य परा जि"
+    }
+]

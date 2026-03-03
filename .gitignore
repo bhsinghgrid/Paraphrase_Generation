@@ -24,13 +24,13 @@ baseline/production_model4/
 *.ckpt
 *.bin
 
-# Experiment outputs / results / specific files
-results/
-results/best_d3pm_cross_attention.pt
-results/             # keep as folder-level ignore (redundant entry safe)
+# Experiment outputs / results1 / specific files
+results1/
+results1/best_d3pm_cross_attention.pt
+results1/             # keep as folder-level ignore (redundant entry safe)
 
 # Large tokenizer file
-sanskrit_tokenizer_m4pro.json
+sample/sanskrit_tokenizer_m4pro.json
 
 # Specific baseline checkpoint files (if you prefer explicit)
 baseline/production_model4/best_baseline_cross_attention.pt
@@ -42,45 +42,43 @@ config/
 Frontend/
 inference/cross_in_out.py
 inference/new_in_out.py
-inference/typescript/
+inference/typescript
 
 # Specific model source files (you asked to ignore these)
 model/d3pm_model.py
 model/new_d3pm_model.py
 
 # Named scripts, logs and training files you listed
-bl_cross_train.py
-bl_ed_train.py
-main.py
-test_cross.py
-test_ed.py
-train_cross.py
-train_cross_neg.py
-train_crossbs_neg.py
-train_crossbs_neg.py    # duplicate entry kept (harmless)
-train_ed.py
-train_ed_neg.py
-train_ed_output.py
-train_edB.py
-train_edB_negBC.py
-tran_crossb.py
+sample/bl_cross_train.py
+sample/bl_ed_train.py
+sample/main.py
+sample/test_cross.py
+sample/test_ed.py
+sample/train_cross.py
+sample/train_cross_neg.py
+sample/train_crossbs_neg.py
+sample/train_ed.py
+sample/train_ed_neg.py
+sample/train_ed_output.py
+sample/train_edB.py
+sample/train_edB_negBC.py
+sample/tran_crossb.py
 
 # Log files / many training logs
-*.log
-cross_neg_output.log
-cross_output.log
-crossb_neg_output.log
-crossb_neg_outputBC.log
-crossb_output.log
-output_cross.log
-train1_cross_output.log
-train_cross_negT.log
-train_ed_negB_output.log
-train_ed_output.log
-train_edB_negBC_output.log
-trainc_output.log
-tran_crossb.log
-trans_crossb1.log
+sample/cross_neg_output.log
+sample/cross_output.log
+sample/crossb_neg_output.log
+sample/crossb_neg_outputBC.log
+sample/crossb_output.log
+sample/output_cross.log
+sample/train1_cross_output.log
+sample/train_cross_negT.log
+sample/train_ed_negB_output.log
+sample/train_ed_output.log
+sample/train_edB_negBC_output.log
+sample/trainc_output.log
+sample/tran_crossb.log
+sample/trans_crossb1.log
 
 # Any other temporary / local files you don't want tracked
 .gradio/
@@ -125,7 +123,7 @@ Thumbs.db
 #*.bin
 #
 ## Experiment Outputs
-#results/
+#results1/
 #generated_results/
 #production_model*/
 #baseline/production_model*/

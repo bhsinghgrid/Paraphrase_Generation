@@ -1,0 +1,32 @@
+🔒 Seed set to 42 (Deterministic mode enabled)
+🔥 Training Started
+📖 Loading existing Sanskrit tokenizer...
+✅ [MASK] token confirmed at ID=0
+📥 Loading 'train' split of the dataset...
+✅ Dataset loaded successfully! Total samples: 404741
+✅ Train: 48000 | Val: 12000
+✅ Model params: 37,150,336
+🔥 Model type: baseline_encoder_decoder
+
+🔥 EPOCH 1
+📊Train: 1.5745 | Val: 0.0815 | BERT F1: 0.8390
+🎉 Best model saved.
+
+🔥 EPOCH 2
+📊 Train: 0.7268 | Val: 0.0359 | BERT F1: 0.8391
+🎉 Best model saved.
+
+🔥 EPOCH 3
+📊 Train: 0.6909 | Val: 0.0617 | BERT F1: 0.8391
+
+🔥 EPOCH 4
+📊 Train: 0.6911 | Val: 0.0558 | BERT F1: 0.8391
+
+🔥 EPOCH 5
+📊 Train: 0.6864 | Val: 0.0557 | BERT F1: 0.8391
+🛑 Early stopping triggered.
+✅ Training Complete
+
+
+
+

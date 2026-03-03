@@ -1,0 +1,9 @@
+{
+    "model_type": "d3pm_cross_attention",
+    "test_size": 5000,
+    "test_loss": 1.3542,
+    "token_accuracy": 0.8428,
+    "sentence_exact_match": 0.5052,
+    "bert_f1": 0.0,
+    "bleu": 50.8263
+}

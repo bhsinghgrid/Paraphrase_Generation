@@ -80,12 +80,12 @@
 #     # -----------------------------
 #     def _setup_logging(self):
 #         os.makedirs("production_model4", exist_ok=True)
-#         os.makedirs("results", exist_ok=True)
+#         os.makedirs("results1", exist_ok=True)
 #         logging.basicConfig(
 #             level=logging.INFO,
 #             format="%(asctime)s - %(message)s",
 #             handlers=[
-#                 logging.FileHandler("results/training.log"),
+#                 logging.FileHandler("results1/training.log"),
 #                 logging.StreamHandler()
 #             ]
 #         )
@@ -216,8 +216,8 @@
 #     #     if len(predictions) == 0:
 #     #         return 0.0
 #     #
-#     #     results = self.bertscore.compute(predictions=predictions, references=references, lang="hi", batch_size=16)
-#     #     f1 = float(np.mean(results["f1"]))
+#     #     results1 = self.bertscore.compute(predictions=predictions, references=references, lang="hi", batch_size=16)
+#     #     f1 = float(np.mean(results1["f1"]))
 #     #     return f1
 #
 #     def compute_bertscore(self, max_samples=500, debug=True):
@@ -613,9 +613,9 @@ class SanskritTrainer:
     #         return 0.0
     #
     #     try:
-    #         results = self.bertscore.compute(predictions=predictions, references=references,
+    #         results1 = self.bertscore.compute(predictions=predictions, references=references,
     #                                          lang="hi", batch_size=batch_score_size)
-    #         mean_f1 = float(np.mean(results["f1"]))
+    #         mean_f1 = float(np.mean(results1["f1"]))
     #         return mean_f1
     #     except Exception as e:
     #         logging.error(f"BERTScore computation failed: {e}")
@@ -653,11 +653,11 @@ class SanskritTrainer:
     #     # Try BERTScore first
     #     try:
     #         if BERTSCORE_AVAILABLE:
-    #             results = self.bertscore.compute(predictions=predictions,
+    #             results1 = self.bertscore.compute(predictions=predictions,
     #                                              references=references,
     #                                              lang="hi",
     #                                              batch_size=batch_score_size)
-    #             f1_mean = float(np.mean(results["f1"]))
+    #             f1_mean = float(np.mean(results1["f1"]))
     #             if f1_mean > 0:
     #                 return f1_mean
     #     except Exception as e:

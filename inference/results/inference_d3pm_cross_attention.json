@@ -1,0 +1,52 @@
+[
+    {
+        "model": "d3pm_cross_attention",
+        "input": "udelaḍi",
+        "output": "हृदि ल डि असि"
+    },
+    {
+        "model": "d3pm_cross_attention",
+        "input": "yā oṣa̍dhī̱ḥ soma̍rājñī̱r viṣṭhi̍tāḥ pṛthi̱vīm anu̍ | bṛha̱spati̍prasūtā a̱syai saṁ da̍tta vī̱rya̍m ||",
+        "output": "पेक्ष शरणा र्प बे चाप्य् भ्रात्रा शिनी लाप चिता इवो ̍ मूर्छ वर्ति क्रोश वृत्तम् हविषा दुःखा ̍ ब्रह्मवादि दर्शनम् लाद् मर्त्या पाया वीचि दुरु साः रजनी तेति नभो"
+    },
+    {
+        "model": "d3pm_cross_attention",
+        "input": "pranaṣṭe gandhatanmātre bhavaty urvī jalātmikā āpas tadā pravṛttās tu vegavatyo mahāsvanāḥ //",
+        "output": "वधि कृष्य ग्रन्थि रजनी कुलं स्पन्द गिरा विभाव चिता ङ्गुलि कराल भूतले अग्निं लैः श्वशु पल्ल विध् वैद्य याहि कटा निपत सतत पाया वीचि ान्तरा"
+    },
+    {
+        "model": "d3pm_cross_attention",
+        "input": "nakṣatre 'bdaṃ sa tiṣṭhanvai saṃvedhāstena gacchati / tataḥ śanaiścaro 'pyaśvaiḥ sabalairvyomasaṃbhavaiḥ",
+        "output": "नक्ष त्रे ऽ ब् दं स स्त वै सं ित धा । । । ततः श ां श्च रो ऽ प्य श ैः बल बल ैर् च"
+    },
+    {
+        "model": "d3pm_cross_attention",
+        "input": "udelaḍi",
+        "output": "धरणी रघु प्रयत्नेन"
+    },
+    {
+        "model": "d3pm_cross_attention",
+        "input": "somakṣaye ca saṃprāpte somasya ca dine tathā / yaḥ śrāddhaṃ kurute martyastasya puṇyaphalaṃ śṛṇu",
+        "output": "यताम् लाद् पश्चिमे जा̱ स्थाय ट्ट मन्त्रः स्तां तुषा तृप्ति ऽपरः निर्या ऽन्त हन गणाः अन्यत्र र्घ प्रतापवान्"
+    },
+    {
+        "model": "d3pm_cross_attention",
+        "input": "somakṣaye ca saṃprāpte somasya ca dine tathā / yaḥ śrāddhaṃ kurute martyastasya puṇyaphalaṃ śṛṇu",
+        "output": "सोम त्पल च सं प्राप्ते विज्ञे च आदि तथा । यः गूढ कुरुते स्क स पुण्य फलं शृणु शृणु"
+    },
+    {
+        "model": "d3pm_cross_attention",
+        "input": "somakṣaye ca saṃprāpte somasya ca dine tathā / yaḥ śrāddhaṃ kurute martyastasya puṇyaphalaṃ śṛṇu",
+        "output": "सोम त्पल च सं प्राप्ते विज्ञे च आदि तथा । यः गूढ कुरुते स्क स पुण्य फलं शृणु शृणु"
+    },
+    {
+        "model": "d3pm_cross_attention",
+        "input": "pranaṣṭe gandhatanmātre bhavaty urvī jalātmikā āpas tadā pravṛttās tu vegavatyo mahāsvanāḥ //",
+        "output": "प्र न ष्टे गन्ध तन् किला दू ौ वी भीष त् । ष्ठी स् स् ते तु तु वेग वत् यो महा नाः नाः ॥"
+    },
+    {
+        "model": "d3pm_cross_attention",
+        "input": "pranaṣṭe gandhatanmātre bhavaty urvī jalātmikā āpas tadā pravṛttās tu vegavatyo mahāsvanāḥ",
+        "output": "प्र न ष्टे गन्ध तन् किला दू ौ वी भीष त् । ष्ठी स् स् प्रवृत्त तु तु वेग वत् यो महा नाः नाः"
+    }
+]

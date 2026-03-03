@@ -38,7 +38,7 @@ iface = gr.Interface(
     ],
     outputs=[gr.Textbox(label="Output Text")],
     title="Sanskrit Paraphrase Generator",
-    description="Generates paraphrases and saves all results automatically to a JSON file."
+    description="Generates paraphrases and saves all results1 automatically to a JSON file."
 )
 
 # ----------------------------

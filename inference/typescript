@@ -1,0 +1,159 @@
+Script started on Sat Feb 28 07:05:50 2026
+[1m[7m%[27m[1m[0m                                                                                                                                                                                [0m[27m[24m[Jbhsingh@Bhanus-MacBook-Pro inference % [K[?2004htouch README.md[15Dcd ..          [10Dtouch new_d3pm_model.py[23Dcd model               [15D[8Dtouch test_ed.py[16Dcd model        [8D[8Dtouch new_d3pm_model.py[23Dcd ..                  [18Dtouch README.md[15D               [15Duuv run cross_in_out.py | tee output.log[?2004l
+📖 Loading existing Sanskrit tokenizer...
+✅ [MASK] token confirmed at ID=0
+
+📝 Model: d3pm_cross_attention
+Type 'quit' to exit.
+
+> pranaṣṭe gandhatanmātre bhavaty urvī jalātmikā āpas tadā pravṛttās tu vegavatyo mahāsvanāḥ
+Beam Reverse step 11/12
+Beam Reverse step 10/12
+Beam Reverse step 9/12
+Beam Reverse step 8/12
+Beam Reverse step 7/12
+Beam Reverse step 6/12
+Beam Reverse step 5/12
+Beam Reverse step 4/12
+Beam Reverse step 3/12
+Beam Reverse step 2/12
+Beam Reverse step 1/12
+Beam Reverse step 0/12
+✅ Output: प्र न ष्टे गन्ध तन् किला दू ौ वी भीष त् । ष्ठी स् स् प्रवृत्त तु तु वेग वत् यो महा नाः नाः
+> quit
+
+💾 Saved to results/inference_d3pm_cross_attention.json
+[1m[7m%[27m[1m[0m                                                                                                                                                                                [0m[27m[24m[Jbhsingh@Bhanus-MacBook-Pro inference % [K[?2004huv run cross_in_out.py | tee output.log1.log[1C[1C[1C[1C[?2004l
+📖 Loading existing Sanskrit tokenizer...
+✅ [MASK] token confirmed at ID=0
+
+📝 Model: d3pm_encoder_decoder
+Type 'quit' to exit.
+
+> pranaṣṭe gandhatanmātre bhavaty urvī jalātmikā āpas tadā pravṛttās tu vegavatyo mahāsvanāḥ
+Beam Reverse step 11/12
+Beam Reverse step 10/12
+Beam Reverse step 9/12
+Beam Reverse step 8/12
+Beam Reverse step 7/12
+Beam Reverse step 6/12
+Beam Reverse step 5/12
+Beam Reverse step 4/12
+Beam Reverse step 3/12
+Beam Reverse step 2/12
+Beam Reverse step 1/12
+Beam Reverse step 0/12
+✅ Output: प्र न ष्टे गन्ध तन्त्र मात्रे भवत्य् ुर् वी जला त् मिका आप तदा तदा प्रवृत्त ा तु तु वत् वत् महा स्व नाः
+> yaḥ śūnyatāṃ prajānāti īdṛśaṃ rūpalakṣaṇam / na cāsau mārakoṭībhirbhūyaḥ śakya parājitum
+
+Beam Reverse step 11/12
+Beam Reverse step 10/12
+Beam Reverse step 9/12
+Beam Reverse step 8/12
+Beam Reverse step 7/12
+Beam Reverse step 6/12
+Beam Reverse step 5/12
+Beam Reverse step 4/12
+Beam Reverse step 3/12
+Beam Reverse step 2/12
+Beam Reverse step 1/12
+Beam Reverse step 0/12
+✅ Output: यः शून्य तां प्रजा ईदृ ईदृ शं रूप लक्षणम् । न चा सौ मार भिर् भिर् भूयः शक्य परा जि
+> Beam Reverse step 11/12
+Beam Reverse step 10/12
+Beam Reverse step 9/12
+Beam Reverse step 8/12
+Beam Reverse step 7/12
+Beam Reverse step 6/12
+Beam Reverse step 5/12
+Beam Reverse step 4/12
+Beam Reverse step 3/12
+Beam Reverse step 2/12
+Beam Reverse step 1/12
+Beam Reverse step 0/12
+✅ Output: अचिन्ति
+> quit
+
+💾 Saved to results/inference_d3pm_encoder_decoder.json
+[1m[7m%[27m[1m[0m                                                                                                                                                                                [0m[27m[24m[Jbhsingh@Bhanus-MacBook-Pro inference % [K[?2004httouch new_in_out.py[?2004l
+[1m[7m%[27m[1m[0m                                                                                                                                                                                [0m[27m[24m[Jbhsingh@Bhanus-MacBook-Pro inference % [K[?2004huuv run in  new_in_out.py[?2004l
+📖 Loading existing Sanskrit tokenizer...
+✅ [MASK] token confirmed at ID=0
+
+📝 Model: d3pm_encoder_decoder
+Type 'quit' to exit.
+
+> yaḥ śūnyatāṃ prajānāti īdṛśaṃ rūpalakṣaṇam / na cāsau mārakoṭībhirbhūyaḥ śakya parājitum
+Beam Reverse step 11/12
+Beam Reverse step 10/12
+Beam Reverse step 9/12
+Beam Reverse step 8/12
+Beam Reverse step 7/12
+Beam Reverse step 6/12
+Beam Reverse step 5/12
+Beam Reverse step 4/12
+Beam Reverse step 3/12
+Beam Reverse step 2/12
+Beam Reverse step 1/12
+Beam Reverse step 0/12
+❌ Inference Error: 'SanskritTokenizer' object has no attribute 'pad_token_id'
+> quit
+
+💾 Saved to results/inference_d3pm_encoder_decoder.json
+[1m[7m%[27m[1m[0m                                                                                                                                                                                [0m[27m[24m[Jbhsingh@Bhanus-MacBook-Pro inference % [K[?2004huv run new_in_out.py[?2004l
+📖 Loading existing Sanskrit tokenizer...
+✅ [MASK] token confirmed at ID=0
+
+📝 Model: d3pm_encoder_decoder
+Type 'quit' to exit.
+
+> yaḥ śūnyatāṃ prajānāti īdṛśaṃ rūpalakṣaṇam / na cāsau mārakoṭībhirbhūyaḥ śakya parājitum
+Beam Reverse step 11/12
+Beam Reverse step 10/12
+Beam Reverse step 9/12
+Beam Reverse step 8/12
+Beam Reverse step 7/12
+Beam Reverse step 6/12
+Beam Reverse step 5/12
+Beam Reverse step 4/12
+Beam Reverse step 3/12
+Beam Reverse step 2/12
+Beam Reverse step 1/12
+Beam Reverse step 0/12
+✅ Output: यः शून्य तां प्रजा ईदृ ईदृ शं रूप लक्षणम् । न चा सौ मार भिर् भिर् भूयः शक्य परा जि
+> quit
+
+💾 Saved to results/inference_d3pm_encoder_decoder.json
+[1m[7m%[27m[1m[0m                                                                                                                                                                                [0m[27m[24m[Jbhsingh@Bhanus-MacBook-Pro inference % [K[?2004huv run new_in_out.py[?2004l
+Traceback (most recent call last):
+  File [35m"/Users/bhsingh/Documents/Generation/inference/new_in_out.py"[0m, line [35m10[0m, in [35m<module>[0m
+    [1;31mfrom model.new_d3pm import D3PMModel[0m   # change if your model class name differs
+    [1;31m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[1;35mModuleNotFoundError[0m: [35mNo module named 'model'[0m
+[1m[7m%[27m[1m[0m                                                                                                                                                                                [0m[27m[24m[Jbhsingh@Bhanus-MacBook-Pro inference % [K[?2004huv run new_in_out.py[?2004l
+Traceback (most recent call last):
+  File [35m"/Users/bhsingh/Documents/Generation/inference/new_in_out.py"[0m, line [35m10[0m, in [35m<module>[0m
+    [1;31mfrom model.new_d3pm_model import D3PMModel[0m   # change if your model class name differs
+    [1;31m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[1;35mModuleNotFoundError[0m: [35mNo module named 'model'[0m
+[1m[7m%[27m[1m[0m                                                                                                                                                                                [0m[27m[24m[Jbhsingh@Bhanus-MacBook-Pro inference % [K[?2004huv run new_in_out.py[?2004l
+Traceback (most recent call last):
+  File [35m"/Users/bhsingh/Documents/Generation/inference/new_in_out.py"[0m, line [35m12[0m, in [35m<module>[0m
+    [1;31mfrom model.new_d3pm_model import D3PMModel[0m   # change if your model class name differs
+    [1;31m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[1;35mImportError[0m: [35mcannot import name 'D3PMModel' from 'model.new_d3pm_model' (/Users/bhsingh/Documents/Generation/model/new_d3pm_model.py)[0m
+[1m[7m%[27m[1m[0m                                                                                                                                                                                [0m[27m[24m[Jbhsingh@Bhanus-MacBook-Pro inference % [K[?2004huv run new_in_out.py[?2004l
+📖 Loading tokenizer...
+📖 Loading existing Sanskrit tokenizer...
+✅ [MASK] token confirmed at ID=0
+📦 Loading model...
+Traceback (most recent call last):
+  File [35m"/Users/bhsingh/Documents/Generation/inference/new_in_out.py"[0m, line [35m166[0m, in [35m<module>[0m
+    model, tokenizer = [31mload_model[0m[1;31m(MODEL_PATH, DEVICE)[0m
+                       [31m~~~~~~~~~~[0m[1;31m^^^^^^^^^^^^^^^^^^^^[0m
+  File [35m"/Users/bhsingh/Documents/Generation/inference/new_in_out.py"[0m, line [35m144[0m, in [35mload_model[0m
+    model = SanskritModel(
+        vocab_size=tokenizer.vocab_size
+    )
+[1;35mTypeError[0m: [35mSanskritModel.__init__() got an unexpected keyword argument 'vocab_size'[0m
+[1m[7m%[27m[1m[0m                                                                                                                                                                                [0m[27m[24m[Jbhsingh@Bhanus-MacBook-Pro inference % [K[?2004huv run new_in_out.py

@@ -9,6 +9,7 @@ dependencies = [
     "datasets>=4.6.0",
     "evaluate>=0.4.6",
     "gradio>=6.7.0",
+    "nltk>=3.9.3",
     "numpy>=2.4.2",
     "sacrebleu>=2.6.0",
     "scikit-learn>=1.8.0",

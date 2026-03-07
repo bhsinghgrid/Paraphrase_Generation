@@ -316,7 +316,7 @@ def batch_evaluate(sample_size=1000, num_steps=None, temperature=0.8, top_k=50):
     device     = torch.device(base_cfg["training"]["device"])
     model_name = base_cfg["model_type"]
     has_neg    = "True" if base_cfg["data"]["include_negative_examples"] else "False"
-    exp_dir    = f"results/{model_name}_neg_{has_neg}"
+    exp_dir    = f"results2/{model_name}_neg_{has_neg}"
     ckpt_path  = f"{exp_dir}/best_model.pt"
 
     if not os.path.exists(ckpt_path):

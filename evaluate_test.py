@@ -1,121 +1,120 @@
+"""
+evaluate_test.py
+================
+Final held-out test evaluation.
+Uses the same run_inference() as inference.py — no divergence.
+"""
+
 import torch
-import os
-import sys
+import os, sys
 from tqdm import tqdm
 from torch.utils.data import DataLoader, Subset
 
-from config import CONFIG
-
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+from config import CONFIG
+from inference import load_model, run_inference
 from data.dataset import OptimizedSanskritDataset
 from model.tokenizer import SanskritTokenizer
-from model.sanskrit_model import SanskritModel
-
-try:
-    import evaluate
-
-    BERTSCORE_AVAILABLE = True
-except ImportError:
-    BERTSCORE_AVAILABLE = False
-
-try:
-    from nltk.translate.bleu_score import corpus_bleu
-
-    BLEU_AVAILABLE = True
-except ImportError:
-    BLEU_AVAILABLE = False
 
 
-class FinalEvaluator:
+class Evaluator:
     def __init__(self):
-        self.cfg = CONFIG
-        self.device = torch.device(self.cfg["training"]["device"])
+        self.cfg    = CONFIG
+        self.device = torch.device(self.cfg['training']['device'])
 
-        # 📂 AUTOMATICALLY LOCATE THE CORRECT EXPERIMENT FOLDER
         model_name = self.cfg['model_type']
-        has_neg = "True" if self.cfg['data']['include_negative_examples'] else "False"
+        has_neg    = self.cfg['data']['include_negative_examples']
         self.exp_dir = f"results/{model_name}_neg_{has_neg}"
+        self.ckpt    = f"{self.exp_dir}/best_model.pt"
 
-        if not os.path.exists(f"{self.exp_dir}/best_model.pt"):
-            raise FileNotFoundError(f"🚨 Model not found at {self.exp_dir}/best_model.pt! Train this config first.")
+        if not os.path.exists(self.ckpt):
+            raise FileNotFoundError(
+                f"No checkpoint at {self.ckpt}. Train first."
+            )
 
     def _collate(self, batch):
         return {
-            "input_ids": torch.stack([b["input_ids"].long() for b in batch]),
-            "target_text": [b["target_text"] for b in batch],
-            "input_text": [b["input_text"] for b in batch]
+            'input_ids':   torch.stack([b['input_ids'].long() for b in batch]),
+            'target_text': [b['target_text'] for b in batch],
+            'input_text':  [b['input_text']  for b in batch],
         }
 
     def evaluate(self, sample_size=1000):
-        print(f"🚀 Evaluating: {self.exp_dir}")
-
-        tokenizer = SanskritTokenizer(self.cfg["model"]["vocab_size"])
-        PAD_ID = tokenizer.tokenizer.token_to_id("[PAD]") if tokenizer.tokenizer.token_to_id("[PAD]") is not None else 1
-        MASK_ID = self.cfg["diffusion"]["mask_token_id"]
-
-        dataset = OptimizedSanskritDataset("test", tokenizer, self.cfg["model"]["max_seq_len"])
-        indices = list(range(min(sample_size, len(dataset))))
-        test_loader = DataLoader(Subset(dataset, indices), batch_size=self.cfg["training"]["batch_size"], shuffle=False,
-                                 collate_fn=self._collate)
-
-        # Load Model
-        model = SanskritModel(self.cfg).to(self.device)
-        model.load_state_dict(torch.load(f"{self.exp_dir}/best_model.pt", map_location=self.device))
+        model, cfg = load_model(self.ckpt, self.cfg, self.device)
         model.eval()
 
-        all_predictions, all_references, all_inputs = [], [], []
+        tokenizer = SanskritTokenizer(cfg['model']['vocab_size'])
+        PAD_ID    = tokenizer.tokenizer.token_to_id('[PAD]') or 1
+        MASK_ID   = cfg['diffusion']['mask_token_id']
 
-        print(f"⏳ Generating translations for {len(indices)} samples...")
-        for batch in tqdm(test_loader):
-            input_ids = batch["input_ids"].to(self.device)
-            refs = batch["target_text"]
-            inputs = batch["input_text"]
+        dataset = OptimizedSanskritDataset(
+            'test', tokenizer, cfg['model']['max_seq_len'], cfg
+        )
+        indices = list(range(min(sample_size, len(dataset))))
+        loader  = DataLoader(
+            Subset(dataset, indices),
+            batch_size=cfg['training']['batch_size'],
+            shuffle=False, collate_fn=self._collate
+        )
 
-            with torch.no_grad():
-                # 🔥 This calls YOUR generate_beam logic from reverse_process.py
-                # (via the model's wrapper methods)
-                if "d3pm" in self.cfg["model_type"]:
-                    output_ids = model.generate(input_ids, num_steps=self.cfg["model"]["diffusion_steps"], beam_width=3)
-                else:
-                    output_ids = model.generate(input_ids)
+        all_preds, all_refs, all_inputs = [], [], []
+        print(f"⏳ Evaluating {len(indices)} samples …")
 
-            for i in range(output_ids.size(0)):
-                clean_ids = [id for id in output_ids[i].tolist() if id not in [MASK_ID, PAD_ID]]
-                all_predictions.append(tokenizer.decode(clean_ids).strip())
-                all_references.append(refs[i].strip())
-                all_inputs.append(inputs[i].strip())
+        for batch in tqdm(loader):
+            ids = batch['input_ids'].to(self.device)
+            out = run_inference(model, ids, cfg)
+            for i in range(out.size(0)):
+                clean = [x for x in out[i].tolist() if x not in (MASK_ID, PAD_ID)]
+                all_preds.append(tokenizer.decode(clean).strip())
+                all_refs.append(batch['target_text'][i].strip())
+                all_inputs.append(batch['input_text'][i].strip())
 
-        # Calculate Metrics
-        bleu_score = 0.0
-        if BLEU_AVAILABLE:
-            refs_tokenized = [[ref.split()] for ref in all_references]
-            preds_tokenized = [pred.split() for pred in all_predictions]
-            bleu_score = corpus_bleu(refs_tokenized, preds_tokenized)
+        # ── Metrics ───────────────────────────────────────────────────
+        bleu_score, bert_f1 = 0.0, 0.0
 
-        bert_f1 = 0.0
-        if BERTSCORE_AVAILABLE:
-            print("⏳ Calculating BERTScore...")
-            bertscore = evaluate.load("bertscore")
-            results = bertscore.compute(predictions=all_predictions, references=all_references, lang="hi")
-            bert_f1 = sum(results['f1']) / len(results['f1'])
+        try:
+            from nltk.translate.bleu_score import corpus_bleu
+            bleu_score = corpus_bleu(
+                [[r.split()] for r in all_refs],
+                [p.split() for p in all_preds]
+            )
+        except Exception:
+            print("⚠️  BLEU unavailable (install nltk)")
 
-        # 💾 SAVE RESULTS TO FILE
-        results_path = f"{self.exp_dir}/evaluation_results.txt"
-        with open(results_path, "w", encoding="utf-8") as f:
-            f.write(
-                f"=== EVALUATION RESULTS: {self.cfg['model_type']} (Negatives: {self.cfg['data']['include_negative_examples']}) ===\n")
-            f.write(f"BLEU Score : {bleu_score:.4f}\n")
+        try:
+            import evaluate as hf_eval
+            print("⏳ Computing BERTScore …")
+            res     = hf_eval.load('bertscore').compute(
+                predictions=all_preds, references=all_refs, lang='hi'
+            )
+            bert_f1 = sum(res['f1']) / len(res['f1'])
+        except Exception:
+            print("⚠️  BERTScore unavailable (install evaluate)")
+
+        # ── Save ──────────────────────────────────────────────────────
+        inf = cfg['inference']
+        out_path = f"{self.exp_dir}/test_results.txt"
+        with open(out_path, 'w', encoding='utf-8') as f:
+            f.write(f"=== TEST RESULTS ===\n")
+            f.write(f"Model      : {cfg['model_type']}\n")
+            f.write(f"Negatives  : {cfg['data']['include_negative_examples']}\n")
+            f.write(f"Steps      : {inf['num_steps']}\n")
+            f.write(f"Temp       : {inf['temperature']}\n")
+            f.write(f"RepPen     : {inf['repetition_penalty']}\n")
+            f.write(f"DivPen     : {inf['diversity_penalty']}\n")
+            f.write(f"BLEU       : {bleu_score:.4f}\n")
             f.write(f"BERTScore  : {bert_f1:.4f}\n\n")
-            f.write("=== SAMPLE PREDICTIONS ===\n")
-            for i in range(min(10, len(all_predictions))):
-                f.write(f"INPUT : {all_inputs[i]}\n")
-                f.write(f"REF   : {all_references[i]}\n")
-                f.write(f"PRED  : {all_predictions[i]}\n")
-                f.write("-" * 50 + "\n")
+            f.write("=== SAMPLES ===\n")
+            for i in range(min(20, len(all_preds))):
+                f.write(f"IN  : {all_inputs[i]}\n")
+                f.write(f"REF : {all_refs[i]}\n")
+                f.write(f"PRED: {all_preds[i]}\n")
+                f.write("-" * 60 + "\n")
 
-        print(f"✅ Evaluation complete! Results saved to {results_path}")
-        print(f"📊 BLEU: {bleu_score:.4f} | BERTScore: {bert_f1:.4f}")
+        print(f"\n✅ Test complete → {out_path}")
+        print(f"📊 BLEU: {bleu_score:.4f}  |  BERTScore: {bert_f1:.4f}")
+        return bleu_score, bert_f1
 
 
-if __name__ == "__main__":
-    FinalEvaluator().evaluate(sample_size=1000)
+if __name__ == '__main__':
+    Evaluator().evaluate(sample_size=1000)

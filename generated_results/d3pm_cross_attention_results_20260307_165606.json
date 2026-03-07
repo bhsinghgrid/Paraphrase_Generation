@@ -1,0 +1,12 @@
+[
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "yadā mano nivarteta viṣayebhyaḥ svabhāvataḥ",
+        "output_text": "लक्ष् māṃ र्व ẖ ब्रवी Ṛ Ṛ [ [ x | प्रकृ प्रकृ प्रकृ प्रकृ | ण [ ठ Ṛ Ṛ ब्रवी Ṛ Ṛ [ ण ई ई र्व र्व prabhu तदि र्व र्व र्व māṃ māṃ लक्ष् लक्ष् लक्ष् लक्ष् लक्ष् लक्ष् लक्ष् ú र्व र्व र्व र्व र्व Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ तस्य Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "length_penalty": 1.0,
+        "timestamp": "2026-03-07T16:56:34.448254"
+    }
+]

@@ -6,8 +6,14 @@ dist/
 wheels/
 *.egg-info
 
-results/
-results1/
+results2/
+results3/
+results4/
+results5/
+results6/
+.gradio/
+
+*.pt
 
 # Virtual environments
 .venv

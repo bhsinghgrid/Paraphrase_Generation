@@ -1,0 +1,76 @@
+2026-03-05 01:02:53,790 - 🚀 RUN START | Arch: d3pm_encoder_decoder | Self-Conditioning: ON
+2026-03-05 01:02:54,076 - HTTP Request: HEAD https://huggingface.co/datasets/paws/sanskrit-verses-gretil/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-03-05 01:02:54,086 - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/paws/sanskrit-verses-gretil/cccaab468cf4a329784ea2ccbfb45052c0e93258/README.md "HTTP/1.1 200 OK"
+2026-03-05 01:02:54,314 - HTTP Request: HEAD https://huggingface.co/datasets/paws/sanskrit-verses-gretil/resolve/cccaab468cf4a329784ea2ccbfb45052c0e93258/sanskrit-verses-gretil.py "HTTP/1.1 404 Not Found"
+2026-03-05 01:02:54,995 - HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/paws/sanskrit-verses-gretil/paws/sanskrit-verses-gretil.py "HTTP/1.1 404 Not Found"
+2026-03-05 01:02:55,340 - HTTP Request: GET https://huggingface.co/api/datasets/paws/sanskrit-verses-gretil/revision/cccaab468cf4a329784ea2ccbfb45052c0e93258 "HTTP/1.1 200 OK"
+2026-03-05 01:02:55,567 - HTTP Request: HEAD https://huggingface.co/datasets/paws/sanskrit-verses-gretil/resolve/cccaab468cf4a329784ea2ccbfb45052c0e93258/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-03-05 01:02:55,858 - HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=paws/sanskrit-verses-gretil "HTTP/1.1 200 OK"
+2026-03-05 01:02:56,094 - HTTP Request: GET https://huggingface.co/api/datasets/paws/sanskrit-verses-gretil/tree/cccaab468cf4a329784ea2ccbfb45052c0e93258/data?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-05 01:02:56,340 - HTTP Request: GET https://huggingface.co/api/datasets/paws/sanskrit-verses-gretil/tree/cccaab468cf4a329784ea2ccbfb45052c0e93258?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-03-05 01:02:56,580 - HTTP Request: HEAD https://huggingface.co/datasets/paws/sanskrit-verses-gretil/resolve/cccaab468cf4a329784ea2ccbfb45052c0e93258/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-03-05 03:10:58,778 - 🚀 RUN START | Arch: d3pm_encoder_decoder | Self-Conditioning: ON
+2026-03-05 03:10:59,070 - HTTP Request: HEAD https://huggingface.co/datasets/paws/sanskrit-verses-gretil/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-03-05 03:10:59,070 - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-03-05 03:10:59,078 - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/paws/sanskrit-verses-gretil/cccaab468cf4a329784ea2ccbfb45052c0e93258/README.md "HTTP/1.1 200 OK"
+2026-03-05 03:10:59,306 - HTTP Request: HEAD https://huggingface.co/datasets/paws/sanskrit-verses-gretil/resolve/cccaab468cf4a329784ea2ccbfb45052c0e93258/sanskrit-verses-gretil.py "HTTP/1.1 404 Not Found"
+2026-03-05 03:11:00,092 - HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/paws/sanskrit-verses-gretil/paws/sanskrit-verses-gretil.py "HTTP/1.1 404 Not Found"
+2026-03-05 03:11:00,451 - HTTP Request: GET https://huggingface.co/api/datasets/paws/sanskrit-verses-gretil/revision/cccaab468cf4a329784ea2ccbfb45052c0e93258 "HTTP/1.1 200 OK"
+2026-03-05 03:11:00,744 - HTTP Request: HEAD https://huggingface.co/datasets/paws/sanskrit-verses-gretil/resolve/cccaab468cf4a329784ea2ccbfb45052c0e93258/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-03-05 03:11:01,028 - HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=paws/sanskrit-verses-gretil "HTTP/1.1 200 OK"
+2026-03-05 03:11:01,265 - HTTP Request: GET https://huggingface.co/api/datasets/paws/sanskrit-verses-gretil/tree/cccaab468cf4a329784ea2ccbfb45052c0e93258/data?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-05 03:11:01,501 - HTTP Request: GET https://huggingface.co/api/datasets/paws/sanskrit-verses-gretil/tree/cccaab468cf4a329784ea2ccbfb45052c0e93258?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-03-05 03:11:01,744 - HTTP Request: HEAD https://huggingface.co/datasets/paws/sanskrit-verses-gretil/resolve/cccaab468cf4a329784ea2ccbfb45052c0e93258/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-03-05 03:23:58,234 - 🚀 RUN START | Arch: d3pm_encoder_decoder | Self-Conditioning: ON
+2026-03-05 03:23:58,504 - HTTP Request: HEAD https://huggingface.co/datasets/paws/sanskrit-verses-gretil/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-03-05 03:23:58,513 - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/paws/sanskrit-verses-gretil/cccaab468cf4a329784ea2ccbfb45052c0e93258/README.md "HTTP/1.1 200 OK"
+2026-03-05 03:23:58,744 - HTTP Request: HEAD https://huggingface.co/datasets/paws/sanskrit-verses-gretil/resolve/cccaab468cf4a329784ea2ccbfb45052c0e93258/sanskrit-verses-gretil.py "HTTP/1.1 404 Not Found"
+2026-03-05 03:23:59,509 - HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/paws/sanskrit-verses-gretil/paws/sanskrit-verses-gretil.py "HTTP/1.1 404 Not Found"
+2026-03-05 03:23:59,740 - HTTP Request: GET https://huggingface.co/api/datasets/paws/sanskrit-verses-gretil/revision/cccaab468cf4a329784ea2ccbfb45052c0e93258 "HTTP/1.1 200 OK"
+2026-03-05 03:23:59,965 - HTTP Request: HEAD https://huggingface.co/datasets/paws/sanskrit-verses-gretil/resolve/cccaab468cf4a329784ea2ccbfb45052c0e93258/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-03-05 03:24:00,254 - HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=paws/sanskrit-verses-gretil "HTTP/1.1 200 OK"
+2026-03-05 03:24:00,492 - HTTP Request: GET https://huggingface.co/api/datasets/paws/sanskrit-verses-gretil/tree/cccaab468cf4a329784ea2ccbfb45052c0e93258/data?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-05 03:24:00,723 - HTTP Request: GET https://huggingface.co/api/datasets/paws/sanskrit-verses-gretil/tree/cccaab468cf4a329784ea2ccbfb45052c0e93258?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-03-05 03:24:00,971 - HTTP Request: HEAD https://huggingface.co/datasets/paws/sanskrit-verses-gretil/resolve/cccaab468cf4a329784ea2ccbfb45052c0e93258/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-03-05 03:34:03,560 - 🚀 RUN START | Arch: d3pm_encoder_decoder | Self-Conditioning: ON
+2026-03-05 03:34:03,836 - HTTP Request: HEAD https://huggingface.co/datasets/paws/sanskrit-verses-gretil/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-03-05 03:34:03,844 - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/paws/sanskrit-verses-gretil/cccaab468cf4a329784ea2ccbfb45052c0e93258/README.md "HTTP/1.1 200 OK"
+2026-03-05 03:34:04,082 - HTTP Request: HEAD https://huggingface.co/datasets/paws/sanskrit-verses-gretil/resolve/cccaab468cf4a329784ea2ccbfb45052c0e93258/sanskrit-verses-gretil.py "HTTP/1.1 404 Not Found"
+2026-03-05 03:34:04,855 - HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/paws/sanskrit-verses-gretil/paws/sanskrit-verses-gretil.py "HTTP/1.1 404 Not Found"
+2026-03-05 03:34:05,218 - HTTP Request: GET https://huggingface.co/api/datasets/paws/sanskrit-verses-gretil/revision/cccaab468cf4a329784ea2ccbfb45052c0e93258 "HTTP/1.1 200 OK"
+2026-03-05 03:34:05,445 - HTTP Request: HEAD https://huggingface.co/datasets/paws/sanskrit-verses-gretil/resolve/cccaab468cf4a329784ea2ccbfb45052c0e93258/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-03-05 03:34:05,735 - HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=paws/sanskrit-verses-gretil "HTTP/1.1 200 OK"
+2026-03-05 03:34:05,972 - HTTP Request: GET https://huggingface.co/api/datasets/paws/sanskrit-verses-gretil/tree/cccaab468cf4a329784ea2ccbfb45052c0e93258/data?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-05 03:34:06,241 - HTTP Request: GET https://huggingface.co/api/datasets/paws/sanskrit-verses-gretil/tree/cccaab468cf4a329784ea2ccbfb45052c0e93258?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-03-05 03:34:06,547 - HTTP Request: HEAD https://huggingface.co/datasets/paws/sanskrit-verses-gretil/resolve/cccaab468cf4a329784ea2ccbfb45052c0e93258/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-03-05 03:40:52,903 - HTTP Request: HEAD https://huggingface.co/bert-base-multilingual-cased/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-05 03:40:52,904 - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-03-05 03:40:53,183 - HTTP Request: HEAD https://huggingface.co/bert-base-multilingual-cased/resolve/main/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-03-05 03:40:53,490 - HTTP Request: GET https://huggingface.co/api/models/bert-base-multilingual-cased/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-05 03:40:53,797 - HTTP Request: GET https://huggingface.co/api/models/google-bert/bert-base-multilingual-cased/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-05 03:40:54,039 - HTTP Request: GET https://huggingface.co/api/models/bert-base-multilingual-cased/tree/main?recursive=true&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-05 03:40:54,309 - HTTP Request: GET https://huggingface.co/api/models/google-bert/bert-base-multilingual-cased/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-05 03:40:54,672 - HTTP Request: GET https://huggingface.co/api/models/bert-base-multilingual-cased "HTTP/1.1 307 Temporary Redirect"
+2026-03-05 03:40:54,903 - HTTP Request: GET https://huggingface.co/api/models/google-bert/bert-base-multilingual-cased "HTTP/1.1 200 OK"
+2026-03-05 03:40:55,141 - HTTP Request: HEAD https://huggingface.co/bert-base-multilingual-cased/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-05 03:40:58,017 - 📊 Epoch 1 | Loss: 14.9455 | BLEU: 0.06 | BERTScore: 0.5772
+2026-03-05 03:40:58,361 - 🎉 New Best Model Saved (BERTScore Improved)!
+2026-03-05 03:48:01,669 - 📊 Epoch 2 | Loss: 7.4536 | BLEU: 0.08 | BERTScore: 0.6147
+2026-03-05 03:48:02,189 - 🎉 New Best Model Saved (BERTScore Improved)!
+2026-03-05 03:55:24,473 - 📊 Epoch 3 | Loss: 4.7855 | BLEU: 0.23 | BERTScore: 0.6496
+2026-03-05 03:55:24,966 - 🎉 New Best Model Saved (BERTScore Improved)!
+2026-03-05 04:02:49,206 - 📊 Epoch 4 | Loss: 4.2677 | BLEU: 0.19 | BERTScore: 0.6576
+2026-03-05 04:02:49,721 - 🎉 New Best Model Saved (BERTScore Improved)!
+2026-03-05 04:10:33,932 - 📊 Epoch 5 | Loss: 4.0380 | BLEU: 0.25 | BERTScore: 0.6543
+2026-03-05 04:10:34,451 - 🎉 New Best Model Saved (BERTScore Improved)!
+2026-03-05 04:17:39,811 - 📊 Epoch 6 | Loss: 3.9385 | BLEU: 0.24 | BERTScore: 0.6568
+2026-03-05 04:17:40,187 - 🎉 New Best Model Saved (BERTScore Improved)!
+2026-03-05 04:24:29,603 - 📊 Epoch 7 | Loss: 3.8613 | BLEU: 0.25 | BERTScore: 0.6631
+2026-03-05 04:24:30,003 - 🎉 New Best Model Saved (BERTScore Improved)!
+2026-03-05 04:31:04,865 - 📊 Epoch 8 | Loss: 3.7850 | BLEU: 0.26 | BERTScore: 0.6678
+2026-03-05 04:31:05,376 - 🎉 New Best Model Saved (BERTScore Improved)!
+2026-03-05 04:37:39,878 - 📊 Epoch 9 | Loss: 3.6939 | BLEU: 0.28 | BERTScore: 0.6661
+2026-03-05 04:37:40,326 - 🎉 New Best Model Saved (BERTScore Improved)!
+2026-03-05 04:44:52,563 - 📊 Epoch 10 | Loss: 3.6435 | BLEU: 0.41 | BERTScore: 0.6691
+2026-03-05 04:44:53,102 - 🎉 New Best Model Saved (BERTScore Improved)!
+2026-03-05 04:44:53,102 - ✅ Training Complete

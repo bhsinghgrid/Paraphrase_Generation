@@ -1,0 +1,22 @@
+[
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "somakṣaye ca saṃprāpte somasya ca dine tathā / yaḥ śrāddhaṃ kurute martyastasya puṇyaphalaṃ śṛṇu",
+        "output_text": "| ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ṭa प्राप्त ṭa ṭa ṭa ṭa ई ṭa उ n ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "length_penalty": 1.0,
+        "timestamp": "2026-03-06T10:09:31.787567"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "iti stutvā jagannātham uvāca munisattamān",
+        "output_text": "\\ , , , ई ई ई , , ई n , , , ई , , , , , ई , , ई , , ई ई , ई , , n , , , , , , , , , , , , , n , n n , उ , , | , , उ , , n n n , , , , , , , n , , | | , n n | ,",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "length_penalty": 1.0,
+        "timestamp": "2026-03-06T10:10:11.241413"
+    }
+]

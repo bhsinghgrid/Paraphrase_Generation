@@ -8,6 +8,26 @@ from diffusion.reverse_process import ReverseDiffusion  # 🔥 FIXED IMPORT
 from model.d3pm_model_cross_attention import SanskritEmbeddings, EncoderBlock, MultiHeadAttention
 
 
+class DecoderBlock(nn.Module):
+    def __init__(self, d_model, n_heads, d_ff, dropout=0.15):
+        super().__init__()
+        self.self_attn = MultiHeadAttention(d_model, n_heads, dropout)
+        self.ff = nn.Sequential(
+            nn.Linear(d_model, d_ff),
+            nn.ReLU(),
+            nn.Dropout(dropout),
+            nn.Linear(d_ff, d_model),
+            nn.Dropout(dropout)
+        )
+        self.norm1 = nn.LayerNorm(d_model)
+        self.norm2 = nn.LayerNorm(d_model)
+
+    def forward(self, x, tgt_pad_mask=None):
+        # Position 1: x
+        # Position 2: tgt_pad_mask
+        x = self.norm1(x + self.self_attn(x, x, x, mask=tgt_pad_mask))
+        return self.norm2(x + self.ff(x))
+
 class DecoderBlockNoCrossAttn(nn.Module):
     def __init__(self, d_model, n_heads, d_ff, dropout=0.15):
         super().__init__()

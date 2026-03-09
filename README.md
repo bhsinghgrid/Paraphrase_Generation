@@ -208,6 +208,7 @@ python evaluate_test.py
 Results will be saved to `sanskrit_results.csv`.
 
 ---
+> 📄 **Full Technical Report:** [View on Google Docs]([https://docs.google.com/...](https://docs.google.com/document/d/1ZgXJfiGx8ZzyI0gjZakqyVM-vqDxazEAuP-Ofm7DiJ8/edit?tab=t.0#heading=h.hjqubxz5flis))
 
 ## 🧪 Running Inference Without the UI
 

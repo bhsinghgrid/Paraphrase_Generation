@@ -26,6 +26,7 @@ results7/*.txt
 inference1.py
 inference2.py
 
+*.pt
 
 # Virtual environments
 .venv/

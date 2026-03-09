@@ -6,17 +6,26 @@ dist/
 wheels/
 *.egg-info
 
+# Result folders
+results/*.pt
 results2/
 results3/
 results4/
 results5/
 results6/
+
+# Ignore txt files inside results folders
+results2/*.txt
+results3/*.txt
+results4/*.txt
+results5/*.txt
+results6/*.txt
+results7/*.txt
+
 .gradio/
-app1.py
 inference1.py
 inference2.py
 
-*.pt
 
 # Virtual environments
-.venv
+.venv/

@@ -1,0 +1,38 @@
+[
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "yadā mano nivarteta viṣayebhyaḥ svabhāvataḥ",
+        "output_text": "यदा मनो ानन्द सो ते त ध हेयोपादे भ्यः त् दे̱वाना̱म् रत् तो विशुद्ध रा भ्यः स्फ विषये त त । वर्तेत । ता । ता ज्ञान मनो नि । ित यितुं ानि मनो",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "timestamp": "2026-03-07T18:02:08.990552"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "ākāśād vāyur utpannaḥ vāyor agnir ajāyata",
+        "output_text": "आ काशा द् वायुर् उत् उत् श्वर व̱त् वा अग्निर्",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "timestamp": "2026-03-07T18:02:50.906036"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "kāle pravṛtte jagat sarvaṁ vikāraṁ pratipadyate",
+        "output_text": "काले त्त जगत् सर्व स्त सर्व प विकार ्वि कारैः य वञ्च विन्य े प मांसं । विकार थ चनं सर्व । सर्व कार् द । निरी कल जगत्",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "timestamp": "2026-03-07T18:03:20.131572"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "iti stutvā jagannātham uvāca munisattamān",
+        "output_text": "इति स्तुत्वा जगन्नाथ म् उवाच उवाच मुनि ्व मुनि सत्त मान्",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "timestamp": "2026-03-07T18:03:58.160510"
+    }
+]

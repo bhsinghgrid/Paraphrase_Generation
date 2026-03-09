@@ -1,0 +1,11 @@
+[
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "yadā mano nivarteta viṣayebhyaḥ svabhāvataḥ",
+        "output_text": "लक्ष् र्व kri र Ṛ Ṛ ur ṣa hyā ु तः | ta लक्ष् छ ट [ kāle catu Ṛ sarvatra ब्रवी ] Ṛ मन ई kramam लक्ष् र्व ई mā पो prabhu र्व र्व māṃ va ú लक्ष् लक्ष् लक्ष् लक्ष् ú लक्ष् लक्ष् र्व र्व र्व र्व र्व vivarji र्व अन्य तदि ā ú भु ú तदि पुत्रम् ú | तदि æ र śca vivarji Ṛ स्या Ṛ ाना ṃ rka ङ a [ varaṃ न्दं Ṛ ē",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "timestamp": "2026-03-07T17:51:22.173817"
+    }
+]

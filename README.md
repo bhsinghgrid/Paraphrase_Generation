@@ -14,112 +14,227 @@ Unlike standard AI models (like ChatGPT) that guess words one by one from left t
 
 1. **The Starting Point:** When you input a Sanskrit verse, the AI doesn't translate it directly. Instead, it creates a blank sequence of `[MASK]` tokens (digital "noise").
 2. **The Denoising Process:** Over a series of mathematical steps (Diffusion Steps), the AI iteratively refines this noise. It uses **Cross-Attention** to constantly look back at your original verse, ensuring the meaning remains intact.
-3. **Self-Conditioning:** At each step, the model feeds its previous guess back into itself as a "hint." This forces the AI to maintain strict grammatical consistency—a crucial requirement for a highly inflected language like Sanskrit.
+3. **Self-Conditioning:** At each step, the model feeds its previous guess back into itself as a "hint." This forces the AI to maintain strict grammatical consistency — a crucial requirement for a highly inflected language like Sanskrit.
 4. **The Penalties:** We implemented custom mathematical penalties (Diversity and Repetition) into the beam search. This gives the user granular control to push the AI toward finding rare synonyms or to keep it strictly literal.
 
 ---
 
 ## 📂 Understanding the Project Structure
 
-When you download this project, you will see several folders and files. Here is what they do:
-
-* **`app2.py`**: The main application file. Running this launches the user-friendly web interface.
-* **`model/`**: Contains the core AI architecture (`sanskrit_model.py`) and the custom 16,000-word Sanskrit Tokenizer (`tokenizer.py`).
-* **`diffusion/`**: Contains `reverse_process.py`, which holds the complex mathematics for the denoising steps and generation penalties.
-* **`results/`**: This is where your trained AI weights (the `.pt` files) live. (e.g., `d3pm_cross_attention_neg_False`). The app automatically scans this folder to let you switch between different models.
-* **`run_all_experiments.sh`**: Automated shell scripts for developers who want to train the models from scratch.
-* **`backend_generation_log.csv`**: The master database. Every generation is automatically saved here to ensure zero data loss.
-
----
-
-Here is the updated section for your `README.md`. I have added a clear new step showing exactly how to run the `.sh` files right after installing the requirements, explaining that this is necessary to generate the model results.
-
-You can replace the **"How to Access & Run the Entire Project"** section of your README with this updated version:
+```
+Paraphrase_Generation/
+│
+├── app2.py                        # ✅ Main web app — run this to launch the UI
+├── train.py                       # Model training script (called by .sh files)
+├── inference.py                   # Standalone inference (command-line, no UI)
+├── inference1.py                  # Alternate inference variant for testing
+├── evaluate_test.py               # Evaluation script — computes BERTScore & metrics
+├── main.py                        # Orchestrator / experiment runner
+├── config.py                      # Central config — edit hyperparameters here
+│
+├── model/
+│   ├── sanskrit_model.py          # Core D3PM model architecture
+│   └── tokenizer.py               # Custom 16,000-word Sanskrit tokenizer
+│
+├── diffusion/
+│   └── reverse_process.py         # Denoising math, beam search & generation penalties
+│
+├── data/                          # Training data (Sanskrit verse pairs)
+│
+├── results/                       # ⚠️ Created after training — stores .pt model weights
+│                                  #    e.g., d3pm_cross_attention_neg_False.pt
+│
+├── backend_generation_log.csv     # Master log — every generation is saved here
+├── sanskrit_results.csv           # Sample evaluation results
+├── sanskrit_tokenizer_m4pro.json  # Tokenizer vocab file (used by model/)
+│
+├── requirements.txt               # Python dependencies
+├── pyproject.toml                 # Project metadata (built with uv)
+├── uv.lock                        # Locked dependency versions
+├── .python-version                # Pins Python version (3.11 recommended)
+│
+├── run_all_experiments.sh         # Runs ALL training configurations sequentially
+├── run_cross_att_no_neg.sh        # Train: Cross-Attention, no diversity penalty
+├── run_cross_attn_with_neg.sh     # Train: Cross-Attention, with diversity penalty
+├── run_enc_dec_no_neg.sh          # Train: Encoder-Decoder, no diversity penalty
+├── run_enc_dec_with_neg.sh        # Train: Encoder-Decoder, with diversity penalty
+├── run_base_cross_att_no_neg.sh   # Train: Base + Cross-Attention, no penalty
+├── run_base_cross_att_with_neg.sh # Train: Base + Cross-Attention, with penalty
+├── run_base_enc_dec_no_neg.sh     # Train: Base + Enc-Dec, no penalty
+└── run_base_enc_dec_with_neg.sh   # Train: Base + Enc-Dec, with penalty
+```
 
 ---
 
 ## 📥 How to Access & Run the Entire Project
 
-You do not need to be a software developer to run this tool on your computer. Follow these steps to get the Paraphrase Lab running locally:
+You do not need to be a software developer to run this tool on your computer. Follow these steps to get the Paraphrase Lab running locally.
+
+> **⚠️ Requirements:**
+> - **Python 3.11** (check with `python --version` in your terminal)
+> - A machine with a **GPU is strongly recommended** for training. CPU-only machines can run inference but training will be extremely slow.
+
+---
 
 ### Step 1: Download the Project
 
 1. Navigate to the top of this GitHub repository.
-2. Click the green **"<> Code"** button.
+2. Click the green **`<> Code`** button.
 3. Click **"Download ZIP"** and extract the folder to your computer (e.g., your Desktop).
+
+---
 
 ### Step 2: Set Up the Environment
 
-To ensure the AI runs smoothly without messing up your computer's other settings, we will create a "Virtual Environment". You will need Python installed on your computer.
+To ensure the AI runs smoothly without affecting your computer's other settings, we will create a **Virtual Environment**.
 
-1. Open your computer's **Terminal** (Mac) or **Command Prompt** (Windows).
-2. Tell the Terminal to go inside your downloaded folder. Type `cd ` (with a space), drag the unzipped project folder into the Terminal, and hit **Enter**.
-3. Create a virtual environment by typing:
+1. Open your computer's **Terminal** (Mac/Linux) or **Command Prompt** (Windows).
+2. Navigate into the downloaded project folder:
+
+```bash
+cd /path/to/Paraphrase_Generation
+```
+
+> **Tip (Mac):** Type `cd ` (with a space), drag the unzipped folder into the Terminal, then press Enter.
+
+3. Create a virtual environment:
+
 ```bash
 python -m venv .venv
-
 ```
 
+4. Activate it:
 
-4. Activate the environment:
-* **Mac/Linux:** `source .venv/bin/activate`
-* **Windows:** `.venv\Scripts\activate`
+| Platform | Command |
+|---|---|
+| Mac / Linux | `source .venv/bin/activate` |
+| Windows | `.venv\Scripts\activate` |
 
+5. Install all required libraries:
 
-5. Install the required AI libraries:
 ```bash
 pip install -r requirements.txt
-
 ```
-
-
-
-### Step 3: Run the Training Experiments (.sh files)
-
-Before you can use the web interface, you need to run the experiment scripts to train the models and generate the weights.
-
-1. While still in your Terminal with the virtual environment activated, run one of the provided bash scripts by typing `bash` followed by the file name. For example:
-```bash
-bash run_cross_att_no_neg.sh
-
-```
-
-
-2. **Want to run everything?** If you want to run all the different model configurations sequentially, simply run the master script:
-```bash
-bash run_all_experiments.sh
-
-```
-
-
-
-*(Note: This process will begin training the AI. Once it finishes, it will automatically save the trained weights into the `results/` folder so the web app can use them.)*
-
-### Step 4: Launch the Paraphrase Lab (Web App)
-
-Once your `.sh` scripts have finished running and your models are saved in the `results/` folder, you can launch the interactive interface!
-
-1. In your terminal, type:
-```bash
-python app2.py
-
-```
-
-
-2. After a few seconds, a local web link (usually `http://127.0.0.1:7860`) will appear in the Terminal. **Click that link** to open the Paraphrase Lab in your web browser!
-## 🖥️ How to Use the Paraphrase Lab Interface
-
-Once the app is open, you will see a clean, interactive dashboard. Here is how to use it:
-
-1. **Select Experiment:** Use the dropdown menu at the top left to select your AI model (e.g., `d3pm_cross_attention_neg_False`).
-2. **Load Model (Crucial!):** Click the **"🔄 Load Model"** button. Wait until the status changes to *✅ Loaded*.
-3. **Choose a Strategy:**
-* **Manual Tuning:** Unlocks the "Advanced Controls" accordion so you can adjust the Temperature, Beam Width, and Penalties yourself.
-* **High Diversity:** Automatically sets the sliders to encourage the AI to be highly creative with its synonyms.
-* **Low Diversity:** Automatically sets the sliders to keep the AI strict and literal.
-
-
-4. **Generate:** Paste your source verse into the text box and click **"✨ Paraphrase"**.
-5. **Save Your Work:** Your generations will appear in the "Current Session History" table. Click **"Download Current Session"** to save your immediate results, or check the `backend_generation_log.csv` in your project folder for a permanent record of everything you have ever generated.
 
 ---
+
+### Step 3: (Optional) Edit Configuration
+
+Before training, you may want to review `config.py` to adjust hyperparameters such as:
+- Number of diffusion timesteps
+- Batch size
+- Learning rate
+- Maximum sequence length
+
+Open it in any text editor. The default values work well for a first run.
+
+---
+
+### Step 4: Train the Models (Run `.sh` Scripts)
+
+Before launching the web interface, you need to train the models. Each `.sh` script trains a different model configuration. The trained weights are saved to a `results/` folder that is automatically created.
+
+> **⚠️ Warning:** Training from scratch is computationally intensive. A single configuration can take **several hours** on a GPU. CPU training will be significantly slower. Plan accordingly.
+
+Run a single configuration (recommended to start):
+
+```bash
+bash run_cross_att_no_neg.sh
+```
+
+Or run **all configurations** back-to-back (will take a long time):
+
+```bash
+bash run_all_experiments.sh
+```
+
+Once complete, trained weights (`.pt` files) will appear in the `results/` folder. For example:
+
+```
+results/
+└── d3pm_cross_attention_neg_False/
+    └── best_model.pt
+```
+
+---
+
+### Step 5: Launch the Paraphrase Lab (Web App)
+
+With models trained and saved in `results/`, launch the interactive interface:
+
+```bash
+python app2.py
+```
+
+After a few seconds, a local link will appear in the terminal — usually:
+
+```
+http://127.0.0.1:7860
+```
+
+**Click that link** to open the Paraphrase Lab in your web browser.
+
+---
+
+## 🖥️ How to Use the Paraphrase Lab Interface
+
+Once the app is open, you will see a clean, interactive dashboard:
+
+1. **Select Experiment:** Use the dropdown at the top left to pick a trained model (e.g., `d3pm_cross_attention_neg_False`).
+
+2. **Load Model (Crucial!):** Click **"🔄 Load Model"** and wait until the status shows ✅ *Loaded*.
+
+3. **Choose a Strategy:**
+   - **Manual Tuning** — Unlock the Advanced Controls accordion to adjust Temperature, Beam Width, and Penalties yourself.
+   - **High Diversity** — Auto-sets sliders to encourage creative, synonym-rich paraphrases.
+   - **Low Diversity** — Auto-sets sliders to keep output strict and literal.
+
+4. **Generate:** Paste your source Sanskrit verse into the text box and click **"✨ Paraphrase"**.
+
+5. **Save Your Work:**
+   - Click **"Download Current Session"** to export results from this session.
+   - All generations are permanently saved to `backend_generation_log.csv` automatically — nothing is ever lost.
+
+---
+
+## 📊 Evaluating Results
+
+To compute quantitative metrics (BERTScore, etc.) on a test set, run:
+
+```bash
+python evaluate_test.py
+```
+
+Results will be saved to `sanskrit_results.csv`.
+
+---
+
+## 🧪 Running Inference Without the UI
+
+If you prefer the command line over the web interface, you can use:
+
+```bash
+python inference.py
+```
+
+or the alternate variant:
+
+```bash
+python inference1.py
+```
+
+---
+
+## 📋 Experiment Configurations at a Glance
+
+| Script | Architecture | Diversity Penalty |
+|---|---|---|
+| `run_cross_att_no_neg.sh` | Cross-Attention | ❌ No |
+| `run_cross_attn_with_neg.sh` | Cross-Attention | ✅ Yes |
+| `run_enc_dec_no_neg.sh` | Encoder-Decoder | ❌ No |
+| `run_enc_dec_with_neg.sh` | Encoder-Decoder | ✅ Yes |
+| `run_base_cross_att_no_neg.sh` | Base + Cross-Attention | ❌ No |
+| `run_base_cross_att_with_neg.sh` | Base + Cross-Attention | ✅ Yes |
+| `run_base_enc_dec_no_neg.sh` | Base + Encoder-Decoder | ❌ No |
+| `run_base_enc_dec_with_neg.sh` | Base + Encoder-Decoder | ✅ Yes |
+| `run_all_experiments.sh` | All of the above | Both |

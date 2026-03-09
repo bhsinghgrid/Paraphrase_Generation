@@ -3,6 +3,8 @@
 # 🕉️ Sanskrit AI Paraphrasing Engine (D3PM)
 
 Welcome to the **Sanskrit Paraphrase Lab**. This project is a state-of-the-art text-to-text generation tool designed specifically for the Sanskrit language. It provides researchers, linguists, and data scientists with an interactive environment to test custom-trained AI models, generate paraphrases, and automatically log metadata for accuracy grading (e.g., BERTScore).
+<img width="1378" height="679" alt="image" src="https://github.com/user-attachments/assets/5fe68b86-f405-4a74-8e31-a6e5e22b1f0d" />
+
 
 ---
 
@@ -21,7 +23,7 @@ Unlike standard AI models (like ChatGPT) that guess words one by one from left t
 
 When you download this project, you will see several folders and files. Here is what they do:
 
-* **`inference.py`**: The main application file. Running this launches the user-friendly web interface.
+* **`app2.py`**: The main application file. Running this launches the user-friendly web interface.
 * **`model/`**: Contains the core AI architecture (`sanskrit_model.py`) and the custom 16,000-word Sanskrit Tokenizer (`tokenizer.py`).
 * **`diffusion/`**: Contains `reverse_process.py`, which holds the complex mathematics for the denoising steps and generation penalties.
 * **`results/`**: This is where your trained AI weights (the `.pt` files) live. (e.g., `d3pm_cross_attention_neg_False`). The app automatically scans this folder to let you switch between different models.
@@ -99,7 +101,7 @@ Once your `.sh` scripts have finished running and your models are saved in the `
 
 1. In your terminal, type:
 ```bash
-python inference.py
+python app2.py
 
 ```
 

@@ -12,9 +12,9 @@ results4/
 results5/
 results6/
 .gradio/
-app1.py
-inference1.py
-inference2.py
+app1.py/
+inference1.py/
+inference2.py/
 
 *.pt
 

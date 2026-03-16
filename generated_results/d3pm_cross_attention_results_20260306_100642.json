@@ -1,0 +1,92 @@
+[
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "somakṣaye ca saṃprāpte somasya ca dine tathā / yaḥ śrāddhaṃ kurute martyastasya puṇyaphalaṃ śṛṇu",
+        "output_text": "\\ ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ṭa n ई n n n ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ṭa ई प्राप्त n उ ई | | n ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "length_penalty": 1.0,
+        "timestamp": "2026-03-06T10:06:58.541931"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "somakṣaye ca saṃprāpte somasya ca dine tathā / yaḥ śrāddhaṃ kurute martyastasya puṇyaphalaṃ śṛṇu",
+        "output_text": "| ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ṭa ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई n ई ई उ प्राप्त ṭa ṭa ई ई ई ई ई ई ई ई ई n ई ई ई ई ई ई ई n",
+        "diversity_level": "high",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "length_penalty": 1.0,
+        "timestamp": "2026-03-06T10:07:10.051575"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "somakṣaye ca saṃprāpte somasya ca dine tathā / yaḥ śrāddhaṃ kurute martyastasya puṇyaphalaṃ śṛṇu",
+        "output_text": "| ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ṭa ई ई ई ई ṭa ṭa ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ṭa ई ṭa उ उ ई ई ई ई ई ई n ई ई ई ई ई ई ई ई ई ई ई ई ई",
+        "diversity_level": "low",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "length_penalty": 1.0,
+        "timestamp": "2026-03-06T10:07:15.590949"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "somakṣaye ca saṃprāpte somasya ca dine tathā / yaḥ śrāddhaṃ kurute martyastasya puṇyaphalaṃ śṛṇu",
+        "output_text": "| ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ṭa उ उ प्राप्त ई n ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "length_penalty": 1.0,
+        "timestamp": "2026-03-06T10:07:21.852386"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "somakṣaye ca saṃprāpte somasya ca dine tathā / yaḥ śrāddhaṃ kurute martyastasya puṇyaphalaṃ śṛṇu",
+        "output_text": "| ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ṭa | ṭa ई प्राप्त उ ई n ई ई ई ई ई ई ई ई ई ई ई ई छ ई ई ई ई",
+        "diversity_level": "high",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "length_penalty": 1.0,
+        "timestamp": "2026-03-06T10:07:28.659910"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "somakṣaye ca saṃprāpte somasya ca dine tathā / yaḥ śrāddhaṃ kurute martyastasya puṇyaphalaṃ śṛṇu",
+        "output_text": "ā ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ṭa ṭa ई ṭa ṭa ई n ई ई n ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई n n ṭa ई प्राप्त | उ ṭa ई n ई n ई ई ई ई n ई ई ई ई ई n ई ई",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "length_penalty": 1.0,
+        "timestamp": "2026-03-06T10:07:36.408730"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "somakṣaye ca saṃprāpte somasya ca dine tathā / yaḥ śrāddhaṃ kurute martyastasya puṇyaphalaṃ śṛṇu",
+        "output_text": "| ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ṭa ṭa प्राप्त उ n ई ई ई ई ई ई ई ई ई ई ई छ ई ई ई ई ई ई",
+        "diversity_level": "low",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "length_penalty": 1.0,
+        "timestamp": "2026-03-06T10:07:41.659990"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "somakṣaye ca saṃprāpte somasya ca dine tathā / yaḥ śrāddhaṃ kurute martyastasya puṇyaphalaṃ śṛṇu",
+        "output_text": "\\ ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ṭa ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ṭa ई ई ṭa प्राप्त ṭa n ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई",
+        "diversity_level": "low",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.5,
+        "length_penalty": 1.0,
+        "timestamp": "2026-03-06T10:07:48.057449"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "somakṣaye ca saṃprāpte somasya ca dine tathā / yaḥ śrāddhaṃ kurute martyastasya puṇyaphalaṃ śṛṇu",
+        "output_text": "| ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई उ ṭa ṭa n n ई ई ई ई ई ई ई ई ई ई ई ई \\ ई ई ई ई",
+        "diversity_level": "low",
+        "repetition_penalty": 1.5,
+        "diversity_penalty": 0.5,
+        "length_penalty": 1.0,
+        "timestamp": "2026-03-06T10:07:54.738910"
+    }
+]

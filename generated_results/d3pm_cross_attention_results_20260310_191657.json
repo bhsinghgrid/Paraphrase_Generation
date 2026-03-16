@@ -1,0 +1,11 @@
+[
+    {
+        "input_text": "yadā mano nivarteta viṣayebhyaḥ svabhāvataḥ",
+        "output_text": "यदा मनो ानन्दसो ते तध हेयोपादे भ्यः त्दे̱वाना̱म्रत्तो विशुद्धरा भ्यः स्फविषये तत । वर्तेत । ता । ता ज्ञानमनो नि । ितयितुं ानि मनो स्वयदा यदा",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0,
+        "top_k": 50,
+        "timestamp": "2026-03-10T19:17:04.522886"
+    }
+]

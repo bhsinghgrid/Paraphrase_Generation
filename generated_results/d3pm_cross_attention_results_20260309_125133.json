@@ -1,0 +1,83 @@
+[
+    {
+        "input_text": "baler atulavīryasya siṃhāsanagatasya vai",
+        "output_text": "बले र् अ तुलवीर्यवीर्यमानस्यसिंहा सनगतस्यन वै ते गतस्यसनसिंहा सिंहा स्यस्यवीर्यक्रुद्धो वीर्यस्य । पा गतस्यक्ष अ क्रुद्धो तुलतुल अ र्र् र्बले वै देकवै बले र्वनामतुल अ स्वभावा शोच । बुद्धानु स्यनः सनव स्यसनसन ( क्षसनर्घर्घर्घकालेनर्घ ) ॥ निर्मस्रवर्घस्यसन अ े त्रसन",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0,
+        "top_k": 50,
+        "timestamp": "2026-03-09T12:51:53.495241"
+    },
+    {
+        "input_text": "yadā mano nivarteta viṣayebhyaḥ svabhāvataḥ",
+        "output_text": "यदा मनो नि मसो तर्थः दे̱वाना̱म्यितुं भ्यः । िता त् आलोकभ्यः भ्यः कृतं विषये तं । अ विषये एवता । द्यो । ानन्दनितानि मनो यदा क्षत्रिया यदा पि यदा न्तु मनो निजनिजतत्तसं ितत्तपि स्तन र्तभि । यितुं । तत त आनु र्तितनो ततत्तराज्ये तत ततत्तलु ï र्तक्षस्व̱स्त",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0,
+        "top_k": 50,
+        "timestamp": "2026-03-09T12:52:09.991562"
+    },
+    {
+        "input_text": "ākāśād vāyur utpannaḥ vāyor agnir ajāyata",
+        "output_text": "आ काशा द्वायुर् उत् उत्पन्नः । वा अग्निर् अग्निर्विवर्जितः त्ये अग्निर् अग्निर्र् ोर्वा आसीद् उत्",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0,
+        "top_k": 50,
+        "timestamp": "2026-03-09T12:52:43.028794"
+    },
+    {
+        "input_text": "ākāśād vāyur utpannaḥ vāyor agnir ajāyata",
+        "output_text": "आ द्वायुर्वायुर् उत् उत्पन्नः वा ोर् अग्निर्हि अजायत अग्निर् अग्निर्योर्वा वा पन्नः उत्",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0,
+        "top_k": 50,
+        "timestamp": "2026-03-09T12:54:54.608278"
+    },
+    {
+        "input_text": "ākāśād vāyur utpannaḥ vāyor agnir ajāyata",
+        "output_text": "आ काशा द्वायुर् उत् उत्मनीषिणः वा अग्निर् अग्निर्वि अग्निर् ोर्ववा पन्नः उत्",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0,
+        "top_k": 50,
+        "timestamp": "2026-03-09T12:54:59.443025"
+    },
+    {
+        "input_text": "ākāśād vāyur utpannaḥ vāyor agnir ajāyata",
+        "output_text": "आ काशा द्वायुर् उत् उत्पन्नः वा अग्निर् अजायत अग्निर् अग्निर्योर्र् वा पन्नः उत्",
+        "diversity_level": "low",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0,
+        "top_k": 50,
+        "timestamp": "2026-03-09T12:55:05.758365"
+    },
+    {
+        "input_text": "ākāśād vāyur utpannaḥ vāyor agnir ajāyata",
+        "output_text": "आ वि ल्वायुर् ी श्वरस्तदा वा सित अग्निर्कृतनक्तं अग्निर् ्ययोर्वा वा पन्नः उत् उत्साधनिर्मितम्वा योर् । यथा द्ष्ठवायुर्वायुर्द् त्था वरि काशा आ रु ु आ चौ सो ै वं ं कृतम् । वि द् उत्माने बाधा को ध्यवा ललको वर्मजगस्तथा अमा विवर्जितः खल्वे र्घ उत्को दौ वा द्वा । अग्निर्निर्मितम्वा आविशी द् ै",
+        "diversity_level": "high",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0,
+        "top_k": 50,
+        "timestamp": "2026-03-09T12:55:11.149765"
+    },
+    {
+        "input_text": "ākāśād vāyur utpannaḥ vāyor agnir ajāyata",
+        "output_text": "आ कपर्द् वायुर् उत्मूलपन्नः वा अग्निर्वं अग्निर् अजायत अग्निर् अग्निर्योर् ोर्वा र्चनं उत् । उत् उत्वा ोर्योर् । द्माने वायुर्ता वृन्दद्तस्काशा आ ै आ विश्वर् अग्निर् आ काशा द् अ द् । वु ̱त्री शीघ्रवा निर्मितम्ववा रम्यं समवा र्ववायुर् ी र्घव वा भू बाधा उत्द् को वायुर्रो वा ललख वा वि",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0,
+        "top_k": 50,
+        "timestamp": "2026-03-09T12:55:16.769678"
+    },
+    {
+        "input_text": "ākāśād vāyur utpannaḥ vāyor agnir ajāyata",
+        "output_text": "धर्माधर्मृ खसित उत्निर्मितम्दौ रम्यं वा द् अग्निर्सकलं न । अग्निर्योर्वा वा ग्राह्यवेदि न्तं - हि वा अ ी उपति द्माने वरु । द्वकम्च्छेदम ग् आ चौ रणम्ष्टस्तथा भूरि च्छादसृजद्वसेत्द् ̱त्रै शै खल्वे गङ्गव̱त्क्षकर्मवा र्वा विश्वमन्त्रर्घदीर्घर्वं वै ्यो वर्ममोर्भू वि वायुर्प्रविवेशमा न्दे वा नीयो विवर्जितः",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.5,
+        "diversity_penalty": 0,
+        "top_k": 50,
+        "timestamp": "2026-03-09T12:55:23.507611"
+    }
+]

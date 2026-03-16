@@ -1,0 +1,22 @@
+[
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "yadā mano nivarteta viṣayebhyaḥ svabhāvataḥ\n",
+        "output_text": "ā ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई प्राप्त ṭa ई ई ई ई ई ई ई ई ई ई ई",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "length_penalty": 1.0,
+        "timestamp": "2026-03-06T11:39:58.198389"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "baler atulavīryasya siṃhāsanagatasya vai",
+        "output_text": "ā ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई ई प्राप्त ṭa ई ई ई ई ई ई ई ई ई ई ई ई",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "length_penalty": 1.0,
+        "timestamp": "2026-03-06T11:40:23.872915"
+    }
+]

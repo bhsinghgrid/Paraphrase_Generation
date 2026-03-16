@@ -1,0 +1,236 @@
+[
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "yadā mano nivarteta viṣayebhyaḥ svabhāvataḥ",
+        "output_text": "यदा मनो ानन्द सो ते त ध हेयोपादे भ्यः त् दे̱वाना̱म् रत् तो विशुद्ध रा भ्यः स्फ विषये त त । वर्तेत । ता । ता ज्ञान मनो नि । ित यितुं ानि मनो",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "timestamp": "2026-03-09T09:37:27.390214"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "ākāśād vāyur utpannaḥ vāyor agnir ajāyata",
+        "output_text": "आ काशा द् वायुर् उत् उत् श्वर व̱त् वा अग्निर्",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "timestamp": "2026-03-09T09:37:58.953421"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "kāle pravṛtte jagat sarvaṁ vikāraṁ pratipadyate",
+        "output_text": "काले त्त जगत् सर्व स्त सर्व प विकार ्वि कारैः य वञ्च विन्य े प मांसं । विकार थ चनं सर्व । सर्व कार् द । निरी कल जगत्",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "timestamp": "2026-03-09T09:38:39.689924"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "ākāśād vāyur utpannaḥ vāyor agnir ajāyata",
+        "output_text": "आ द् वायुर् वायुर् उत् उत् पन्नः वा वा ोर् अग्निर् हि अजायत अग्निर् अग्निर् योर् वा वा पन्नः उत्",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "timestamp": "2026-03-09T09:39:04.748659"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "ākāśād vāyur utpannaḥ vāyor agnir ajāyata",
+        "output_text": "आ न द् संयुतम् उत् उत् वा वा ज अग्निर् अग्निर् ्यो वि अग्निर् अग्निर् योर् वा नम् ी उत् को उत् पूर भू सु̱ता योर् कुश वृत्ति वै उत् वायुर् वायुर् द् ग्राम काशा काशा ी श्रीलोकनाथविबुधं वं भार चौ सृज ष्ट । अ प्तो लल निर्मितम् संय वा वायुर् दीर्घ त् छेद विश्व द् श्र वा नम् विवर्जितः वा आविश वा ु येत रम्यं वु तमा निर्मितम् वायुर् पिता वा । र्चनं ध्य र्वा मां ै विवर्जितः वि",
+        "diversity_level": "high",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "timestamp": "2026-03-09T09:39:22.230340"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "ākāśād vāyur utpannaḥ vāyor agnir ajāyata",
+        "output_text": "आ काशा द् वायुर् उत् उत् ख वा वा अग्निर् अग्निर् अजायत अजायत अग्निर् अग्निर् योर् र् वा पन्नः र्चनं उत्",
+        "diversity_level": "low",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "timestamp": "2026-03-09T09:39:43.857360"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "ākāśād vāyur utpannaḥ vāyor agnir ajāyata",
+        "output_text": "आ काशा द् वायुर् उत् श्वर पन्नः वा वा अग्निर् अग्निर् वर अजायत । अग्निर् योर् वा वा दीर्घ उत्",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "timestamp": "2026-03-09T09:40:02.644763"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "sarve bhawanti sukhina sarve santu niramaya sarve bhdrani pashcyantu ma vidhvisha wahe",
+        "output_text": "सर्वे भ सर्वे क्ष ान न सर्वे क्ष निर निर मय सर्वे न् न्म ानि भिन ह्य च् ज्या यन्तु । म सु स तीक्ष् मणिपूर शीर्ष भगव ानन ेना ्व सूक्ष्म अय ज्य भ भ सर्वे सार सर्वे द्रव र्व स्थः सर्वे प्रसूता न्ति दन्ति सं श् प व व ह सर्वे काचित् ह चञ्च ्व व विक्र सर्वे चञ्च म सु त्वत् अय मह म क्ष मह िता ला सर्वे सुख ज णिर् म प ्या ठ उद्दा",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "timestamp": "2026-03-09T10:15:56.882673"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "{vajra:: māraṇa} raktotpalasya mūlaiśca meghanādasya kuḍmalaiḥ / piṇḍitairveṣṭitaṃ dhmātaṃ vajraṃ bhasma bhavatyalam",
+        "output_text": "{ वज्र :: क्रूरो } ते त्पल त्पल मूल मूल मेघ नाद स्य स्य मल मल । पि ्वि ण्डि तैर् वेष्ट वेष्ट तं ितं ष्व् भस्म त्य तु द वेष्ट म ैर्व वज्र वज्र {",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "timestamp": "2026-03-09T12:10:47.509343"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "{vajra:: māraṇa} raktotpalasya mūlaiśca meghanādasya kuḍmalaiḥ / piṇḍitairveṣṭitaṃ dhmātaṃ vajraṃ bhasma bhavatyalam",
+        "output_text": "{ वज्र नितम्ब भूत } म न स्य मूल मूल मेघ ृ स्य वज्र मल कल्पा । नि मल तै तैर् िता ह न्तं भिः त ल मृत तर ितं तं काल ्वि वज्र यि ्य { दश कं पूजये स्य गन्धर्व दैव त्य तु भव त्य त्य ग ज ितं धि ितं पि तं ितं ितं गज त्त ो ग् ैव । त द्यू ध दि च् ितं च अमित कं भ ग्रह ैव ना सुख प्राप्तं ज्योति गन्धर्व",
+        "diversity_level": "high",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "timestamp": "2026-03-09T12:11:03.882512"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "{vajra:: māraṇa} raktotpalasya mūlaiśca meghanādasya kuḍmalaiḥ / piṇḍitairveṣṭitaṃ dhmātaṃ vajraṃ bhasma bhavatyalam",
+        "output_text": "{ वज्र :: भिद्यते } ते त्पल त्पल मूल मूल मेघ नाद स्य स्य मल । । पि ि ण्डि तैर् वेष्ट प्राप्तं ितं ितं भस्म त्य त्य लम् ृ वेष्ट :: वज्र",
+        "diversity_level": "low",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "timestamp": "2026-03-09T12:31:40.022185"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "{vajra:: māraṇa} raktotpalasya mūlaiśca meghanādasya kuḍmalaiḥ / piṇḍitairveṣṭitaṃ dhmātaṃ vajraṃ bhasma bhavatyalam",
+        "output_text": "स्य वज्र :: ीर् ध पि त्पल स्य मूल मूल ैश्च मेघ नाद स्य मल ैः । पि ि ण्डि ितैर् वेष्ट वेष्ट तं ितं भस्म कर्तृ त्य ै तं हि :: वज्र वज्र ज्र । { { ितम् स्य स्य त्य भव भव त्य",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "timestamp": "2026-03-09T12:31:48.473126"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "{vajra:: māraṇa} raktotpalasya mūlaiśca meghanādasya kuḍmalaiḥ / piṇḍitairveṣṭitaṃ dhmātaṃ vajraṃ bhasma bhavatyalam",
+        "output_text": "{ वज्र :: क्रूरो } रणा त्पल हाय मूल मूल मेघ नाद स्य प्राक् मल द्य र्वा पि ण्डि मण्ड ैर् वेष्ट वेष्ट तं न्तं भस्म भस्म कारणे लम् ज्योति वेष्ट :: वज्र",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.5,
+        "timestamp": "2026-03-09T12:31:53.902138"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "{vajra:: māraṇa} raktotpalasya mūlaiśca meghanādasya kuḍmalaiḥ / piṇḍitairveṣṭitaṃ dhmātaṃ vajraṃ bhasma bhavatyalam",
+        "output_text": "{ वज्र माः क्रूरो } लग् त्पल त्पल मूल मूल मेघ नाद स्य स्य मल त्रि । पि ि ला ितैर् ृ वेष्ट श्वि ितं ितं भस्म मूला लम् यानां वेष्ट :: कम् वज्र",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "timestamp": "2026-03-09T12:32:15.854356"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "{vajra:: māraṇa} raktotpalasya mūlaiśca meghanādasya kuḍmalaiḥ / piṇḍitairveṣṭitaṃ dhmātaṃ vajraṃ bhasma bhavatyalam",
+        "output_text": "{ वज्र :: रतो } धान त्पल स्य मूल मूल मेघ नाद स्य र्व मल । । पि ि ितैर् तैर् वेष्ट थैव क्रतु ितं ितं क्रिया त्य लम् यथान्या वेष्ट दा वज्र",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "timestamp": "2026-03-09T12:32:21.428024"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "{vajra:: māraṇa} raktotpalasya mūlaiśca meghanādasya kuḍmalaiḥ / piṇḍitairveṣṭitaṃ dhmātaṃ vajraṃ bhasma bhavatyalam",
+        "output_text": "कं वज्र र्मो क्रूरो क्ष पि नमी ै मूल मूल ैश्च मेघ नाद स्य मल ैः ितम् म पि ि ितैर् वेष्ट ध ितं ितं भस्म कं त्य लम् निष् । ाना त् - त्र ते { { ध स्य ङ्गा पल न ेष वानु त्य भव द्व तां ृ न ितं ज सर्व प्रति ितं ितं वि । ह । ्य ज्योति त्व वाञ्छति माम् ितं शव तं त्य हि गन्धर्व यम् भव ग्रह । सुख प्राप्तं ो ततस्",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.3,
+        "diversity_penalty": 0.0,
+        "timestamp": "2026-03-09T12:32:32.889667"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "{vajra:: māraṇa} raktotpalasya mūlaiśca meghanādasya kuḍmalaiḥ / piṇḍitairveṣṭitaṃ dhmātaṃ vajraṃ bhasma bhavatyalam",
+        "output_text": "तिर् य̱ज्ञि सर्व } ज दा स ाना मूल मूल काल मूल कं वादित मल । ैः पि । गु निष् वेष्ट ते ितम् न्तं वाहि ेष म प्य ितं बल ृ ैर्व वज्र ज्र { ुः प्र ण स्य त्य भव मोह साह त्य भ यम् सहस्रम् िता नयनो ध ततस् र्व तत्त्वम् भेद द्व गतिं ॥ ता सह सं त षा त्रि दश । कं तं गोप न ैव क्ष प्राप्तं मन त् ॥ ितं । वर् ग्रह",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.5,
+        "diversity_penalty": 0.0,
+        "timestamp": "2026-03-09T12:32:42.145109"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "{vajra:: māraṇa} raktotpalasya mūlaiśca meghanādasya kuḍmalaiḥ / piṇḍitairveṣṭitaṃ dhmātaṃ vajraṃ bhasma bhavatyalam",
+        "output_text": "{ वज्र :: म } भवनं त्पल स्य मूल मूल मेघ नाद नाद स्य मल । ैः पि येते ण्डि ितैर् वेष्ट वेष्ट ितं ितं भस्म भस्म प्राप्तं लम् ित थैव :: ज्र वज्र",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.13,
+        "diversity_penalty": 0.0,
+        "timestamp": "2026-03-09T12:32:52.588679"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "{vajra:: māraṇa} raktotpalasya mūlaiśca meghanādasya kuḍmalaiḥ / piṇḍitairveṣṭitaṃ dhmātaṃ vajraṃ bhasma bhavatyalam",
+        "output_text": "{ वज्र गुड बुद्ध्वा } देव त्पल स्य मूल मूल मेघ नाद स्य मल मल ैः । पि ि ण्डि ैर् वेष्ट वेष्ट नि ितं ितं भस्म त्य लम् तं तु :: वज्र",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.2,
+        "diversity_penalty": 0.0,
+        "timestamp": "2026-03-09T12:33:03.710406"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "{vajra:: māraṇa} raktotpalasya mūlaiśca meghanādasya kuḍmalaiḥ / piṇḍitairveṣṭitaṃ dhmātaṃ vajraṃ bhasma bhavatyalam",
+        "output_text": "{ वज्र ज क्रूरो } दा त्पल स्य मूल मूल मेघ नाद क्ष त मल ैः । ्वि ि मण्ड ितैर् वेष्ट वेष्ट ज्योति भिः । भस्म त्य लम् ितं दश ाना वज्र",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.2,
+        "diversity_penalty": 0.0,
+        "timestamp": "2026-03-09T12:33:21.571938"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "yadā mano nivarteta viṣayebhyaḥ svabhāvataḥ",
+        "output_text": "यदा मनो नि तत्त एव त ता भ्यः भ्यः वाङ् ता ता । ी सहस्व हि दश् विषये र्त कार् विशुद्ध स्त । गर्द त्त । त । नि ानि सुग नि ानन्द मनो ित मनो यदा",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.2,
+        "diversity_penalty": 0.0,
+        "timestamp": "2026-03-09T12:33:38.422719"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "yadā mano nivarteta viṣayebhyaḥ svabhāvataḥ",
+        "output_text": "यदा द ानि ानन्द ने त त्त वाक्य भ्यः भ्यः रा पि स्वभावतः धिष्ठ । भ्यः दश् विषये विषये त ी । ते र्त । भ्यः । म । ानन्द नि एव ानन्द मनो",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.13,
+        "diversity_penalty": 0.0,
+        "timestamp": "2026-03-09T12:33:49.649920"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "yadā mano nivarteta viṣayebhyaḥ svabhāvataḥ",
+        "output_text": "ैर् मनो निभ सुकृते वर्तेत त यितुं एता भ्यः भ्यः स्वभावतः",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.13,
+        "diversity_penalty": 0.5,
+        "timestamp": "2026-03-09T12:34:05.887878"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "yadā mano nivarteta viṣayebhyaḥ svabhāvataḥ",
+        "output_text": "यदा मनो ानन्द र्णा गुण्ठ त विषये भ्यः",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.13,
+        "diversity_penalty": 0.2,
+        "timestamp": "2026-03-09T12:34:13.184896"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "yadā mano nivarteta viṣayebhyaḥ svabhāvataḥ",
+        "output_text": "यदा मनो वो तत्त्व वर्तेत त सो भ्यः भ्यः पि स्वभावतः स्वभावतः धिष्ठ । स्वभावतः भ्यः भ्यः विषये ्व ित यथा ध वर्तेत ते विषये ता यमं द्यो । दे̱वाना̱म् र्ज नि नि द मनो मनो यदा",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.13,
+        "diversity_penalty": 0.4,
+        "timestamp": "2026-03-09T12:34:38.993175"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "yadā mano nivarteta viṣayebhyaḥ svabhāvataḥ",
+        "output_text": "भ मनो भ सनि त्रिभिर् ध ता विषये भ्यः रत् धिष्ठ स्वभावतः अट स्वभावतः कर्पूर कृतं भ्यः पूजित र्त त वर्तेत ते त्त तारं ता मुख न्तु ता चि । नि नि ानन्द नित मनो मनो यदा",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.2,
+        "diversity_penalty": 0.4,
+        "timestamp": "2026-03-09T12:34:52.863199"
+    }
+]

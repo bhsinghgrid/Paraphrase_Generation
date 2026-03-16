@@ -1,0 +1,22 @@
+[
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "yadā mano nivarteta viṣayebhyaḥ svabhāvataḥ",
+        "output_text": "लक्ष् māṃ र्व ẖ ब्रवी Ṛ Ṛ ङ [ ण | प्रकृ प्रकृ प्रकृ प्रकृ ई [ hyā तस्य Ṛ Ṛ Ṛ Ṛ Ṛ [ [ [ ई र्व र्व तदि तदि र्व र्व र्व māṃ māṃ लक्ष् लक्ष् लक्ष् लक्ष् लक्ष् ú ú र्व र्व र्व र्व vivarji र्व Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ तस्य तस्य Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ Ṛ",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "length_penalty": 1.0,
+        "timestamp": "2026-03-07T17:35:44.715895"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "iti stutvā jagannātham uvāca munisattamān",
+        "output_text": "dhar शक् चतुर्थ छ छ स्यात् rud rud tra ki अनु अनु अनु अनु ki ki ō rud rud स्यात् स्यात् छ स्यात् rud rud tra ki ई छ छ छ चतुर्थ चतुर्थ ꣡ शक् dhar dhar dhar dhar dhar अनु dhar dhar dhar dhar dhar dhar dhar छ छ rud rud rud rud rud rud rud rud rud ō rud rud rud rud rud rud rud rud rud rud rud rud rud rud rud rud rud rud rud rud",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "length_penalty": 1.0,
+        "timestamp": "2026-03-07T17:36:18.641227"
+    }
+]

@@ -1,0 +1,91 @@
+=== TEST RESULTS ===
+Model      : d3pm_encoder_decoder
+Negatives  : True
+Steps      : 64
+Temp       : 0.7
+RepPen     : 1.2
+DivPen     : 0.5
+BLEU       : 0.0000
+BERTScore  : 0.5434
+
+=== SAMPLES ===
+IN  : nakṣatre 'bdaṃ sa tiṣṭhanvai saṃvedhāstena gacchati / tataḥ śanaiścaro 'pyaśvaiḥ sabalairvyomasaṃbhavaiḥ
+REF : नक्षत्रे ऽब्दं स तिष्ठन्वै संवेधास्तेन गच्छति । ततः शनैश्चरो ऽप्यश्वैः सबलैर्व्योमसंभवैः
+PRED: त्थ jayati कन्द तापि यं dati ानां दिव्य ऋजु tavaiva prāpyate dati kṣau kṣau dati ikṣvā yatā तापि gagana tīrthāni तापि को dati dati cchā asura dati dati dati prāpyate ॥ kṣau dati babhūva dati kṣau dati तापि viśu यस्याः asura sāgaraḥ dati स्त ikṣvā hū hasaḥ भि̍ः शु̱ tīrthāni शु̱ tiṣṭhe dati dati kṣau dati ान भि̍ः kṣau भि̍ः kṣau kṣau यूयं kṣau kṣau kṣau kṣau dati dati dati भव dati kṣau पुनर् dati dati
+------------------------------------------------------------
+IN  : somakṣaye ca saṃprāpte somasya ca dine tathā / yaḥ śrāddhaṃ kurute martyastasya puṇyaphalaṃ śṛṇu
+REF : सोमक्षये च संप्राप्ते सोमस्य च दिने तथा । यः श्राद्धं कुरुते मर्त्यस्तस्य पुण्यफलं शृणु
+PRED: अधि ntar जन tiṣṭhe dati कन्द dati dati dati mava ̱r kṣau dati dati dati yatra dati यूयं ानां kṣau dati dati ैश् dati mava शु̱ dati dati de dati kṣau kṣau kṣau तापि dati dati dati yatā kṣau viśu dati इन्द्रो̱ yatā dati asura भि̍ः kṣau tīrthāni ntaṁ tavaiva hariḥ laj dati laj tavaiva kṣau भि̍ः yatā babhūva dati भव dati dati kṣau तथा dati prāpyate dati kṣau kṣau dati dati kṣau dati ऋजु dati dati
+------------------------------------------------------------
+IN  : yaḥ śūnyatāṃ prajānāti īdṛśaṃ rūpalakṣaṇam / na cāsau mārakoṭībhirbhūyaḥ śakya parājitum
+REF : यः शून्यतां प्रजानाति ईदृशं रूपलक्षणम् । न चासौ मारकोटीभिर्भूयः शक्य पराजितुम्
+PRED: tīrthāni tīrthāni अधि यं prāpyate tīrthāni तापि कन्द महा yatā चा kṣau tīrthāni भव तापि dati भि̍ः dati dati varṣe भि̍ः dati tīrthāni dati tīrthāni यूयं mava babhūva dati dati kṣau tīrthāni tīrthāni tīrthāni tīrthāni kṣau tīrthāni mahāya tīrthāni र̍ kṣau laj tīrthāni समाधाय viśu āsādya tuṣā tiṣṭhe cchā tīrthāni dati tīrthāni dati dati tīrthāni kṣau laj mava इन्द्रो̱ तापि dati ष kṣau kṣau kṣau gagana शु̱ kṣau ntaṁ dati ikṣvā kṣau tavaiva laj asura tīrthāni
+------------------------------------------------------------
+IN  : {vajra:: māraṇa} raktotpalasya mūlaiśca meghanādasya kuḍmalaiḥ / piṇḍitairveṣṭitaṃ dhmātaṃ vajraṃ bhasma bhavatyalam
+REF : {वज्र:: मारण} रक्तोत्पलस्य मूलैश्च मेघनादस्य कुड्मलैः । पिण्डितैर्वेष्टितं ध्मातं वज्रं भस्म भवत्यलम्
+PRED: यूयं cchā तापि भि̍ः dati prāpyate tavaiva कन्द dati यूयं tiṣṭhe dati यूयं ानां dati dati यूयं यूयं तापि dati dati dati laj dati dati यूयं यूयं dati mahāya भि̍ः लक्ष्मण kṣau kṣau तापि dati dati dati र̍ asura tīrthāni तापि ntaṁ भि̍ः यूयं yatra kṣau gagana dati स्त viśu mava dati ऋजु dati dati dati स्त बृह babhūva dati dati ष स्त kṣau dati यूयं dati yatā dati dati asura dati tīrthāni kṣau kṣau dati dati dati
+------------------------------------------------------------
+IN  : mahāpraṇālī nakulaḥ kāmaśreṣṭhaśca candanaḥ / nāgāyano haimavataḥ sātāgiristathaiva ca
+REF : महाप्रणाली नकुलः कामश्रेष्ठश्च चन्दनः । नागायनो हैमवतः सातागिरिस्तथैव च
+PRED: तापि च भि̍ः कन्द dati ानां महा dati महा dati dati तापि gagana dati dati इन्द्रो̱ तापि dati शु̱ यूयं dati शु̱ laj mava hṛdi dati ऋजु dati dati dati de dati kṣau laj भि̍ः द्विजोत्तम tiṣṭhe viśu dati asura dati kṣau र̍ yatra kṣau kṣau dati dati भि̍ः dati jayati dati prāpyate dati kṣau dati dati dati kṣau kṣau tīrthāni kṣau cchā dati yatā dati dati पुनर् स्त tīrthāni ikṣvā जन dati dati
+------------------------------------------------------------
+IN  : a̱sme pra ya̍ndhi maghavann ṛjīṣi̱nn indra̍ rā̱yo vi̱śvavā̍rasya̱ bhūre̍ḥ | a̱sme śa̱taṁ śa̱rado̍ jī̱vase̍ dhā a̱sme vī̱rāñ chaśva̍ta indra śiprin ||
+REF : अ̱स्मे प्र य̍न्धि मघवन्न् ऋजीषि̱न्न् इन्द्र̍ रा̱यो वि̱श्ववा̍रस्य̱ भूरे̍ः । अ̱स्मे श̱तꣳ श̱रदो̍ जी̱वसे̍ धा अ̱स्मे वी̱राञ् छश्व̍त इन्द्र शिप्रिन् ॥
+PRED: dati prāpyate dati ानां तापि dati dati mava तापि kṣau भि̍ः dati dati dati dati tīrthāni यूयं dati dati भि̍ः dati dati dati इन्द्रो̱ dati भि̍ः dati dati dati यूयं ntaṁ स्त dati dati dati tīrthāni dati kṣau viśu ऋजु भि̍ः dati tiṣṭhe dati dati यूयं माः asura yatā भि̍ः शु̱ भि̍ः viśu kṣau prāpyate laj kṣau tīrthāni dati dati asura gagana यूयं cchā tīrthāni dati dati kṣau tīrthāni भि̍ः त्थ dati dati dati dati dati ततस् र̍
+------------------------------------------------------------
+IN  : ta in nv a̍sya̱ madhu̍mad vivipra̱ indra̍sya̱ śardho̍ ma̱ruto̱ ya āsa̍n | yebhi̍r vṛ̱trasye̍ṣi̱to vi̱vedā̍ma̱rmaṇo̱ manya̍mānasya̱ marma̍ ||
+REF : त इन् न्व् अ̍स्य̱ मधु̍मद् विविप्र̱ इन्द्र̍स्य̱ शर्धो̍ म̱रुतो̱ य आस̍न् । येभि̍र् वृ̱त्रस्ये̍षि̱तो वि̱वेदा̍म̱र्मणो̱ मन्य̍मानस्य̱ मर्म̍ ॥
+PRED: laj अधि तापि तापि तापि जन तापि भि̍ः न् tiṣṭhe evam dati ऋजु yatra tīrthāni yatā dati kṣau dati dati dati dati dati dati dati dati dati dati dati dati dati dati dati dati इन्द्रो̱ laj dati viśu dati dati tiṣṭhe hasaḥ र̍ tīrthāni dati babhūva mava ikṣvā dati yatā dati स्त dati dati शु̱ kṣau prāpyate asura kṣau ऋजु dati भि̍ः प्रण dati kṣau dati dati ऋजु dati dati dati kṣau स्त प्रवि dati dati dati यूयं
+------------------------------------------------------------
+IN  : dānopavāsapuṇyāni sukṛtāny apy arundhati /
+REF : दानोपवासपुण्यानि सुकृतान्य् अप्य् अरुन्धति ।
+PRED: प्रण कन्द jayati यं dati dati चर कन्द jayati yatra kṣau dati शु̱ dati mava tiṣṭhe varṣe tīrthāni kṣau तापि ṣṭyā यूयं cchā tīrthāni cchā hasaḥ kṣau tīrthāni dati viśu यूयं शु̱ kṣau ॥ @ laj hariḥ tīrthāni भि̍ः यूयं dati cchā babhūva kṣau kṣau kṣau asura laj tuṣā तथा kṣau dati यूयं kṣau शु̱ kṣau kṣau kṣau tavaiva śubha kṣau kṣau kṣau dati kṣau kṣau त्थ dati त्थ इन्द्रो̱ इन्द्रो̱ kṣau kṣau yatā dati
+------------------------------------------------------------
+IN  : guṇair viśiṣṭaiḥ samudāgamas tathā kulodayo vyākaraṇābhiṣiktatā | tathāgatajñānam anuttaraṃ padaṃ parārtha eṣa tryadhiko daśātmakaḥ
+REF : गुणैर् विशिष्टैः समुदागमस् तथा कुलोदयो व्याकरणाभिषिक्तता । तथागतज्ञानम् अनुत्तरं पदं परार्थ एष त्र्यधिको दशात्मकः
+PRED: dati ntaṁ अधि dati dati dati ntaṁ र̍ ानां kṣau tuṣā ऋजु yatra tīrthāni jayati dati dati इन्द्रो̱ hasaḥ dati dati भि̍ः cchā dati laj cchā यूयं kṣau dati dati dati laj kṣau dati kṣau tīrthāni asura prāpyate dati शु̱ tīrthāni asura mava kṣau gagana dati tuṣā dati mava viśu tiṣṭhe dati tīrthāni babhūva kṣau dati mava ऋजु hasaḥ kṣau dati भि̍ः dati dati kṣau kṣau तापि तापि dati kṣau dati kṣau न् mava dati dati yatā dati
+------------------------------------------------------------
+IN  : prakṛtereva mokṣābhyupagamāt / naca bandhamokṣayorvaiyadhikaraṇyānupapattiḥ / bandhasyāpi prakṛtigatatvāditi cenna / sakalaśrutismṛtīhāsapurāṇānubhavairbandhamokṣayerātmagatatvāvagamena tadvirodhādityāśayavānupasaṃharati- sarveti //
+REF : प्रकृतेरेव मोक्षाभ्युपगमात् । नच बन्धमोक्षयोर्वैयधिकरण्यानुपपत्तिः । बन्धस्यापि प्रकृतिगतत्वादिति चेन्न । सकलश्रुतिस्मृतीहासपुराणानुभवैर्बन्धमोक्षयेरात्मगतत्वावगमेन तद्विरोधादित्याशयवानुपसंहरति- सर्वेति ॥
+PRED: ानां ानां ज्ज्वल हे ले अधि कर्तुं कर्ण्य ले छ भक्ति चा च ज्ज्वल कर्ण्य को यन्तः कर्ण्य कर्ण्य स्तम् जीव ैश् ऋजु कर्ण्य कृतः मम् धि बि लभते ऽष्ट लक्ष्मण संस् लभते गु सम ।॥ ॥ गमे रे तः यस्याः सम vatīm लभते सर्वबुद्ध गमे लभते धान्य अश्वा लभते गमे पुरा भव prāpyate ततस् कर्ण्य भेद लभते ष ष लभते भेद स्त कृतः कर्ण्य भ त्थ कर्ण्य स्त त्थ कान्त ष स्त ोप ल्ल कर्ण्य प्रतिषे कर्ण्य
+------------------------------------------------------------
+IN  : agrabhaṃ sam agrabham ubhāvantau sam agrabham | divaś ca pṛthivyāś ca viṣadūṣaṇam ud bhare ||
+REF : अग्रभं सम् अग्रभम् उभावन्तौ सम् अग्रभम् । दिवश् च पृथिव्याश् च विषदूषणम् उद् भरे ॥
+PRED: चर dati कन्द भि̍ः तापि तापि तापि prāpyate तापि tīrthāni tīrthāni dati kṣau इन्द्रो̱ dati तापि tīrthāni dati तापि dati viśu तापि tīrthāni dati tīrthāni dati तापि tīrthāni dati viśu viśu dati tiṣṭhe asura यूयं kṣau viśu viśu viśu babhūva tīrthāni laj hasaḥ tiṣṭhe tīrthāni tīrthāni viśu prāpyate kṣau laj tīrthāni dati mava viśu viśu tīrthāni ntaṁ भि̍ः शु̱ dati tīrthāni भि̍ः cchā viśu tīrthāni dati tīrthāni prāpyate तापि dati तापि tīrthāni tīrthāni yatā kṣau
+------------------------------------------------------------
+IN  : śaive śaktiriti khyāte tīrthe caṇḍīti kalpite / vede vedeti prakhyāte namaste vajrayogini //
+REF : शैवे शक्तिरिति ख्याते तीर्थे चण्डीति कल्पिते । वेदे वेदेति प्रख्याते नमस्ते वज्रयोगिनि ॥
+PRED: बृह प्रण यूयं कन्द तापि यूयं dati tavaiva tuṣā तापि तापि dati यूयं यूयं dati इन्द्रो̱ यूयं cchā jayati तापि तापि dati तापि dati शु̱ dati tīti asura dati dati dati kṣau dati ॥ dati ntaṁ dati तापि शु̱ kṣau viśu asura kṣau yatā tīrthāni viśu यूयं kṣau prāpyate kṣau cchā kṣau tīrthāni dati kṣau tiṣṭhe तापि yatā kṣau babhūva viśu kṣau kṣau tīrthāni kṣau dati asura dati dati kṣau kṣau dati kṣau tīrthāni तापि mava
+------------------------------------------------------------
+IN  : śvobhūte 'pa upaspṛśya kṛṣṇamabhyarcya pūrvavat / payaḥśṛtena juhuyāc caruṇā saha sarpiṣā / pākayajñavidhānena dvādaśaivāhutīḥ patiḥ
+REF : श्वोभूते ऽप उपस्पृश्य कृष्णमभ्यर्च्य पूर्ववत् । पयःशृतेन जुहुयाच् चरुणा सह सर्पिषा । पाकयज्ञविधानेन द्वादशैवाहुतीः पतिः
+PRED: prāpyate jayati र̍ tuṣā संनि दर्शनम् कन्द तापि प्रण mava haro dati तापि dati dati tavaiva dati de dati dati शु̱ dati dati तापि kṣau तापि kṣau dati सुरे तापि dati tīrthāni dati yatā viśu dati dati tīrthāni babhūva dati dati ॥ sāgaraḥ dati dati ेन viśu tīrthāni dati भि̍ः dati भि̍ः इन्द्रो̱ dati kṣau बृह kṣau asura स्त mava kṣau cchā kṣau kṣau ष kṣau यूयं cchā prāpyate dati dati ṣṭyā dati dati को ानां च
+------------------------------------------------------------
+IN  : devānāṃ puṣpatoyena ṛṣīṇāṃ tu kuśāṃbhasā pitṝṇāṃ tilatoyena gandhayuktena sarvataḥ //
+REF : देवानां पुष्पतोयेन ऋषीणां तु कुशांभसा पितॄणां तिलतोयेन गन्धयुक्तेन सर्वतः ॥
+PRED: तापि ानां अधि यं यूयं prāpyate तापि कन्द prāpyate तापि तापि dati ऋजु भि̍ः cchā ikṣvā भि̍ः ntaṁ prāpyate laj यूयं laj cchā यूयं dati tīrthāni evam gagana ntaṁ र̍ haro kṣau yatra tavaiva babhūva viśu hasaḥ tīrthāni भि̍ः prāpyate prāpyate hariḥ yatra tiṣṭhe viśu prāpyate kṣau kṣau kṣau dati viśu mava kṣau kṣau tapas kṣau kṣau शु̱ yatā तापि इन्द्रो̱ asura kṣau dati kṣau kṣau tīrthāni kṣau kṣau dati dati dati kṣau स्त kṣau
+------------------------------------------------------------
+IN  : śaratalpe śayānena bhīṣmeṇa paricoditaḥ gāṇḍīvadhanvā bībhatsur māhātmyaṃ keśavasya yat //
+REF : शरतल्पे शयानेन भीष्मेण परिचोदितः गाण्डीवधन्वा बीभत्सुर् माहात्म्यं केशवस्य यत् ॥
+PRED: vayam jayati यं cchā tīrthāni tavaiva prāpyate tiṣṭhe कन्द शुक्ल mava शु̱ mava तापि kṣau भि̍ः asura शु̱ dati dati ikṣvā dati kṣau tīrthāni dati यूयं dati tīti kṣau viśu tīrthāni viśu kṣau dati ॥ asura kandha ṣṭyā र̍ yatā asura asura viśu yatā asura kṣau kṣau yatra tiṣṭhe इन्द्रो̱ tuṣā शु̱ kṣau tiṣṭhe kṣau kṣau tuṣā kṣau tīrthāni asura kṣau kṣau kṣau तापि ikṣvā kṣau kṣau tīrthāni dati kṣau kṣau tiṣṭhe asura kṣau yatā
+------------------------------------------------------------
+IN  : cīravākī tṛtīyaṃ tu śaṅkhaśabdaṃ caturthakam pañcamaṃ tantrinirghoṣaṃ ṣaṣṭhaṃ vaṃśaravas tathā //
+REF : चीरवाकी तृतीयं तु शङ्खशब्दं चतुर्थकम् पञ्चमं तन्त्रिनिर्घोषं षष्ठं वंशरवस् तथा ॥
+PRED: ऋजु तापि dati cchā tīrthāni prāpyate अधि पुनर् kṣau laj dati mava dati dati viśu dati यूयं tavaiva viśu यूयं dati ntaṁ शु̱ viśu dati dati laj tīrthāni dati kandha viśu tīrthāni kṣau kṣau viśu tīrthāni kṣau babhūva viśu tīrthāni viśu र̍ viśu kṣau dati kṣau mava tavaiva kṣau viśu dati यूयं viśu asura भि̍ः भि̍ः mava kṣau dati kṣau dati इन्द्रो̱ kṣau tiṣṭhe kṣau तापि kṣau kṣau mava laj kṣau tavaiva hariḥ yatā तापि ntaṁ शु̱ laj
+------------------------------------------------------------
+IN  : ata̍s tvā ra̱yim a̱bhi rājā̍naṁ sukrato di̱vaḥ | su̱pa̱rṇo a̍vya̱thir bha̍rat ||
+REF : अत̍स् त्वा र̱यिम् अ̱भि राजा̍नꣳ सुक्रतो दि̱वः । सु̱प̱र्णो अ̍व्य̱थिर् भ̍रत् ॥
+PRED: कन्द अधि tīrthāni kṣau mava prāpyate tīrthāni tīrthāni यूयं भि̍ः kṣau tiṣṭhe dati tīrthāni dati tīrthāni इन्द्रो̱ tīrthāni dati तापि dati शु̱ dati dati dati laj dati tīrthāni kṣau tīrthāni kṣau viśu ntaṁ dati tīrthāni ॥ tīrthāni dati kṣau tīrthāni tīrthāni kṣau sāgaraḥ kṣau dati tīrthāni tīrthāni dati tavaiva tīrthāni tīrthāni cchā tīrthāni tīrthāni kṣau kṣau kṣau tīrthāni kṣau tīrthāni babhūva dati kṣau asura dati kṣau kṣau शु̱ kṣau kṣau kṣau tīrthāni kṣau dati ानां yatā kṣau ऋजु
+------------------------------------------------------------
+IN  : daṃṣṭrākarālā raktāṅgī kapilakeśī mahodarī / kṛṣā(pā)ṇī bhīṣaṇī raudrī jihvālalanabhīṣaṇā //
+REF : दंष्ट्राकराला रक्ताङ्गी कपिलकेशी महोदरी । कृषा(पा)णी भीषणी रौद्री जिह्वाललनभीषणा ॥
+PRED: ntaṁ tavaiva कन्द dati jayati dati कन्द kandha भव तापि mava dati kṣau kṣau cchā dati dati yatra ṣṭu यूयं dati dati dati laj dati viśu tiṣṭhe jayati dati dati tīrthāni dati dati kṣau dati dati dati dati dati viśu शु̱ dati asura dati dati viśu asura dati kṣau yatā शु̱ asura babhūva dati kṣau kṣau kṣau gagana asura kṣau त्थ mava kṣau asura kṣau dati भि̍ः dati prāpyate dati dati dati dati प्रण kṣau dati kṣau
+------------------------------------------------------------
+IN  : sadvāraṃ sagavākṣaṃ ca sakavāṭaṃ hi sārgalam / kṛtvaivaṃ adhivāsārthaṃ prākāravalayaṃ mahat
+REF : सद्वारं सगवाक्षं च सकवाटं हि सार्गलम् । कृत्वैवं अधिवासार्थं प्राकारवलयं महत्
+PRED: ानां बृह कन्द yatra भि̍ः jayati कन्द dati यूयं तापि ऋजु tuṣā gagana र̍ बृह tīrthāni tavaiva तापि tīrthāni तापि viśu tiṣṭhe भि̍ः भि̍ः dati dati tiṣṭhe dati dati यस्याः tīrthāni tīrthāni tīrthāni kṣau dati dati laj dati ntaṁ dati इन्द्रो̱ evam cchā tīrthāni hasaḥ tīrthāni asura tiṣṭhe prāpyate शु̱ dati kṣau dati kṣau tīrthāni tīrthāni बृह mava tīrthāni śubha dati dati kṣau शु̱ tīrthāni kṣau dati tīrthāni इन्द्रो̱ ौघ dati dati kṣau भि̍ः kṣau yatā kṣau त्थ
+------------------------------------------------------------
+IN  : aśvinī sūyate vatsaṃ kāmadhenusturaṃgamam / tathaiva sāgaro vahniṃ yathā rājā tathā prajā //
+REF : अश्विनी सूयते वत्सं कामधेनुस्तुरंगमम् । तथैव सागरो वह्निं यथा राजा तथा प्रजा ॥
+PRED: अधि yatā भि̍ः कन्द र̍ तापि ानां महा prāpyate kṣau पुनर् laj sāgaraḥ यूयं laj शु̱ kṣau mava तापि tiṣṭhe laj को dati इन्द्रो̱ de kṣau tīrthāni यस्याः viśu viśu viśu kṣau यूयं ॥ viśu यूयं @ dati kṣau tīrthāni asura tīrthāni viśu viśu dati viśu viśu kṣau asura tīrthāni viśu kṣau jayati ऋजु dati viśu viśu kṣau kṣau viśu babhūva laj tīrthāni ऋजु dati स्त kṣau kṣau dati viśu viśu mava भि̍ः dati kṣau cchā
+------------------------------------------------------------

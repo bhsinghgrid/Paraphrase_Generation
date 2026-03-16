@@ -1,0 +1,11 @@
+[
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "baler atulavīryasya siṃhāsanagatasya vai",
+        "output_text": "बले र् अ तुल वीर्य वीर्य मान स्य सिंहा सन गतस्य न वै ते गतस्य सन सिंहा सिंहा स्य स्य वीर्य क्रुद्धो वीर्य स्य । पा गतस्य क्ष अ क्रुद्धो तुल तुल अ अ र्",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "timestamp": "2026-03-09T12:42:30.275941"
+    }
+]

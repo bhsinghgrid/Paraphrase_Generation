@@ -1,0 +1,20 @@
+[
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "iti stutvā jagannātham uvāca munisattamān",
+        "output_text": "dhar smṛtvā pāpe , { स्यात् rud rud ō ki ki अनु अनु अनु ki ki ō rud lambi सित ṟ छ स्यात् rud ō ō ki ङ चतुर्थ ई त चतुर्थ चतुर्थ चतुर्थ ꣡ dhar dhar dhar dhar dhar ki अ̱हꣳ ē ित छ sp dhar यदा छ bhir [ ॠ ē ki rud rud rud rud ē ō पा ्व श्रू rud rud ki rud तꣳ ś ú उ rud ी वर् rud rud चिद् rud स्रो ē",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "timestamp": "2026-03-07T17:45:19.623842"
+    },
+    {
+        "model_type": "d3pm_cross_attention",
+        "input_text": "yadā mano nivarteta viṣayebhyaḥ svabhāvataḥ",
+        "output_text": "ú Ā र्व तदि लक्ष् ṃ Ṛ ऽ ु तः ú वह्नि dhyā छ kramam तः ङ kāle [ Ṛ bhi ई śca vivarji rathā æ पन्नः ई ̍ vivarji ई ẖ र्व र्व ẖ लक्ष् māṃ | लक्ष् लक्ष् लक्ष् vā̍m [ ऽ ú र्व र्व र्व र्व vivarji prabhu pa लक्ष् ीं श तदि va परेण कण्ठ तदि ú मन kri भु vivarji लक्ष् Ṛ ] ú stuti parākramaḥ र्व तदि sy ṃ vivarji Ṛ पुत्रम् न्त तदि",
+        "diversity_level": "medium",
+        "repetition_penalty": 1.15,
+        "diversity_penalty": 0.0,
+        "timestamp": "2026-03-07T17:45:35.258015"
+    }
+]

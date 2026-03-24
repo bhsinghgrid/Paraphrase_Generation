@@ -1,0 +1,41 @@
+1) Keep only deploy files: app.py, inference.py, config.py, model/, diffusion/, tokenizers, checkpoint(s), requirements.txt, README.md.
+
+2) Make paths relative and portable (no local absolute paths like /Users/...).
+
+3) Pin dependencies in requirements.txt (exact versions for Gradio/HF/PyTorch stack).
+
+4) For Space, add runtime.txt (example: python-3.11) to avoid runtime mismatch issues.
+
+5) Ensure app entrypoint works:
+
+        a) Space: app.py with demo.launch(server_name="0.0.0.0", server_port=7860, share = True)
+        b) No interactive terminal-only input calls in default path.
+
+6) Add startup-safe model loading:
+
+        d) clear error message if model missing,
+        e) fallback/default checkpoint discovery,
+        f) avoid crash on first page load.
+
+7) Separate heavy training/analysis from serving path:
+
+        a) deployment app should only load model + run inference,
+        b) analysis scripts stay optional.
+
+8) Add a clear README.md:
+
+        what repo does,
+        quick local run,
+        expected inputs/outputs,
+        model limitations.
+
+9) Validate locally in clean env:
+
+        create fresh venv,
+        install requirements,
+        run app and one inference test.
+
+10) Upload:
+        Model repo: weights + runtime code + model card.
+        Space repo: app + runtime code + requirements/runtime files.
+        Rebuild and check logs.

@@ -1,0 +1,688 @@
+2026-03-21 04:57:35,714  🚀  model=d3pm_cross_attention  T=128  task=quote_text→quote_devanagari  src_vocab=16000  tgt_vocab=16000
+2026-03-21 04:57:35,989  HTTP Request: HEAD https://huggingface.co/datasets/paws/sanskrit-verses-gretil/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-03-21 04:57:35,999  HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/paws/sanskrit-verses-gretil/cccaab468cf4a329784ea2ccbfb45052c0e93258/README.md "HTTP/1.1 200 OK"
+2026-03-21 04:57:36,238  HTTP Request: HEAD https://huggingface.co/datasets/paws/sanskrit-verses-gretil/resolve/cccaab468cf4a329784ea2ccbfb45052c0e93258/sanskrit-verses-gretil.py "HTTP/1.1 404 Not Found"
+2026-03-21 04:57:37,031  HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/paws/sanskrit-verses-gretil/paws/sanskrit-verses-gretil.py "HTTP/1.1 404 Not Found"
+2026-03-21 04:57:37,287  HTTP Request: GET https://huggingface.co/api/datasets/paws/sanskrit-verses-gretil/revision/cccaab468cf4a329784ea2ccbfb45052c0e93258 "HTTP/1.1 200 OK"
+2026-03-21 04:57:37,605  HTTP Request: HEAD https://huggingface.co/datasets/paws/sanskrit-verses-gretil/resolve/cccaab468cf4a329784ea2ccbfb45052c0e93258/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-03-21 04:57:37,954  HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=paws/sanskrit-verses-gretil "HTTP/1.1 200 OK"
+2026-03-21 04:57:38,190  HTTP Request: GET https://huggingface.co/api/datasets/paws/sanskrit-verses-gretil/tree/cccaab468cf4a329784ea2ccbfb45052c0e93258/data?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-21 04:57:38,423  HTTP Request: GET https://huggingface.co/api/datasets/paws/sanskrit-verses-gretil/tree/cccaab468cf4a329784ea2ccbfb45052c0e93258?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-03-21 04:57:38,666  HTTP Request: HEAD https://huggingface.co/datasets/paws/sanskrit-verses-gretil/resolve/cccaab468cf4a329784ea2ccbfb45052c0e93258/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-03-21 04:57:38,666  Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-03-21 05:53:38,143  HTTP Request: HEAD https://huggingface.co/bert-base-multilingual-cased/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-21 05:53:38,503  HTTP Request: HEAD https://huggingface.co/bert-base-multilingual-cased/resolve/main/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-03-21 05:53:38,824  HTTP Request: GET https://huggingface.co/api/models/bert-base-multilingual-cased/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-21 05:53:39,064  HTTP Request: GET https://huggingface.co/api/models/google-bert/bert-base-multilingual-cased/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-21 05:53:39,534  HTTP Request: GET https://huggingface.co/api/models/bert-base-multilingual-cased/tree/main?recursive=true&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-21 05:53:39,790  HTTP Request: GET https://huggingface.co/api/models/google-bert/bert-base-multilingual-cased/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-21 05:53:40,347  HTTP Request: GET https://huggingface.co/api/models/bert-base-multilingual-cased "HTTP/1.1 307 Temporary Redirect"
+2026-03-21 05:53:40,653  HTTP Request: GET https://huggingface.co/api/models/google-bert/bert-base-multilingual-cased "HTTP/1.1 200 OK"
+2026-03-21 05:53:40,959  HTTP Request: HEAD https://huggingface.co/bert-base-multilingual-cased/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-21 05:53:47,294  Ep 01  train=57.6644  val=25.6411  bert=0.6135  lr=5.83e-05
+2026-03-21 05:53:51,754  ────────────────────────────────────────────────────────────────────────
+2026-03-21 05:53:51,755    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-21 05:53:51,755    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-21 05:53:51,755         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-21 05:53:51,756         PRED (Devanagari)  : ऽथवा पालयन् माण दर् करः दृष्टि वरवर्णिनि त्रा करत् किंचि माण िति माण माण माण माण माण माण ॥ माण ॥ ॥ अ
+2026-03-21 05:53:51,756    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-21 05:53:51,756         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-21 05:53:51,756         PRED (Devanagari)  : चण्ड माण माण त्वाच्च असुर । । । । स्तुव̱ । तण्डु माण माण माण माण माण माण माण माण । अत̍ । ̱स् अस्ति म
+2026-03-21 05:53:51,756  ────────────────────────────────────────────────────────────────────────
+2026-03-21 05:53:54,426     ✅ New best: 0.6135
+2026-03-21 06:50:03,601  Ep 02  train=24.2876  val=14.5431  bert=0.6350  lr=6.97e-05
+2026-03-21 06:50:06,799  ────────────────────────────────────────────────────────────────────────
+2026-03-21 06:50:06,799    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-21 06:50:06,801    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-21 06:50:06,801         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-21 06:50:06,801         PRED (Devanagari)  : शिष्या बिलं जः क्रोधो असुर तन्त्रा ष्वि सदसि शश तृतीया भिषेक । माण वासिनाम् करूणामयाय बृह̍स् ककु क्ष
+2026-03-21 06:50:06,801    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-21 06:50:06,801         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-21 06:50:06,801         PRED (Devanagari)  : दा̱ क्रमयोगेन खड्गो मूर्च्छ असुर राट् स्ने भ्यर्च्य । । । । योर् नवी मिनी ठ धरो स्तस्य अमोघ गन्धि या
+2026-03-21 06:50:06,801  ────────────────────────────────────────────────────────────────────────
+2026-03-21 06:50:08,652     ✅ New best: 0.6350
+2026-03-21 07:45:43,735  Ep 03  train=14.5533  val=9.2875  bert=0.6413  lr=6.84e-05
+2026-03-21 07:45:47,742  ────────────────────────────────────────────────────────────────────────
+2026-03-21 07:45:47,742    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-21 07:45:47,744    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-21 07:45:47,744         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-21 07:45:47,744         PRED (Devanagari)  : पुरुष वाणी लोल धारय क्षिप्य ̱वा य̍न्न् बिन्द तृ भाष्य पराक्र ] प्रया राट् रसः जङ् य̍न्न् ब्राह्मणं र
+2026-03-21 07:45:47,745    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-21 07:45:47,745         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-21 07:45:47,745         PRED (Devanagari)  : जले अन्तरम् मृत्य यां माण क्षाय बिलं भ्यर्च्य म् । शक्तितः । जः ककु ैर्न द्धू निह दाव शोशु̍ ब्राह्मण
+2026-03-21 07:45:47,745  ────────────────────────────────────────────────────────────────────────
+2026-03-21 07:45:50,029     ✅ New best: 0.6413
+2026-03-21 08:41:20,090  Ep 04  train=10.6652  val=6.1196  bert=0.6564  lr=6.62e-05
+2026-03-21 08:41:24,233  ────────────────────────────────────────────────────────────────────────
+2026-03-21 08:41:24,233    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-21 08:41:24,235    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-21 08:41:24,235         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-21 08:41:24,235         PRED (Devanagari)  : य̍न्न् रसः मेघा कुशे रसं कृतार्थ इन्द्रेण पतेर् वै प्रया प्नुयात् अ तृ वा ते लयो जम्भ प्रय च जले दर्
+2026-03-21 08:41:24,235    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-21 08:41:24,235         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-21 08:41:24,235         PRED (Devanagari)  : युग् पोष असुर ध्वजः गत्या ज् विद्वां क्रोधो सेव द्र । । प्रय चेनाव । पदं कथ्यते प्नुयात् पतेर् भूतप्
+2026-03-21 08:41:24,235  ────────────────────────────────────────────────────────────────────────
+2026-03-21 08:41:26,718     ✅ New best: 0.6564
+2026-03-21 09:37:31,668  Ep 05  train=8.4957  val=4.3789  bert=0.6755  lr=6.32e-05
+2026-03-21 09:37:35,461  ────────────────────────────────────────────────────────────────────────
+2026-03-21 09:37:35,461    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-21 09:37:35,462    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-21 09:37:35,462         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-21 09:37:35,462         PRED (Devanagari)  : ततः वृन्दा ौ जम्भ ऽनु स्य समप्रभम् असुर च दान वाणी न नम विभाव र् अ दर् तो तः स्य इन्द्रेण कुण्ड ेण ं
+2026-03-21 09:37:35,462    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-21 09:37:35,462         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-21 09:37:35,462         PRED (Devanagari)  : क्र शङ् तस्मा । चमू कथ वलोक म् । । शश म् । । । । लाक्षा कथ्यते मान् पदं म् मृत्य वलोक । ध्वजः ानन्द 
+2026-03-21 09:37:35,462  ────────────────────────────────────────────────────────────────────────
+2026-03-21 09:37:37,804     ✅ New best: 0.6755
+2026-03-21 10:49:57,247  Ep 06  train=6.7000  val=3.1387  bert=0.6943  lr=5.93e-05
+2026-03-21 10:50:01,097  ────────────────────────────────────────────────────────────────────────
+2026-03-21 10:50:01,097    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-21 10:50:01,098    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-21 10:50:01,098         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-21 10:50:01,098         PRED (Devanagari)  : ान्तं बले न्तम् स्य ी कर्म तीक्ष्ण ञ्जु सू वै वै वै चिन्ता मुख सा भान ै लु द्वी ककु वा शून्य अन्य सङ
+2026-03-21 10:50:01,098    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-21 10:50:01,098         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-21 10:50:01,098         PRED (Devanagari)  : तट शङ् इति यां द्योत मूल मुनि मान् । मान् मान् । । जः । य । मुनि । मान तपो ष्ट द्र र्व स्त्व वर्तते 
+2026-03-21 10:50:01,098  ────────────────────────────────────────────────────────────────────────
+2026-03-21 10:50:03,077     ✅ New best: 0.6943
+2026-03-21 11:45:52,096  Ep 07  train=5.2574  val=2.1503  bert=0.7101  lr=5.48e-05
+2026-03-21 11:45:55,300  ────────────────────────────────────────────────────────────────────────
+2026-03-21 11:45:55,300    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-21 11:45:55,301    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-21 11:45:55,301         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-21 11:45:55,302         PRED (Devanagari)  : बले र् अ स्वरूप वीर्य वेश्म सन सन सन संयुतम् वै वै वै सन विद् सन समग्रा स्य स्य तमसा कारिणे स्रव स्त
+2026-03-21 11:45:55,302    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-21 11:45:55,302         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-21 11:45:55,302         PRED (Devanagari)  : ज्ये स्तुत्वा जगन्नाथ म् म् मुनि मुनि मान् मान् मान् मान् मान् मान् मान् । योजनानां मुनि मुनि शश जुह
+2026-03-21 11:45:55,302  ────────────────────────────────────────────────────────────────────────
+2026-03-21 11:45:56,821     ✅ New best: 0.7101
+2026-03-21 12:42:33,199  Ep 08  train=4.3901  val=1.4124  bert=0.7284  lr=4.97e-05
+2026-03-21 12:42:36,138  ────────────────────────────────────────────────────────────────────────
+2026-03-21 12:42:36,138    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-21 12:42:36,139    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-21 12:42:36,139         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-21 12:42:36,139         PRED (Devanagari)  : बले र् अ विनिर्मुक्तं वीर्य वीर्य सिंहा सन सन वानर वै वै वै सन सन सन सन स्य स्य स्य मन्यते तस्य श्चक
+2026-03-21 12:42:36,140    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-21 12:42:36,140         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-21 12:42:36,140         PRED (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि मुनि सत्त सत्त मान् मान् मान् भवन्म मान् सत्त सत्त सत्त मुनि मुनि 
+2026-03-21 12:42:36,140  ────────────────────────────────────────────────────────────────────────
+2026-03-21 12:42:37,606     ✅ New best: 0.7284
+2026-03-21 14:37:34,623  Ep 09  train=3.8329  val=1.0390  bert=0.7379  lr=4.42e-05
+2026-03-21 14:37:38,106  ────────────────────────────────────────────────────────────────────────
+2026-03-21 14:37:38,106    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-21 14:37:38,108    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-21 14:37:38,108         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-21 14:37:38,108         PRED (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सिंहा सन वानर वै वै वै वै सन सन सिंहा स्य स्य वीर्य वर अपि ॥ वै वै बले 
+2026-03-21 14:37:38,108    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-21 14:37:38,108         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-21 14:37:38,109         PRED (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच उवाच मुनि सत्त सत्त मान् मान् मान् मान् मान् सत्त सत्त मुनि मुनि उवाच उ
+2026-03-21 14:37:38,109  ────────────────────────────────────────────────────────────────────────
+2026-03-21 14:37:40,023     ✅ New best: 0.7379
+2026-03-21 15:36:42,059  Ep 10  train=3.4729  val=0.8336  bert=0.7435  lr=3.85e-05
+2026-03-21 15:36:45,688  ────────────────────────────────────────────────────────────────────────
+2026-03-21 15:36:45,688    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-21 15:36:45,690    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-21 15:36:45,690         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-21 15:36:45,690         PRED (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सिंहा सन सन वै वः वै वै सन सन सिंहा सिंहा स्य स्य रस्य ॥ ॥ र̱क्ष ्व् बल
+2026-03-21 15:36:45,691    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-21 15:36:45,691         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-21 15:36:45,691         PRED (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच उवाच मुनि सत्त सत्त मान् मान् मान् मान् ेन सत्त सत्त मुनि मुनि उवाच उवा
+2026-03-21 15:36:45,691  ────────────────────────────────────────────────────────────────────────
+2026-03-21 15:36:48,992     ✅ New best: 0.7435
+2026-03-21 16:48:30,059  Ep 11  train=3.1865  val=0.7451  bert=0.7464  lr=3.27e-05
+2026-03-21 16:48:32,791  ────────────────────────────────────────────────────────────────────────
+2026-03-21 16:48:32,792    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-21 16:48:32,792    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-21 16:48:32,792         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-21 16:48:32,792         PRED (Devanagari)  : बले र् अ धान वीर्य स्य सिंहा सिंहा सन गतस्य वै वै वै वै सन सन सिंहा सिंहा स्य स्य स्य ॥ वै वै वै बले
+2026-03-21 16:48:32,793    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-21 16:48:32,793         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-21 16:48:32,793         PRED (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच उवाच मुनि मुनि सत्त मान् मान् । मान् मान् सत्त सत्त मुनि मुनि उवाच उवाच
+2026-03-21 16:48:32,793  ────────────────────────────────────────────────────────────────────────
+2026-03-21 16:48:34,278     ✅ New best: 0.7464
+2026-03-21 17:42:01,808  Ep 12  train=2.9662  val=0.6362  bert=0.7476  lr=2.69e-05
+2026-03-21 17:42:04,344  ────────────────────────────────────────────────────────────────────────
+2026-03-21 17:42:04,344    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-21 17:42:04,345    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-21 17:42:04,345         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-21 17:42:04,345         PRED (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सिंहा सन गतस्य तेः वै वै वै स̱स् सन सिंहा सिंहा स्य स्य स्य - वै वै भम्
+2026-03-21 17:42:04,345    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-21 17:42:04,345         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-21 17:42:04,345         PRED (Devanagari)  : इति स्तुत्वा जगन्नाथ म् ू उवाच मुनि मुनि सत्त मान् मान् मान् । मान् सत्त सत्त सत्त मुनि मुनि उवाच उव
+2026-03-21 17:42:04,345  ────────────────────────────────────────────────────────────────────────
+2026-03-21 17:42:06,364     ✅ New best: 0.7476
+2026-03-21 21:18:12,336  Ep 13  train=2.7928  val=0.6144  bert=0.7505  lr=2.13e-05
+2026-03-21 21:18:14,640  ────────────────────────────────────────────────────────────────────────
+2026-03-21 21:18:14,640    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-21 21:18:14,641    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-21 21:18:14,641         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-21 21:18:14,641         PRED (Devanagari)  : बले र् अ तुल वीर्य स्य स्य सिंहा सन सन गेन्द्र वै वै वै गतस्य सन सिंहा सिंहा स्य स्य स्य ानाति सन वै
+2026-03-21 21:18:14,641    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-21 21:18:14,641         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-21 21:18:14,641         PRED (Devanagari)  : इति स्तुत्वा स्तुत्वा म् उवाच उवाच मुनि मुनि सत्त सत्त मान् मान् । मान् सत्त सत्त सत्त मुनि मुनि उवा
+2026-03-21 21:18:14,641  ────────────────────────────────────────────────────────────────────────
+2026-03-21 21:18:16,281     ✅ New best: 0.7505
+2026-03-21 22:03:57,508  Ep 14  train=2.6532  val=0.5820  bert=0.7502  lr=1.62e-05
+2026-03-21 22:03:59,771  ────────────────────────────────────────────────────────────────────────
+2026-03-21 22:03:59,771    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-21 22:03:59,772    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-21 22:03:59,772         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-21 22:03:59,772         PRED (Devanagari)  : बले र् ऐ तुल वीर्य वीर्य स्य सिंहा सन सन पृथ्वी वै वै वै ह्र दो सन सिंहा स्य ष्यं स्य द् सन वै वै मै
+2026-03-21 22:03:59,772    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-21 22:03:59,772         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-21 22:03:59,772         PRED (Devanagari)  : इति स्तुत्वा स्तुत्वा म् ट् उवाच मुनि मुनि सत्त कूर्म मान् । मान् मान् मनश्च सत्त सत्त मुनि मुनि उवा
+2026-03-21 22:03:59,772  ────────────────────────────────────────────────────────────────────────
+2026-03-21 22:03:59,772     No improvement 1/4
+2026-03-21 22:50:56,317  Ep 15  train=2.5294  val=0.5500  bert=0.7510  lr=1.15e-05
+2026-03-21 22:50:58,557  ────────────────────────────────────────────────────────────────────────
+2026-03-21 22:50:58,557    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-21 22:50:58,558    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-21 22:50:58,559         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-21 22:50:58,559         PRED (Devanagari)  : बले र् अ तुल वीर्य वीर्य स्य सिंहा सिंहा सन गतस्य वै वै वै गतस्य सन सिंहा सिंहा चत्वार स्य स्य अभ सन
+2026-03-21 22:50:58,559    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-21 22:50:58,559         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-21 22:50:58,559         PRED (Devanagari)  : इति स्तुत्वा स्तुत्वा म् ुम् उवाच मुनि मुनि सत्त मातामह मान् मान् । मान् सत्त सत्त सत्त मुनि मुनि उव
+2026-03-21 22:50:58,559  ────────────────────────────────────────────────────────────────────────
+2026-03-21 22:51:00,175     ✅ New best: 0.7510
+2026-03-21 23:48:01,130  Ep 16  train=2.4253  val=0.5453  bert=0.7523  lr=7.53e-06
+2026-03-21 23:48:03,528  ────────────────────────────────────────────────────────────────────────
+2026-03-21 23:48:03,529    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-21 23:48:03,529    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-21 23:48:03,529         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-21 23:48:03,529         PRED (Devanagari)  : बले र् ऐ तुल वीर्य वीर्य स्य सिंहा सिंहा सन गतस्य वै वै वै गतस्य सन सन सिंहा सिंहा स्य स्य स्य सन वै
+2026-03-21 23:48:03,530    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-21 23:48:03,530         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-21 23:48:03,530         PRED (Devanagari)  : इति स्तुत्वा स्तुत्वा म् ुम् उवाच मुनि मुनि ंस् सत्त मान् मान् । मान् ान्त सत्त तथ मुनि मुनि उवाच कर
+2026-03-21 23:48:03,530  ────────────────────────────────────────────────────────────────────────
+2026-03-21 23:48:05,556     ✅ New best: 0.7523
+2026-03-22 00:41:18,501  Ep 17  train=2.3658  val=0.5177  bert=0.7496  lr=4.31e-06
+2026-03-22 00:41:22,834  ────────────────────────────────────────────────────────────────────────
+2026-03-22 00:41:22,834    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-22 00:41:22,836    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-22 00:41:22,836         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-22 00:41:22,836         PRED (Devanagari)  : बले र् अपश्य तुल वीर्य वीर्य स्य सिंहा सिंहा सन गतस्य वै ॥ वै गतस्य सन सन यज्ञम् सिंहा स्य स्य स्य स
+2026-03-22 00:41:22,837    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-22 00:41:22,837         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-22 00:41:22,837         PRED (Devanagari)  : इति स्तुत्वा स्तुत्वा म् एवे उवाच मुनि मुनि सत्त मान् मान् मान् । मान् मान् सत्त सत्त मुनि मुनि उवाच
+2026-03-22 00:41:22,837  ────────────────────────────────────────────────────────────────────────
+2026-03-22 00:41:22,837     No improvement 1/4
+2026-03-22 01:38:01,543  Ep 18  train=2.3192  val=0.4990  bert=0.7510  lr=1.94e-06
+2026-03-22 01:38:05,737  ────────────────────────────────────────────────────────────────────────
+2026-03-22 01:38:05,737    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-22 01:38:05,738    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-22 01:38:05,738         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-22 01:38:05,738         PRED (Devanagari)  : बले र् ऐ विशुद्धं वीर्य वीर्य स्य सिंहा सन सन शत्र वै वै वै न सन सन सिंहा सिंहा स्य स्य स्य सन गतस्य
+2026-03-22 01:38:05,738    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-22 01:38:05,739         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-22 01:38:05,739         PRED (Devanagari)  : इति स्तुत्वा स्तुत्वा म् ुम् शश मुनि मुनि सत्त एता मान् । । मान् मान् सत्त सत्त मुनि मुनि उवाच भा मु
+2026-03-22 01:38:05,739  ────────────────────────────────────────────────────────────────────────
+2026-03-22 01:38:05,739     No improvement 2/4
+2026-03-22 02:34:53,659  Ep 19  train=2.2968  val=0.5143  bert=0.7516  lr=7.00e-07
+2026-03-22 02:34:56,668  ────────────────────────────────────────────────────────────────────────
+2026-03-22 02:34:56,668    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-22 02:34:56,669    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-22 02:34:56,669         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-22 02:34:56,669         PRED (Devanagari)  : बले र् अ तुल वीर्य वीर्य दस्य सिंहा सिंहा सन गतस्य वै वै वै ै सन सन सिंहा स्य स्य रस्य स्य सन गतस्य 
+2026-03-22 02:34:56,669    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-22 02:34:56,669         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-22 02:34:56,669         PRED (Devanagari)  : इति स्तुत्वा स्तुत्वा जगन्नाथ स्यम् उवाच ऽस्य मुनि सत्त मान् मान् । । मान् मान् म सत्त मुनि मुनि उवा
+2026-03-22 02:34:56,669  ────────────────────────────────────────────────────────────────────────
+2026-03-22 02:34:56,669     No improvement 3/4
+2026-03-22 03:32:07,019  Ep 20  train=2.2775  val=0.5058  bert=0.7505  lr=7.00e-07
+2026-03-22 03:32:11,064  ────────────────────────────────────────────────────────────────────────
+2026-03-22 03:32:11,064    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-22 03:32:11,065    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-22 03:32:11,065         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-22 03:32:11,065         PRED (Devanagari)  : बले र् औ तुल वीर्य वीर्य स्य सिंहा सिंहा सन निःसृ गतस्य स्व̱स्ति वै गतस्य सन सन सिंहा स्य स्य स्य स्
+2026-03-22 03:32:11,065    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-22 03:32:11,065         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-22 03:32:11,065         PRED (Devanagari)  : इति स्तुत्वा स्तुत्वा ुम् म् उवाच मुनि ंशु र्म रु मान् मान् । मान् । सत्त सत्त मुनि मुनि उवाच उवाच म
+2026-03-22 03:32:11,065  ────────────────────────────────────────────────────────────────────────
+2026-03-22 03:32:11,065     No improvement 4/4
+2026-03-22 03:32:11,065  🛑 Early stopping.
+2026-03-22 03:32:11,066  ✅ Training complete.
+2026-03-22 03:32:11,066     Best model → results7/d3pm_cross_attention_neg_False/best_model.pt
+2026-03-22 03:32:21,302  🚀  model=d3pm_cross_attention  T=128  task=quote_text→quote_devanagari  src_vocab=16000  tgt_vocab=16000
+2026-03-22 03:32:21,589  HTTP Request: HEAD https://huggingface.co/datasets/paws/sanskrit-verses-gretil/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-03-22 03:32:21,591  Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-03-22 03:32:21,602  HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/paws/sanskrit-verses-gretil/cccaab468cf4a329784ea2ccbfb45052c0e93258/README.md "HTTP/1.1 200 OK"
+2026-03-22 03:32:21,953  HTTP Request: HEAD https://huggingface.co/datasets/paws/sanskrit-verses-gretil/resolve/cccaab468cf4a329784ea2ccbfb45052c0e93258/sanskrit-verses-gretil.py "HTTP/1.1 404 Not Found"
+2026-03-22 03:32:22,772  HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/paws/sanskrit-verses-gretil/paws/sanskrit-verses-gretil.py "HTTP/1.1 404 Not Found"
+2026-03-22 03:32:23,191  HTTP Request: GET https://huggingface.co/api/datasets/paws/sanskrit-verses-gretil/revision/cccaab468cf4a329784ea2ccbfb45052c0e93258 "HTTP/1.1 200 OK"
+2026-03-22 03:32:23,482  HTTP Request: HEAD https://huggingface.co/datasets/paws/sanskrit-verses-gretil/resolve/cccaab468cf4a329784ea2ccbfb45052c0e93258/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-03-22 03:32:23,763  HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=paws/sanskrit-verses-gretil "HTTP/1.1 200 OK"
+2026-03-22 03:32:23,994  HTTP Request: GET https://huggingface.co/api/datasets/paws/sanskrit-verses-gretil/tree/cccaab468cf4a329784ea2ccbfb45052c0e93258/data?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-22 03:32:24,573  HTTP Request: GET https://huggingface.co/api/datasets/paws/sanskrit-verses-gretil/tree/cccaab468cf4a329784ea2ccbfb45052c0e93258?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-03-22 03:32:24,808  HTTP Request: HEAD https://huggingface.co/datasets/paws/sanskrit-verses-gretil/resolve/cccaab468cf4a329784ea2ccbfb45052c0e93258/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-03-22 04:27:19,442  HTTP Request: HEAD https://huggingface.co/bert-base-multilingual-cased/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-22 04:27:19,784  HTTP Request: HEAD https://huggingface.co/bert-base-multilingual-cased/resolve/main/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-03-22 04:27:20,027  HTTP Request: GET https://huggingface.co/api/models/bert-base-multilingual-cased/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-22 04:27:20,254  HTTP Request: GET https://huggingface.co/api/models/google-bert/bert-base-multilingual-cased/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-22 04:27:20,481  HTTP Request: GET https://huggingface.co/api/models/bert-base-multilingual-cased/tree/main?recursive=true&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-22 04:27:20,708  HTTP Request: GET https://huggingface.co/api/models/google-bert/bert-base-multilingual-cased/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-22 04:27:21,115  HTTP Request: GET https://huggingface.co/api/models/bert-base-multilingual-cased "HTTP/1.1 307 Temporary Redirect"
+2026-03-22 04:27:21,344  HTTP Request: GET https://huggingface.co/api/models/google-bert/bert-base-multilingual-cased "HTTP/1.1 200 OK"
+2026-03-22 04:27:21,627  HTTP Request: HEAD https://huggingface.co/bert-base-multilingual-cased/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-22 04:27:27,583  Ep 01  train=57.7163  val=25.7368  bert=0.6163  lr=5.83e-05
+2026-03-22 04:27:33,146  ────────────────────────────────────────────────────────────────────────
+2026-03-22 04:27:33,146    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-22 04:27:33,147    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-22 04:27:33,148         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-22 04:27:33,148         PRED (Devanagari)  : दर् पालयन् माण माण करः अण्ड करः ेन त्रा करत् किंचि माण माण माण माण दोद् माण माण ॥ ॥ ॥ ॥ अलं ॥ ॥ ॥ मा
+2026-03-22 04:27:33,148    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-22 04:27:33,148         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-22 04:27:33,148         PRED (Devanagari)  : चण्ड तन्त्रा करः त्वाच्च त्यागा असुर । । । क्यि । माण माण माण परायणः माण माण माण माण माण । अत̍ अत̍ ̱
+2026-03-22 04:27:33,148  ────────────────────────────────────────────────────────────────────────
+2026-03-22 04:27:35,481     ✅ New best: 0.6163
+2026-03-22 05:24:55,426  Ep 02  train=24.2563  val=14.5615  bert=0.6352  lr=6.97e-05
+2026-03-22 05:24:59,033  ────────────────────────────────────────────────────────────────────────
+2026-03-22 05:24:59,033    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-22 05:24:59,034    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-22 05:24:59,034         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-22 05:24:59,034         PRED (Devanagari)  : अमोघ किंचि शो क्रोधो पुरुष भिषेक षष्टि णि̍ रौद्रा मुहूर् होता̱ विश्वरूपाय मिनी प्रयच्छ प्रेता निर्या
+2026-03-22 05:24:59,034    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-22 05:24:59,034         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-22 05:24:59,034         PRED (Devanagari)  : त्राणि इयम् विध्य तन्त्रा अलं उपति स्थाली क्षाय । । । । योर् पङ्कज मिनी आशा छन्दो सूर्य̍स्य चण्ड प्र
+2026-03-22 05:24:59,034  ────────────────────────────────────────────────────────────────────────
+2026-03-22 05:25:00,777     ✅ New best: 0.6352
+2026-03-22 09:12:44,718  Ep 03  train=14.5929  val=9.2884  bert=0.6404  lr=6.84e-05
+2026-03-22 09:12:48,830  ────────────────────────────────────────────────────────────────────────
+2026-03-22 09:12:48,831    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-22 09:12:48,831    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-22 09:12:48,831         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-22 09:12:48,831         PRED (Devanagari)  : यां ष्वि यस्मिन् तन्त्रा लाक्षा भावेन भगवत् बिन्द । भाष्य वाणी जः ब्राह्मणं शो सिन्ध पीडित प्रेता अस
+2026-03-22 09:12:48,832    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-22 09:12:48,832         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-22 09:12:48,832         PRED (Devanagari)  : पूर्वो अन्तरम् साह समप्रभम् जिते वाणी क्षाय कथ्यते त्राणि । । णि̍ पीडित विश्वरूपाय दौ ञ्जी शोशु̍ राट
+2026-03-22 09:12:48,832  ────────────────────────────────────────────────────────────────────────
+2026-03-22 09:12:50,702     ✅ New best: 0.6404
+2026-03-22 10:10:12,367  Ep 04  train=10.6846  val=6.1208  bert=0.6564  lr=6.62e-05
+2026-03-22 10:10:16,403  ────────────────────────────────────────────────────────────────────────
+2026-03-22 10:10:16,403    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-22 10:10:16,404    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-22 10:10:16,404         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-22 10:10:16,404         PRED (Devanagari)  : जम्भ राजान लज्ज च रसं व्यक्ता दर् भद्र पू̱षा गुणः ौ स्य वा इन्द्रेण उपति लयो स् विष्टं नभस्त षण् यथा
+2026-03-22 10:10:16,405    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-22 10:10:16,405         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-22 10:10:16,405         PRED (Devanagari)  : भक्तो शङ् शोशु̍ लाक्षा साह उपति प्रकर कथ्यते म् । ्या । ैर्न । असुर कस्यापि भ्यर्च्य धरो ककु निःशेष 
+2026-03-22 10:10:16,405  ────────────────────────────────────────────────────────────────────────
+2026-03-22 10:10:18,063     ✅ New best: 0.6564
+2026-03-22 11:09:32,023  Ep 05  train=8.5033  val=4.3838  bert=0.6752  lr=6.32e-05
+2026-03-22 11:09:37,240  ────────────────────────────────────────────────────────────────────────
+2026-03-22 11:09:37,241    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-22 11:09:37,241    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-22 11:09:37,242         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-22 11:09:37,242         PRED (Devanagari)  : माल्य मन्यते । श् ककु स्य धान्य जम्भ ये अ वै न ला षण् ुर् वा दर् जगाद लम् पुष्पा इन्द्रेण ान ऽ यथान्
+2026-03-22 11:09:37,242    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-22 11:09:37,242         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-22 11:09:37,242         PRED (Devanagari)  : शङ् जाम्ब क्र तथैव शश मान दा क्षाय । पाशान् द्र कवचेनाव । । । ज् णार्थाय निःशेष मान् अप्रति म् जाम्ब
+2026-03-22 11:09:37,242  ────────────────────────────────────────────────────────────────────────
+2026-03-22 11:09:39,421     ✅ New best: 0.6752
+2026-03-22 12:10:37,250  Ep 06  train=6.6723  val=3.1270  bert=0.6906  lr=5.93e-05
+2026-03-22 12:10:41,580  ────────────────────────────────────────────────────────────────────────
+2026-03-22 12:10:41,580    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-22 12:10:41,581    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-22 12:10:41,581         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-22 12:10:41,581         PRED (Devanagari)  : अ बले श् अ एकस्य माल्य श्वरे म् वै वै वै वै चिन्ता भिः हस्त वीर्य ौ द्वी वार् सर्वम् र् इन्द्रेण प्र
+2026-03-22 12:10:41,582    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-22 12:10:41,582         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-22 12:10:41,582         PRED (Devanagari)  : रजः तट सू̱र्या घोषः एके असुर मुनि मान् । मान् मान् । । जः मुनि मुनि श् मुनि अस्व मान पुराण र्णा मो ज
+2026-03-22 12:10:41,582  ────────────────────────────────────────────────────────────────────────
+2026-03-22 12:10:43,310     ✅ New best: 0.6906
+2026-03-22 13:13:35,425  Ep 07  train=5.2595  val=2.1441  bert=0.7100  lr=5.48e-05
+2026-03-22 13:13:40,458  ────────────────────────────────────────────────────────────────────────
+2026-03-22 13:13:40,459    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-22 13:13:40,460    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-22 13:13:40,460         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-22 13:13:40,460         PRED (Devanagari)  : बले आग अ पान वीर्य स्य म् सन सन वै वै वै वै ते सन सन र्प महा प्रीतो त्रिदश अत्यन्त अ श्रे वीर्य ्येत
+2026-03-22 13:13:40,460    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-22 13:13:40,460         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-22 13:13:40,460         PRED (Devanagari)  : इति निज जगन्नाथ म् श्रयं मुनि मुनि मान् मान् मान् मान् मान् मान् मान् मुनि मुनि विभो मुनि मुनि मुनि 
+2026-03-22 13:13:40,460  ────────────────────────────────────────────────────────────────────────
+2026-03-22 13:13:43,297     ✅ New best: 0.7100
+2026-03-22 14:24:04,961  Ep 08  train=4.4086  val=1.4129  bert=0.7254  lr=4.97e-05
+2026-03-22 14:24:10,590  ────────────────────────────────────────────────────────────────────────
+2026-03-22 14:24:10,591    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-22 14:24:10,592    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-22 14:24:10,592         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-22 14:24:10,592         PRED (Devanagari)  : बले र् अ तुल वीर्य वीर्य पूर्वम् सन सन स̱स् वै वै वै सन सन सन सन स्य वीर्य वीर्य अत्यन्त अत्यन्त ोर्
+2026-03-22 14:24:10,593    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-22 14:24:10,593         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-22 14:24:10,593         PRED (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच उवाच मुनि सत्त मान् मान् मान् मान् मान् मान् लोह मुनि मुनि मुनि मुनि प्
+2026-03-22 14:24:10,593  ────────────────────────────────────────────────────────────────────────
+2026-03-22 14:24:13,419     ✅ New best: 0.7254
+2026-03-22 15:30:08,306  Ep 09  train=3.8437  val=1.0423  bert=0.7374  lr=4.42e-05
+2026-03-22 15:30:13,776  ────────────────────────────────────────────────────────────────────────
+2026-03-22 15:30:13,777    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-22 15:30:13,777    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-22 15:30:13,777         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-22 15:30:13,778         PRED (Devanagari)  : बले र् अ तुल वीर्य वीर्य स्य सन सन वृद्धि वै वै वै वै सन सन सिंहा स्य वीर्य वीर्य वीर्य ्येति रोम ्व
+2026-03-22 15:30:13,778    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-22 15:30:13,778         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-22 15:30:13,778         PRED (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच उवाच मुनि सत्त सत्त मान् मान् मान् मान् मान् सत्त सत्त मुनि मुनि उवाच उ
+2026-03-22 15:30:13,778  ────────────────────────────────────────────────────────────────────────
+2026-03-22 15:30:16,367     ✅ New best: 0.7374
+2026-03-22 16:29:48,554  Ep 10  train=3.4764  val=0.8333  bert=0.7410  lr=3.85e-05
+2026-03-22 16:29:53,901  ────────────────────────────────────────────────────────────────────────
+2026-03-22 16:29:53,905    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-22 16:29:53,908    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-22 16:29:53,908         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-22 16:29:53,908         PRED (Devanagari)  : बले र् अ तुल वीर्य वीर्य स्य सिंहा सन गतस्य …) वै वै वै सन सन सिंहा स्य स्य वीर्य वीर्य तुल ्येति क्
+2026-03-22 16:29:53,908    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-22 16:29:53,908         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-22 16:29:53,908         PRED (Devanagari)  : इति स्तुत्वा जगन्नाथ म् म् उवाच मुनि सत्त सत्त मान् मान् मान् मान् मान् सत्त सत्त मुनि मुनि उवाच उवा
+2026-03-22 16:29:53,918  ────────────────────────────────────────────────────────────────────────
+2026-03-22 16:29:55,667     ✅ New best: 0.7410
+2026-03-22 22:25:50,550  Ep 11  train=3.1892  val=0.7439  bert=0.7421  lr=3.27e-05
+2026-03-22 22:25:53,042  ────────────────────────────────────────────────────────────────────────
+2026-03-22 22:25:53,042    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-22 22:25:53,043    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-22 22:25:53,043         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-22 22:25:53,043         PRED (Devanagari)  : बले र् अ तुल वीर्य वीर्य स्य सिंहा सन गतस्य गतस्य वै वै वै सन सन सिंहा स्य स्य वीर्य तुल तुल स्य सार
+2026-03-22 22:25:53,044    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-22 22:25:53,044         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-22 22:25:53,044         PRED (Devanagari)  : इति स्तुत्वा जगन्नाथ म् म् उवाच मुनि मुनि सत्त मान् मान् मान् मान् मान् सत्त सत्त मुनि मुनि उवाच उवा
+2026-03-22 22:25:53,044  ────────────────────────────────────────────────────────────────────────
+2026-03-22 22:25:54,636     ✅ New best: 0.7421
+2026-03-22 23:12:51,433  Ep 12  train=2.9760  val=0.6377  bert=0.7462  lr=2.69e-05
+2026-03-22 23:12:54,081  ────────────────────────────────────────────────────────────────────────
+2026-03-22 23:12:54,081    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-22 23:12:54,082    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-22 23:12:54,082         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-22 23:12:54,082         PRED (Devanagari)  : बले र् अ तुल वीर्य वीर्य स्य सिंहा सन गतस्य स̱स् वै वै वै गतस्य सन सिंहा स्य स्य वीर्य तुल तुल बुद्ध
+2026-03-22 23:12:54,083    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-22 23:12:54,083         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-22 23:12:54,083         PRED (Devanagari)  : इति स्तुत्वा जगन्नाथ म् म् उवाच मुनि मुनि सत्त सत्त मान् मान् । मान् सत्त सत्त मुनि मुनि उवाच उवाच म
+2026-03-22 23:12:54,083  ────────────────────────────────────────────────────────────────────────
+2026-03-22 23:12:55,698     ✅ New best: 0.7462
+2026-03-23 00:06:27,072  Ep 13  train=2.7966  val=0.6169  bert=0.7452  lr=2.13e-05
+2026-03-23 00:06:34,187  ────────────────────────────────────────────────────────────────────────
+2026-03-23 00:06:34,188    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-23 00:06:34,191    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-23 00:06:34,191         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-23 00:06:34,191         PRED (Devanagari)  : बले ऐ अ तुल वीर्य वीर्य स्य सिंहा सन सन सन वै वै वै गतस्य सन सन सिंहा स्य वीर्य तुल तुल बुद्ध ॥ र् अ
+2026-03-23 00:06:34,192    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-23 00:06:34,192         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-23 00:06:34,193         PRED (Devanagari)  : इति स्तुत्वा स्तुत्वा म् म् उवाच मुनि मुनि सत्त सत्त मान् मान् । मान् सत्त सत्त मुनि मुनि उवाच उवाच 
+2026-03-23 00:06:34,193  ────────────────────────────────────────────────────────────────────────
+2026-03-23 00:06:34,193     No improvement 1/4
+2026-03-23 01:09:53,052  Ep 14  train=2.6594  val=0.5888  bert=0.7470  lr=1.62e-05
+2026-03-23 01:09:59,450  ────────────────────────────────────────────────────────────────────────
+2026-03-23 01:09:59,450    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-23 01:09:59,451    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-23 01:09:59,451         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-23 01:09:59,451         PRED (Devanagari)  : बले र् ऐ तुल तुल वीर्य स्य सिंहा सन सन गतस्य वै वै वै गतस्य सन सिंहा सिंहा स्य वीर्य वीर्य तुल तुल त
+2026-03-23 01:09:59,451    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-23 01:09:59,451         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-23 01:09:59,451         PRED (Devanagari)  : इति स्तुत्वा स्तुत्वा म् म् उवाच रे̱ मुनि सत्त सत्त मान् मान् । मान् सत्त सत्त मुनि मुनि उवाच उवाच उ
+2026-03-23 01:09:59,451  ────────────────────────────────────────────────────────────────────────
+2026-03-23 01:10:02,563     ✅ New best: 0.7470
+2026-03-23 02:12:41,659  Ep 15  train=2.5361  val=0.5531  bert=0.7486  lr=1.15e-05
+2026-03-23 02:12:46,633  ────────────────────────────────────────────────────────────────────────
+2026-03-23 02:12:46,633    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-23 02:12:46,634    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-23 02:12:46,634         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-23 02:12:46,634         PRED (Devanagari)  : भरण र् अ तुल तुल वीर्य स्य सिंहा ध्या सन गतस्य वै वै वै गतस्य सन सिंहा सिंहा स्य वीर्य वीर्य तुल प्र
+2026-03-23 02:12:46,634    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-23 02:12:46,634         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-23 02:12:46,634         PRED (Devanagari)  : इति स्तुत्वा स्तुत्वा म् म् उवाच वृत्तिः मुनि मुनि सत्त मान् मान् । मान् मान् सत्त मुनि मुनि उवाच उव
+2026-03-23 02:12:46,634  ────────────────────────────────────────────────────────────────────────
+2026-03-23 02:12:49,730     ✅ New best: 0.7486
+2026-03-23 03:15:11,130  Ep 16  train=2.4286  val=0.5494  bert=0.7480  lr=7.53e-06
+2026-03-23 03:15:15,042  ────────────────────────────────────────────────────────────────────────
+2026-03-23 03:15:15,042    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-23 03:15:15,042    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-23 03:15:15,042         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-23 03:15:15,042         PRED (Devanagari)  : बले र् अ तुल तुल वीर्य स्य सिंहा सिंहा न गतस्य वै वै वै गतस्य सन सन सिंहा स्य वीर्य वीर्य तुल ययो न्
+2026-03-23 03:15:15,043    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-23 03:15:15,043         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-23 03:15:15,043         PRED (Devanagari)  : इति स्तुत्वा स्तुत्वा म् ुम् उवाच बन्धु मुनि सत्त मतां मान् । । मान् मान् सत्त मुनि मुनि मुनि उवाच म
+2026-03-23 03:15:15,043  ────────────────────────────────────────────────────────────────────────
+2026-03-23 03:15:15,043     No improvement 1/4
+2026-03-23 04:16:14,412  Ep 17  train=2.3712  val=0.5207  bert=0.7466  lr=4.31e-06
+2026-03-23 04:16:18,843  ────────────────────────────────────────────────────────────────────────
+2026-03-23 04:16:18,843    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-23 04:16:18,844    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-23 04:16:18,844         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-23 04:16:18,844         PRED (Devanagari)  : बले सृष्ट अ तुल वीर्य वीर्य स्य सिंहा शेषतः सन गतस्य क्ल । वै गतस्य सन सन सिंहा स्य वीर्य वीर्य तुल 
+2026-03-23 04:16:18,844    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-23 04:16:18,844         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-23 04:16:18,844         PRED (Devanagari)  : इति स्तुत्वा स्तुत्वा म् म् उवाच महती मुनि अ मान् मान् मान् । मान् मान् सत्त सत्त मुनि ग्रस्त उवाच ु
+2026-03-23 04:16:18,844  ────────────────────────────────────────────────────────────────────────
+2026-03-23 04:16:18,844     No improvement 2/4
+2026-03-23 05:16:59,068  Ep 18  train=2.3245  val=0.5026  bert=0.7481  lr=1.94e-06
+2026-03-23 05:17:03,402  ────────────────────────────────────────────────────────────────────────
+2026-03-23 05:17:03,402    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-23 05:17:03,403    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-23 05:17:03,403         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-23 05:17:03,403         PRED (Devanagari)  : स्फुर र् अ तुल तुल वीर्य स्य सिंहा क्ष सन गतस्य गतस्य वै वै गतस्य गतस्य सन सिंहा स्य वीर्य तुल तुल त
+2026-03-23 05:17:03,404    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-23 05:17:03,404         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-23 05:17:03,404         PRED (Devanagari)  : इति स्तुत्वा स्तुत्वा म् म् भा दश मुनि मुनि सत्त मान् मान् । मान् मान् सत्त सत्त मुनि मुनि उवाच म् ̍
+2026-03-23 05:17:03,404  ────────────────────────────────────────────────────────────────────────
+2026-03-23 05:17:03,404     No improvement 3/4
+2026-03-23 06:17:16,062  Ep 19  train=2.3009  val=0.5180  bert=0.7476  lr=7.00e-07
+2026-03-23 06:17:20,758  ────────────────────────────────────────────────────────────────────────
+2026-03-23 06:17:20,759    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-23 06:17:20,759    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-23 06:17:20,760         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-23 06:17:20,760         PRED (Devanagari)  : बले र् अ तुल वीर्य वीर्य स्य आत सिंहा सन गतस्य गतस्य वै वै गतस्य गतस्य सन सिंहा स्य वीर्य वीर्य तुल 
+2026-03-23 06:17:20,760    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-23 06:17:20,760         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-23 06:17:20,760         PRED (Devanagari)  : इति स्तुत्वा स्तुत्वा जगन्नाथ म् दा उवाच मुनि मुनि सत्त मान् मृधे । मान् कृतां सत्त सत्त मुनि मुनि उ
+2026-03-23 06:17:20,760  ────────────────────────────────────────────────────────────────────────
+2026-03-23 06:17:20,760     No improvement 4/4
+2026-03-23 06:17:20,760  🛑 Early stopping.
+2026-03-23 06:17:20,760  ✅ Training complete.
+2026-03-23 06:17:20,761     Best model → results7/d3pm_cross_attention_neg_False/best_model.pt
+2026-03-23 06:17:30,926  🚀  model=d3pm_cross_attention  T=128  task=quote_text→quote_devanagari  src_vocab=16000  tgt_vocab=16000
+2026-03-23 06:17:31,221  HTTP Request: HEAD https://huggingface.co/datasets/paws/sanskrit-verses-gretil/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-03-23 06:17:31,230  HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/paws/sanskrit-verses-gretil/cccaab468cf4a329784ea2ccbfb45052c0e93258/README.md "HTTP/1.1 200 OK"
+2026-03-23 06:17:31,465  HTTP Request: HEAD https://huggingface.co/datasets/paws/sanskrit-verses-gretil/resolve/cccaab468cf4a329784ea2ccbfb45052c0e93258/sanskrit-verses-gretil.py "HTTP/1.1 404 Not Found"
+2026-03-23 06:17:32,173  HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/paws/sanskrit-verses-gretil/paws/sanskrit-verses-gretil.py "HTTP/1.1 404 Not Found"
+2026-03-23 06:17:32,646  HTTP Request: GET https://huggingface.co/api/datasets/paws/sanskrit-verses-gretil/revision/cccaab468cf4a329784ea2ccbfb45052c0e93258 "HTTP/1.1 200 OK"
+2026-03-23 06:17:32,880  HTTP Request: HEAD https://huggingface.co/datasets/paws/sanskrit-verses-gretil/resolve/cccaab468cf4a329784ea2ccbfb45052c0e93258/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-03-23 06:17:32,881  Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-03-23 06:17:33,174  HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=paws/sanskrit-verses-gretil "HTTP/1.1 200 OK"
+2026-03-23 06:17:33,406  HTTP Request: GET https://huggingface.co/api/datasets/paws/sanskrit-verses-gretil/tree/cccaab468cf4a329784ea2ccbfb45052c0e93258/data?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-23 06:17:33,664  HTTP Request: GET https://huggingface.co/api/datasets/paws/sanskrit-verses-gretil/tree/cccaab468cf4a329784ea2ccbfb45052c0e93258?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-03-23 06:17:33,906  HTTP Request: HEAD https://huggingface.co/datasets/paws/sanskrit-verses-gretil/resolve/cccaab468cf4a329784ea2ccbfb45052c0e93258/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-03-23 07:16:12,382  HTTP Request: HEAD https://huggingface.co/bert-base-multilingual-cased/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-23 07:16:12,720  HTTP Request: HEAD https://huggingface.co/bert-base-multilingual-cased/resolve/main/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-03-23 07:16:13,026  HTTP Request: GET https://huggingface.co/api/models/bert-base-multilingual-cased/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-23 07:16:13,334  HTTP Request: GET https://huggingface.co/api/models/google-bert/bert-base-multilingual-cased/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-23 07:16:13,642  HTTP Request: GET https://huggingface.co/api/models/bert-base-multilingual-cased/tree/main?recursive=true&expand=false "HTTP/1.1 307 Temporary Redirect"
+2026-03-23 07:16:13,873  HTTP Request: GET https://huggingface.co/api/models/google-bert/bert-base-multilingual-cased/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-23 07:16:14,455  HTTP Request: GET https://huggingface.co/api/models/bert-base-multilingual-cased "HTTP/1.1 307 Temporary Redirect"
+2026-03-23 07:16:14,768  HTTP Request: GET https://huggingface.co/api/models/google-bert/bert-base-multilingual-cased "HTTP/1.1 200 OK"
+2026-03-23 07:16:15,009  HTTP Request: HEAD https://huggingface.co/bert-base-multilingual-cased/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-03-23 07:16:20,487  Ep 01  train=57.7738  val=25.6301  bert=0.6140  lr=5.83e-05
+2026-03-23 07:16:24,632  ────────────────────────────────────────────────────────────────────────
+2026-03-23 07:16:24,632    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-23 07:16:24,632    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-23 07:16:24,633         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-23 07:16:24,633         PRED (Devanagari)  : ऽथवा पालयन् दर् दर् करः तन्त्रा अण्ड ेन त्रा करत् किंचि माण माण माण माण माण दोद् माण माण ॥ ॥ ॥ ॥ अलं
+2026-03-23 07:16:24,633    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-23 07:16:24,633         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-23 07:16:24,633         PRED (Devanagari)  : चण्ड माण त्वाच्च असुर । । । । क्यि । तण्डु माण माण माण माण माण रौद्रा माण माण । अत̍ । ̱स् अस्ति माण 
+2026-03-23 07:16:24,633  ────────────────────────────────────────────────────────────────────────
+2026-03-23 07:16:26,442     ✅ New best: 0.6140
+2026-03-23 08:16:25,361  Ep 02  train=24.3270  val=14.5853  bert=0.6363  lr=6.97e-05
+2026-03-23 08:16:33,407  ────────────────────────────────────────────────────────────────────────
+2026-03-23 08:16:33,407    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-23 08:16:33,409    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-23 08:16:33,409         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-23 08:16:33,409         PRED (Devanagari)  : स̱म्रा ककु माण पृष्ठतो वरवर्णिनि णि̍ षष्टि शोशु̍ समप्रभम् । निर्या तन्त्रा नाधि वरवर्णिनि बृह̍स् प्र
+2026-03-23 08:16:33,409    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-23 08:16:33,410         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-23 08:16:33,410         PRED (Devanagari)  : जय नाशयेद् द्धू तन्त्रा अलं राट् त्वाच्च रौद्रा सात्त्व । । । । ठ शक्तितः नवी योर् दिवः भवस्य ग̍ प्र
+2026-03-23 08:16:33,410  ────────────────────────────────────────────────────────────────────────
+2026-03-23 08:16:37,449     ✅ New best: 0.6363
+2026-03-23 10:17:15,014  Ep 03  train=14.5924  val=9.3093  bert=0.6390  lr=6.84e-05
+2026-03-23 10:17:21,200  ────────────────────────────────────────────────────────────────────────
+2026-03-23 10:17:21,200    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-23 10:17:21,201    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-23 10:17:21,202         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-23 10:17:21,202         PRED (Devanagari)  : वरवर्णिनि जाम्ब यस्मिन् दृष्टि गृण तद्वद् असुर पुरुष पीडित कथंचन पराक्र शत्रू जपन् व्यक्ता रसः जङ् प
+2026-03-23 10:17:21,202    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-23 10:17:21,202         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-23 10:17:21,202         PRED (Devanagari)  : नाशयेद् वरवर्णिनि हिरण्य ऋ̱त योर् जः युग् त्वाम् मानसो । शक्तितः । शश ककु भिषेक दर एके राट् न्द्रे व
+2026-03-23 10:17:21,202  ────────────────────────────────────────────────────────────────────────
+2026-03-23 10:17:25,210     ✅ New best: 0.6390
+2026-03-23 11:12:34,929  Ep 04  train=10.6729  val=6.1353  bert=0.6540  lr=6.62e-05
+2026-03-23 11:12:38,225  ────────────────────────────────────────────────────────────────────────
+2026-03-23 11:12:38,226    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-23 11:12:38,227    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-23 11:12:38,227         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-23 11:12:38,227         PRED (Devanagari)  : अ पीडित माल्य सौगतं वयं रसं शिष्या षण्ड वै रसः भिषेक धृष्णु स्य वा दर् कथ्यते स् इन्द्रेण दाव षण् इन
+2026-03-23 11:12:38,227    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-23 11:12:38,227         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-23 11:12:38,227         PRED (Devanagari)  : क्षाय जः पेक्षा मे । म् द्वयो कस्यापि क्षिणः । ्या । प्रय शङ् स्ने राट् संसा निर्वृ बर नाराय प्रत्यक
+2026-03-23 11:12:38,227  ────────────────────────────────────────────────────────────────────────
+2026-03-23 11:12:39,949     ✅ New best: 0.6540
+2026-03-23 11:59:14,177  Ep 05  train=8.5134  val=4.3934  bert=0.6732  lr=6.32e-05
+2026-03-23 11:59:17,141  ────────────────────────────────────────────────────────────────────────
+2026-03-23 11:59:17,141    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-23 11:59:17,142    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-23 11:59:17,142         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-23 11:59:17,143         PRED (Devanagari)  : अ समप्रभम् ेन वीर्य तस्य मन्यते स्य विद्वान् म् यः मण्डल त् स्य वा त्सा कृतार्थ दर् जगाद असुर विद्वा
+2026-03-23 11:59:17,143    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-23 11:59:17,143         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-23 11:59:17,143         PRED (Devanagari)  : चतुरश्रं अज । जाम्ब रिपु भङ्ग कस्यापि समवा । । को रितः । शश । ञ्जी मुखे च मान् कथ्यते जगन्नाथ ङ्ग वल
+2026-03-23 11:59:17,143  ────────────────────────────────────────────────────────────────────────
+2026-03-23 11:59:18,653     ✅ New best: 0.6732
+2026-03-23 12:45:23,741  Ep 06  train=6.6849  val=3.1556  bert=0.6949  lr=5.93e-05
+2026-03-23 12:45:26,363  ────────────────────────────────────────────────────────────────────────
+2026-03-23 12:45:26,363    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-23 12:45:26,364    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-23 12:45:26,364         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-23 12:45:26,364         PRED (Devanagari)  : अ बले र् वीर्य विद्वान् माल्य म्र म् वै इन्द्रेण गन्धेन प्र̱ चिन्ता मन्यते वीर्य वयं तीक्ष्ण जगाद धर
+2026-03-23 12:45:26,365    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-23 12:45:26,365         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-23 12:45:26,365         PRED (Devanagari)  : मुद्र जिनान तट म् न्य जाल मुनि मान् । मान् । भूषण । जः । य एके चमू म् कारिणे तपो ककु हिरण्य रितः तु 
+2026-03-23 12:45:26,365  ────────────────────────────────────────────────────────────────────────
+2026-03-23 12:45:28,341     ✅ New best: 0.6949
+2026-03-23 13:29:11,113  Ep 07  train=5.2376  val=2.1474  bert=0.7096  lr=5.48e-05
+2026-03-23 13:29:13,596  ────────────────────────────────────────────────────────────────────────
+2026-03-23 13:29:13,596    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-23 13:29:13,597    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-23 13:29:13,597         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-23 13:29:13,597         PRED (Devanagari)  : बले आग अ प्रदीप्त गन्धि वीर्य म् सन विधानतः वै वै वै तया विधानतः सन गत स्तस्य महा स्य तमसा नदी समप्र
+2026-03-23 13:29:13,597    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-23 13:29:13,597         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-23 13:29:13,598         PRED (Devanagari)  : इति स्तुत्वा जगन्नाथ जगन्नाथ विशाला मुनि मुनि मान् मान् मान् मान् मान् मान् मान् । मुनि मुनि णार्थाय
+2026-03-23 13:29:13,598  ────────────────────────────────────────────────────────────────────────
+2026-03-23 13:29:15,194     ✅ New best: 0.7096
+2026-03-23 14:10:13,359  Ep 08  train=4.3899  val=1.4026  bert=0.7255  lr=4.97e-05
+2026-03-23 14:10:15,707  ────────────────────────────────────────────────────────────────────────
+2026-03-23 14:10:15,707    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-23 14:10:15,708    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-23 14:10:15,708         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-23 14:10:15,708         PRED (Devanagari)  : बले र् अ कुलम् वीर्य वीर्य सिंहा सन सन विधानतः वै वै वै सन सन सन सन स्य खड्ग वीर्य अ अ अ मानम् र् तो
+2026-03-23 14:10:15,708    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-23 14:10:15,709         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-23 14:10:15,709         PRED (Devanagari)  : स्तुत्वा स्तुत्वा जगन्नाथ म् स्तद् मुनि मुनि सत्त सत्त मान् मान् मान् मान् मान् सत्त मुनि मुनि मुनि 
+2026-03-23 14:10:15,709  ────────────────────────────────────────────────────────────────────────
+2026-03-23 14:10:17,309     ✅ New best: 0.7255
+2026-03-23 14:51:57,614  Ep 09  train=3.8307  val=1.0360  bert=0.7374  lr=4.42e-05
+2026-03-23 14:52:00,313  ────────────────────────────────────────────────────────────────────────
+2026-03-23 14:52:00,313    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-23 14:52:00,313    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-23 14:52:00,314         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-23 14:52:00,314         PRED (Devanagari)  : बले र् अ तुल वीर्य वीर्य सिंहा सिंहा सन जातवे वै वै वै वै सन सिंहा सिंहा स्य वीर्य अत्यन्त अ अ र् र्
+2026-03-23 14:52:00,314    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-23 14:52:00,314         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-23 14:52:00,314         PRED (Devanagari)  : इति स्तुत्वा जगन्नाथ म् म् उवाच मुनि मुनि सत्त मान् मान् मान् मान् मान् सत्त सत्त मुनि उवाच उवाच म् 
+2026-03-23 14:52:00,314  ────────────────────────────────────────────────────────────────────────
+2026-03-23 14:52:02,125     ✅ New best: 0.7374
+2026-03-23 15:34:27,897  Ep 10  train=3.4704  val=0.8347  bert=0.7391  lr=3.85e-05
+2026-03-23 15:34:30,771  ────────────────────────────────────────────────────────────────────────
+2026-03-23 15:34:30,771    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-23 15:34:30,773    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-23 15:34:30,773         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-23 15:34:30,773         PRED (Devanagari)  : बले र् अ तुल वीर्य वीर्य ऽस्य सिंहा सिंहा सन वै वः वै वै सन सन सिंहा स्य स्य तुल अ अ र् र् बले बले ब
+2026-03-23 15:34:30,773    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-23 15:34:30,773         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-23 15:34:30,773         PRED (Devanagari)  : इति स्तुत्वा जगन्नाथ म् म् उवाच मुनि मुनि सत्त मान् मान् मान् मान् । सत्त सत्त मुनि उवाच उवाच म् जगन
+2026-03-23 15:34:30,773  ────────────────────────────────────────────────────────────────────────
+2026-03-23 15:34:32,593     ✅ New best: 0.7391
+2026-03-23 16:55:47,111  Ep 11  train=3.1804  val=0.7468  bert=0.7423  lr=3.27e-05
+2026-03-23 16:55:50,140  ────────────────────────────────────────────────────────────────────────
+2026-03-23 16:55:50,140    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-23 16:55:50,141    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-23 16:55:50,141         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-23 16:55:50,141         PRED (Devanagari)  : बले र् अ तुल क्रुद्धो वीर्य स्य सिंहा सिंहा सन वै वै वै वै गतस्य सन सिंहा स्य णि पलब् तुल अ र् र् बल
+2026-03-23 16:55:50,141    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-23 16:55:50,142         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-23 16:55:50,142         PRED (Devanagari)  : इति स्तुत्वा जगन्नाथ म् ुम् उवाच स्यान् मुनि सत्त मान् मान् मान् । मान् सत्त सत्त मुनि उवाच उवाच म् 
+2026-03-23 16:55:50,142  ────────────────────────────────────────────────────────────────────────
+2026-03-23 16:55:51,753     ✅ New best: 0.7423
+2026-03-23 17:37:11,517  Ep 12  train=2.9656  val=0.6375  bert=0.7425  lr=2.69e-05
+2026-03-23 17:37:14,475  ────────────────────────────────────────────────────────────────────────
+2026-03-23 17:37:14,475    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-23 17:37:14,476    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-23 17:37:14,476         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-23 17:37:14,476         PRED (Devanagari)  : बले र् अ तुल तुल वीर्य स्य सिंहा सिंहा सन तवि̍ वै वै वै गतस्य सन सिंहा स्य स्य तुल तुल अ र् र् बले ब
+2026-03-23 17:37:14,477    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-23 17:37:14,477         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-23 17:37:14,477         PRED (Devanagari)  : इति स्तुत्वा जगन्नाथ म् म् उवाच मुनि मुनि सत्त सत्त मान् मान् । मान् सत्त सत्त मुनि मुनि उवाच म् जगन
+2026-03-23 17:37:14,477  ────────────────────────────────────────────────────────────────────────
+2026-03-23 17:37:16,704     ✅ New best: 0.7425
+2026-03-23 18:22:25,207  Ep 13  train=2.7896  val=0.6147  bert=0.7464  lr=2.13e-05
+2026-03-23 18:22:27,847  ────────────────────────────────────────────────────────────────────────
+2026-03-23 18:22:27,847    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-23 18:22:27,848    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-23 18:22:27,848         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-23 18:22:27,848         PRED (Devanagari)  : बले र् अ तुल तुल वीर्य स्य सिंहा सिंहा सन गतस्य वै वै वै गतस्य सन सिंहा त्र स्य तुल तुल अ अ र् बले ब
+2026-03-23 18:22:27,848    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-23 18:22:27,848         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-23 18:22:27,848         PRED (Devanagari)  : इति स्तुत्वा जगन्नाथ जगन्नाथ म् उवाच मुनि मुनि सत्त सत्त मान् मान् । मान् सत्त सत्त मुनि मुनि उवाच म
+2026-03-23 18:22:27,848  ────────────────────────────────────────────────────────────────────────
+2026-03-23 18:22:29,912     ✅ New best: 0.7464
+2026-03-23 19:15:33,035  Ep 14  train=2.6498  val=0.5835  bert=0.7448  lr=1.62e-05
+2026-03-23 19:15:35,954  ────────────────────────────────────────────────────────────────────────
+2026-03-23 19:15:35,954    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-23 19:15:35,955    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-23 19:15:35,955         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-23 19:15:35,955         PRED (Devanagari)  : बले र् ् तुल तुल वीर्य स्य सिंहा सिंहा सन गतस्य वै वै वै गतस्य सन सिंहा सिंहा कालेन तुल तुल अ र् र् 
+2026-03-23 19:15:35,955    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-23 19:15:35,955         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-23 19:15:35,955         PRED (Devanagari)  : इति स्तुत्वा जगन्नाथ जगन्नाथ म् उवाच मुनि मुनि सत्त सत्त मान् मान् । मान् सत्त सत्त मुनि मुनि उवाच म
+2026-03-23 19:15:35,956  ────────────────────────────────────────────────────────────────────────
+2026-03-23 19:15:35,956     No improvement 1/4
+2026-03-23 20:31:39,536  Ep 15  train=2.5251  val=0.5524  bert=0.7445  lr=1.15e-05
+2026-03-23 20:31:42,186  ────────────────────────────────────────────────────────────────────────
+2026-03-23 20:31:42,186    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-23 20:31:42,187    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-23 20:31:42,187         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-23 20:31:42,187         PRED (Devanagari)  : बले ोर् अ तुल तुल वीर्य स्य सिंहा सिंहा सन गतस्य वै वै वै गतस्य सन सिंहा सिंहा स्य वीर्य तुल अ अ र् 
+2026-03-23 20:31:42,187    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-23 20:31:42,187         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-23 20:31:42,188         PRED (Devanagari)  : इति स्तुत्वा जगन्नाथ जगन्नाथ ुम् उवाच मुनि मुनि सत्त सत्त मान् मान् । मान् सत्त । मुनि मुनि उवाच म् 
+2026-03-23 20:31:42,188  ────────────────────────────────────────────────────────────────────────
+2026-03-23 20:31:42,188     No improvement 2/4
+2026-03-23 21:27:02,071  Ep 16  train=2.4195  val=0.5479  bert=0.7443  lr=7.53e-06
+2026-03-23 21:27:04,475  ────────────────────────────────────────────────────────────────────────
+2026-03-23 21:27:04,475    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-23 21:27:04,475    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-23 21:27:04,475         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-23 21:27:04,475         PRED (Devanagari)  : बले र् ऐ तुल तुल वीर्य ृ सिंहा सिंहा सन गतस्य वै वै वै गतस्य सन सिंहा सिंहा स्य वीर्य तुल अ अपश्य र 
+2026-03-23 21:27:04,476    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-23 21:27:04,476         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-23 21:27:04,476         PRED (Devanagari)  : इति स्तुत्वा जगन्नाथ जगन्नाथ ुम् उवाच मुनि मुनि सत्त सत्त मान् मान् । मान् मान् सत्त ध्रुवो मुनि उवा
+2026-03-23 21:27:04,476  ────────────────────────────────────────────────────────────────────────
+2026-03-23 21:27:04,476     No improvement 3/4
+2026-03-23 22:18:34,966  Ep 17  train=2.3640  val=0.5213  bert=0.7448  lr=4.31e-06
+2026-03-23 22:18:38,124  ────────────────────────────────────────────────────────────────────────
+2026-03-23 22:18:38,124    📝  VALIDATION SAMPLES   (Roman Sanskrit → Devanagari)
+2026-03-23 22:18:38,125    [1] INPUT (Roman)      : baler atulavīryasya siṃhāsanagatasya vai //
+2026-03-23 22:18:38,125         REF  (Devanagari)  : बले र् अ तुल वीर्य स्य सिंहा सन गतस्य वै ॥
+2026-03-23 22:18:38,125         PRED (Devanagari)  : बले र् अचिन्त तुल तुल वीर्य स्य सिंहा सिंहा सन गतस्य गतस्य ॥ वै गतस्य सन सिंहा सिंहा स्य महिमा तुल अ
+2026-03-23 22:18:38,126    [2] INPUT (Roman)      : iti stutvā jagannātham uvāca munisattamān /
+2026-03-23 22:18:38,126         REF  (Devanagari)  : इति स्तुत्वा जगन्नाथ म् उवाच मुनि सत्त मान् ।
+2026-03-23 22:18:38,126         PRED (Devanagari)  : इति स्तुत्वा जगन्नाथ जगन्नाथ म् ल् मुनि मुनि सत्त सत्त मान् मान् । मान् मान् सत्त मुनि मुनि उवाच म् 
+2026-03-23 22:18:38,126  ────────────────────────────────────────────────────────────────────────
+2026-03-23 22:18:38,126     No improvement 4/4
+2026-03-23 22:18:38,126  🛑 Early stopping.
+2026-03-23 22:18:38,126  ✅ Training complete.
+2026-03-23 22:18:38,126     Best model → results7/d3pm_cross_attention_neg_False/best_model.pt

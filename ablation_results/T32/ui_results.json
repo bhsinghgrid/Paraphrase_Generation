@@ -1,0 +1,34 @@
+[
+  {
+    "model": "d3pm_cross_attention",
+    "input": "pranaṣṭe gandhatanmātre bhavaty urvī jalātmikā āpas tadā pravṛttās tu vegavatyo mahāsvanāḥ",
+    "output": "रा प्य जिन जिन आग भी जिन जिन प्य प्य प्य भी प्य जिन बुद्ध प्य बुद्ध जिन कस्य जिन जिन प्य म्स् विद्यु प्रज पार् इद् र्थः विद्यु कस्य ज̱ जिन श् व्रज ते िताः रा ज̱ श् ज̱ श् नेव भी जिन पार् वर्णे वर्णे द्भव नद वर्णे श् युक्त ष्ण ानु मुनिना तेन वाक्यं वपु ॢ ष्ण सामान वर्णे वर्णे वपु युक्त कस्य ोत् प्य वर्णे ष्ण पार् वर्णे इद् निष् जिन िताः प्य तेन पार् पार्",
+    "diversity_level": "medium",
+    "repetition_penalty": 1.0,
+    "diversity_penalty": 0.0
+  },
+  {
+    "model": "d3pm_cross_attention",
+    "input": "pranaṣṭe gandhatanmātre bhavaty urvī jalātmikā āpas tadā pravṛttās tu vegavatyo mahāsvanāḥ",
+    "output": "धा ज़ न्ति णु मा धा ज़ क् फ़ ण्ड धा क् ष्ट भी परं भी भी ꣡ ज़ धा बुद्ध पन् भी ध्या भी रु र्य ानु भी रु श् स्त द् बुद्ध ते तस् ष्ट प्य नयो फ़ प्य न्द ्त क् मू ते क्षेत्र ज̱ मनु रक्ष भ्यां तस् भव श् या मा श् ज़ श् हा श् िताः वी ोत् धा सव धा न्द का मा मा मा ोत् भे से भे न्ति ज़ इद् ्वा",
+    "diversity_level": "medium",
+    "repetition_penalty": 1.0,
+    "diversity_penalty": 0.4
+  },
+  {
+    "model": "d3pm_cross_attention",
+    "input": "pranaṣṭe gandhatanmātre bhavaty urvī jalātmikā āpas tadā pravṛttās tu vegavatyo mahāsvanāḥ",
+    "output": "वरदं न्ति द्वि ज़ क् न्द ज़ न्ति मू ज़ तत्र क् तत्र ष्ट वरदं ित्य ्वा घट क् ित्य क् क् क् ॡ धा यदा शेष क् च्च पाः द्वि भेष भद्र रु धा ज̱ क् दे रु दे रु न्द द्धी न्द ॠ न्द द्धी धा क्षया फ़ स्फु न्ति धा णु क् मा धा मू मा मा ज़ मा ॡ ॡ क् न्द केव त्मने श्री मू द् भे वरदं मा न्ति ॡ स्वाहा न्ति ज़ तत्र",
+    "diversity_level": "medium",
+    "repetition_penalty": 1.0,
+    "diversity_penalty": 1.0
+  },
+  {
+    "model": "d3pm_cross_attention",
+    "input": "pranaṣṭe gandhatanmātre bhavaty urvī jalātmikā āpas tadā pravṛttās tu vegavatyo mahāsvanāḥ",
+    "output": "त्पाद ब्र न्द ज़ धा ्त घट वरदं धा घट स्वाहा क् : मू न्ति ॡ ॡ द्वि द्वि ज़ द्वि चित श्री ्वा ित्य भी ॡ क्षया च्च द्वि क् मू ॥ घट वरदं यित्वा ॡ च्च मा च्च , क् वरदं वी मू क् वस्व न्ति ॡ ज़ क् ज़ ॡ तत्र स्वाहा द्वि णु मू घट ॡ फ़ मू मा टु त्तमैः ॠ च्च ज़ द्धी मा भव मा ज़ न्द भे राक्षसं क् त्म क्",
+    "diversity_level": "medium",
+    "repetition_penalty": 1.5,
+    "diversity_penalty": 1.0
+  }
+]

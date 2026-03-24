@@ -1,0 +1,32 @@
+{
+  "4": {
+    "bertscore_f1": 0.2529125729161555,
+    "semantic_sim": NaN,
+    "bleu": 8.294211889059792e-80,
+    "speed_per_sample": 0.2646796149993315
+  },
+  "8": {
+    "bertscore_f1": 0.12377725870080672,
+    "semantic_sim": NaN,
+    "bleu": 1.361934974181649e-156,
+    "speed_per_sample": 0.4769762866804376
+  },
+  "16": {
+    "bertscore_f1": 0.2523651237299634,
+    "semantic_sim": NaN,
+    "bleu": 3.225962963169236e-80,
+    "speed_per_sample": 0.7693551949993708
+  },
+  "32": {
+    "bertscore_f1": 0.06135031354556533,
+    "semantic_sim": NaN,
+    "bleu": 1.8274987203562474e-232,
+    "speed_per_sample": 1.8487038449989632
+  },
+  "64": {
+    "bertscore_f1": 0.250514949875042,
+    "semantic_sim": NaN,
+    "bleu": 0.0008156460153736389,
+    "speed_per_sample": 3.2919362033181825
+  }
+}

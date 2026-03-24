@@ -1,0 +1,13 @@
+TASK 5 — COMPATIBILITY REPORT
+========================================
+Guidance classifier path unavailable; λ mapped to repetition penalty.
+
+lambda=0.0  CER=6.4826  diversity=0.018
+lambda=0.5  CER=6.4739  diversity=0.018
+lambda=1.0  CER=6.5157  diversity=0.019
+lambda=1.5  CER=6.5621  diversity=0.022
+lambda=2.0  CER=6.7447  diversity=0.064
+lambda=3.0  CER=8.4432  diversity=0.355
+
+Saved graphs:
+  - task5_quality_diversity_tradeoff.png

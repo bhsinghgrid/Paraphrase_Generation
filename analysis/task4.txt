@@ -1,0 +1,143 @@
+=================================================================
+  TASK 4 — Step Ablation  (phase=analyze)
+=================================================================
+  Found models for T=[4, 8, 16, 32]
+🔍 Detected: d_model=1024, n_layers=8, max_seq_len=80, n_heads=8
+✅ Model loaded.
+🔍 Detected: d_model=1024, n_layers=8, max_seq_len=80, n_heads=8
+⚠️  Unexpected keys: ['model.semantic_residual_proj.weight', 'model.semantic_residual_proj.bias', 'model.decoder_blocks.0.cross_attn.compact_q_proj.weight'] …
+✅ Model loaded.
+🔍 Detected: d_model=1024, n_layers=8, max_seq_len=80, n_heads=8
+✅ Model loaded.
+🔍 Detected: d_model=1024, n_layers=8, max_seq_len=80, n_heads=8
+✅ Model loaded.
+modules.json: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 349/349 [00:00<00:00, 4.16MB/s]
+config_sentence_transformers.json: 100%|██████████████████████████████████████████████████████████████████████████████████████████| 116/116 [00:00<00:00, 425kB/s]
+README.md: 10.5kB [00:00, 4.80MB/s]
+sentence_bert_config.json: 100%|████████████████████████████████████████████████████████████████████████████████████████████████| 53.0/53.0 [00:00<00:00, 678kB/s]
+config.json: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████| 612/612 [00:00<00:00, 8.36MB/s]
+model.safetensors: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████| 90.9M/90.9M [00:04<00:00, 21.6MB/s]
+Loading weights: 100%|███████████████████████████████████████████████████████████████| 103/103 [00:00<00:00, 7249.40it/s, Materializing param=pooler.dense.weight]
+BertModel LOAD REPORT from: sentence-transformers/all-MiniLM-L6-v2
+Key                     | Status     |  |
+------------------------+------------+--+-
+embeddings.position_ids | UNEXPECTED |  |
+
+Notes:
+- UNEXPECTED    :can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+tokenizer_config.json: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████| 350/350 [00:00<00:00, 4.27MB/s]
+vocab.txt: 232kB [00:00, 30.3MB/s]
+tokenizer.json: 466kB [00:00, 98.2MB/s]
+special_tokens_map.json: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████| 112/112 [00:00<00:00, 1.59MB/s]
+config.json: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████| 190/190 [00:00<00:00, 1.92MB/s]
+
+=== PHASE 1: Evaluating ALL models ===
+
+Evaluating T=4...
+Loading weights: 100%|███████████████████████████████████████████████████████████████| 199/199 [00:00<00:00, 5335.00it/s, Materializing param=pooler.dense.weight]
+BertModel LOAD REPORT from: bert-base-multilingual-cased
+Key                                        | Status     |  |
+-------------------------------------------+------------+--+-
+cls.predictions.transform.dense.weight     | UNEXPECTED |  |
+cls.seq_relationship.weight                | UNEXPECTED |  |
+cls.predictions.bias                       | UNEXPECTED |  |
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |  |
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |  |
+cls.predictions.transform.dense.bias       | UNEXPECTED |  |
+cls.seq_relationship.bias                  | UNEXPECTED |  |
+
+Notes:
+- UNEXPECTED    :can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+/Users/bhsingh/Documents/Final_Paraphrase/.venv/lib/python3.11/site-packages/nltk/translate/bleu_score.py:577: UserWarning:
+The hypothesis contains 0 counts of 2-gram overlaps.
+Therefore the BLEU score evaluates to 0, independently of
+how many N-gram overlaps of lower order it contains.
+Consider using lower n-gram order or use SmoothingFunction()
+  warnings.warn(_msg)
+/Users/bhsingh/Documents/Final_Paraphrase/.venv/lib/python3.11/site-packages/nltk/translate/bleu_score.py:577: UserWarning:
+The hypothesis contains 0 counts of 3-gram overlaps.
+Therefore the BLEU score evaluates to 0, independently of
+how many N-gram overlaps of lower order it contains.
+Consider using lower n-gram order or use SmoothingFunction()
+  warnings.warn(_msg)
+/Users/bhsingh/Documents/Final_Paraphrase/.venv/lib/python3.11/site-packages/nltk/translate/bleu_score.py:577: UserWarning:
+The hypothesis contains 0 counts of 4-gram overlaps.
+Therefore the BLEU score evaluates to 0, independently of
+how many N-gram overlaps of lower order it contains.
+Consider using lower n-gram order or use SmoothingFunction()
+  warnings.warn(_msg)
+  BERTScore: 0.6790
+  Sim: 0.5334
+  BLEU: 0.0003
+  Speed: 0.1250s
+
+Evaluating T=8...
+Loading weights: 100%|███████████████████████████████████████████████████████████████| 199/199 [00:00<00:00, 7878.97it/s, Materializing param=pooler.dense.weight]
+BertModel LOAD REPORT from: bert-base-multilingual-cased
+Key                                        | Status     |  |
+-------------------------------------------+------------+--+-
+cls.predictions.transform.dense.weight     | UNEXPECTED |  |
+cls.seq_relationship.weight                | UNEXPECTED |  |
+cls.predictions.bias                       | UNEXPECTED |  |
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |  |
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |  |
+cls.predictions.transform.dense.bias       | UNEXPECTED |  |
+cls.seq_relationship.bias                  | UNEXPECTED |  |
+
+Notes:
+- UNEXPECTED    :can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+  BERTScore: 0.6395
+  Sim: 0.4811
+  BLEU: 0.0000
+  Speed: 0.2654s
+
+Evaluating T=16...
+Loading weights: 100%|███████████████████████████████████████████████████████████████| 199/199 [00:00<00:00, 4643.05it/s, Materializing param=pooler.dense.weight]
+BertModel LOAD REPORT from: bert-base-multilingual-cased
+Key                                        | Status     |  |
+-------------------------------------------+------------+--+-
+cls.predictions.transform.dense.weight     | UNEXPECTED |  |
+cls.seq_relationship.weight                | UNEXPECTED |  |
+cls.predictions.bias                       | UNEXPECTED |  |
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |  |
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |  |
+cls.predictions.transform.dense.bias       | UNEXPECTED |  |
+cls.seq_relationship.bias                  | UNEXPECTED |  |
+
+Notes:
+- UNEXPECTED    :can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+  BERTScore: 0.6822
+  Sim: 0.5373
+  BLEU: 0.0005
+  Speed: 0.5335s
+
+Evaluating T=32...
+Loading weights: 100%|███████████████████████████████████████████████████████████████| 199/199 [00:00<00:00, 5158.34it/s, Materializing param=pooler.dense.weight]
+BertModel LOAD REPORT from: bert-base-multilingual-cased
+Key                                        | Status     |  |
+-------------------------------------------+------------+--+-
+cls.predictions.transform.dense.weight     | UNEXPECTED |  |
+cls.seq_relationship.weight                | UNEXPECTED |  |
+cls.predictions.bias                       | UNEXPECTED |  |
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |  |
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |  |
+cls.predictions.transform.dense.bias       | UNEXPECTED |  |
+cls.seq_relationship.bias                  | UNEXPECTED |  |
+
+Notes:
+- UNEXPECTED    :can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+  BERTScore: 0.4940
+  Sim: 0.1985
+  BLEU: 0.0000
+  Speed: 1.0968s
+
+=== PHASE 2: Analysis ===
+
+Marginal Gains:
+  T4 → T8: +-0.0395
+  T8 → T16: +0.0427
+  T16 → T32: +-0.1882
+
+✅ Optimal T (knee detected): 8
+Saved 3D plot
+  New pipeline suggested optimal T=8

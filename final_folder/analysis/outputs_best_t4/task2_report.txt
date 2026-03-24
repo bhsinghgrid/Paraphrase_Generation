@@ -1,0 +1,24 @@
+TASK 2 — ATTENTION + DRIFT REPORT
+==================================================
+
+Input : dharmo rakṣati rakṣitaḥ
+Output: ति ति रक्ष रक्षि ितः तः तः तः ितः धर्मो धर्मो धर्मो धर्मो धर्मो धर्मो ितः तः ितः ितः ित धर्मो धर्मो ति ति ति ति रक्ष रक्षि रक्षि ितः ितः तः तः तः ितः ितः ितः ितः रक्षि रक्षि रक्ष रक्ष रक्ष रक्ष ति ति ति ति ति ति ति ति रक्ष रक्ष रक्ष रक्ष रक्ष रक्ष रक्ष रक्ष रक्ष रक्ष रक्ष रक्ष रक्ष रक्ष रक्ष रक्ष रक्ष रक्ष रक्ष रक्ष रक्षि रक्षि रक्षि रक्षि रक्षि रक्षि रक्षि रक्षि
+
+Captured steps: 4
+Lock-in step (CER<=0.05): t=0
+Locked tokens: 80  Flexible tokens: 0
+TF-IDF vs attention stability corr: 0.0000
+
+Saved graphs:
+  - task2_attn_t*.png / task2_all_layers_t0.png
+  - task2_attn_evolution.png
+  - task2_semantic_drift.png
+  - task2_source_alignment.png
+  - task2_tfidf_vs_attention.png
+
+Step trajectory (first 10 rows)
+------------------------------------------------------------
+t=  3  bert=0.0000  drift=1.0000  text=ति ति रक्ष रक्षि ितः तः तः तः ितः धर्मो धर्मो धर्मो धर्मो धर
+t=  2  bert=0.0000  drift=1.0000  text=ति ति रक्ष रक्षि ितः तः तः तः ितः धर्मो धर्मो धर्मो धर्मो धर
+t=  1  bert=0.0000  drift=1.0000  text=ति ति रक्ष रक्षि ितः तः तः तः ितः धर्मो धर्मो धर्मो धर्मो धर
+t=  0  bert=0.0000  drift=1.0000  text=ति ति रक्ष रक्षि ितः तः तः तः ितः धर्मो धर्मो धर्मो धर्मो धर

@@ -1,0 +1,15 @@
+TASK 1 — KV CACHE BENCHMARK
+========================================
+
+has_generate_cached=True
+memory_profile=N/A (CPU/MPS)
+
+ src_len   standard(s)   cached(s)   speedup   encoder%
+      16         0.855       0.549     1.56x      39.2%
+      32         0.679       0.499     1.36x      41.2%
+      64         1.069       0.732     1.46x      40.0%
+
+Saved graphs:
+  - task1_time_comparison.png
+  - task1_speedup.png
+  - task1_encoder_cost.png

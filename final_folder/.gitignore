@@ -1,0 +1,10 @@
+*.pt
+/analysis/outputs
+/analysis/outputs_best_t4_fix
+/analysis/outputs_cross_attention_full
+/analysis/outputs_dry_t4
+/analysis/outputs_dryrun
+/analysis/outputs_dryrun2
+/analysis/outputs_latest
+/analysis/outputs_multi
+/analysis/outputs_t8_latest

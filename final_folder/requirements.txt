@@ -1,0 +1,10 @@
+bert-score>=0.3.13
+datasets>=4.6.0
+evaluate>=0.4.6
+gradio>=6.7.0
+sacrebleu>=2.6.0
+scikit-learn>=1.8.0
+sentence-transformers>=5.2.3
+tokenizers>=0.22.2
+torch>=2.10.0
+tqdm>=4.67.3

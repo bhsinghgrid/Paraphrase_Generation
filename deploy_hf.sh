@@ -3,8 +3,8 @@ set -euo pipefail
 
 if [[ $# -lt 2 ]]; then
 #  echo "Usage: $0 <hf_username> <model_repo_name> [space_repo_name]"
-  echo "Usage: $0 bhsinghgrid/devflow"
-  echo "Example: $0 bhsinghgrid/devflow"
+  echo "Usage: $0 <model_repo_name>"
+  echo "Example: $0 <model_repo_name>"
   exit 1
 fi
 

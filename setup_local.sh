@@ -13,5 +13,10 @@ fi
 .venv/bin/python -m pip install --upgrade pip
 .venv/bin/pip install -r requirements.txt
 
+if [[ ! -f ".env" && -f ".env.example" ]]; then
+  cp .env.example .env
+  echo "Created .env from .env.example"
+fi
+
 echo "Setup complete."
 echo "Run UI: ./run_ui.sh"

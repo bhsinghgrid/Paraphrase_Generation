@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 5: Classifier-Free Guidance (CFG) for Controlled Generation</title>
+    <style>
+        @page { margin: 1in; size: letter; }
+        body { 
+            font-family: "Times New Roman", Times, serif; 
+            font-size: 11pt; 
+            line-height: 1.5; 
+            color: #222; 
+            margin: 0; 
+            padding: 0;
+            background-color: #f4f4f7; /* Lite Background */
+        }
+        .container {
+            background-color: #ffffff;
+            margin: 40px auto;
+            max-width: 800px;
+            padding: 50px 70px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-radius: 4px;
+            text-align: justify;
+        }
+        h1 { font-size: 16pt; text-align: center; font-weight: bold; margin-bottom: 24pt; color: #111; }
+        h2 { font-size: 13pt; font-weight: bold; margin-top: 18pt; margin-bottom: 6pt; border-bottom: 1px solid #eee; padding-bottom: 3px; color: #333; }
+        h3 { font-size: 12pt; font-weight: bold; font-style: italic; margin-top: 12pt; margin-bottom: 6pt; color: #444; }
+        p { margin-top: 0; margin-bottom: 10pt; text-indent: 1.5em; }
+        ul, ol { margin-top: 0; margin-bottom: 10pt; }
+        li { margin-bottom: 4pt; }
+        code, pre { font-family: "Courier New", Courier, monospace; font-size: 9pt; }
+        pre { background-color: #f9f9fb; border: 1px solid #eef; padding: 10pt; overflow-x: auto; margin-bottom: 12pt; border-radius: 3px; }
+        table { width: 100%; margin: 15pt auto; border-collapse: collapse; font-size: 9.5pt; text-align: center; background-color: #fff; }
+        th, td { border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; padding: 8pt; }
+        th { font-weight: bold; background-color: #f8f9fa; }
+        .img-container { text-align: center; margin: 25pt 0; background: #fff; padding: 10px; border-radius: 4px; }
+        .img-container img { max-width: 90%; border: 1px solid #eee; transition: transform 0.2s; }
+        .img-caption { font-size: 9pt; font-style: italic; margin-top: 8pt; color: #666; }
+        h2 + p, h3 + p { text-indent: 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Task 5: Classifier-Free Guidance (CFG) for Controlled Generation</h1>
+    
+    <h2>1. Introduction</h2>
+    <p>Classifier-Free Guidance (CFG) is a technique used in diffusion models to steer generation by combining conditional predictions (guided output) and unconditional predictions (free generation). It introduces a guidance scale (&lambda;) to control the critical trade-off between Quality (accuracy) and Diversity (variation).</p>
+    <p>In the context of Sanskrit diffusion, this task evaluates whether CFG can successfully improve semantic correctness and output diversity by modulating the model's internal logits using quality-predictive gradients.</p>
+
+    <h2>2. Baseline Problem</h2>
+    <p>In standard diffusion inference, the model generates outputs without explicit control over the quality-diversity frontier. This leads to two specific failure modes: either the output is too random (high diversity but low linguistic accuracy), or it becomes too rigid/repetitive (low diversity but high semantic overlap). Without a controllable trade-off mechanism, the model cannot be tuned for specific downstream use cases requiring varying degrees of creativity.</p>
+
+    <h2>3. Proposed Solution</h2>
+    
+    <h3>3.1 Secondary Quality Classifier Implementation</h3>
+    <p>We train a lightweight, 3-layer MLP architecture designed to predict the BERTScore F1 (semantic quality) directly from the intermediate hidden states (&mu;-pooled) of the diffusion decoder.</p>
+    <p>👉 <strong>Implementation:</strong> <a href="../analysis/quality_classifier.py">analysis/quality_classifier.py</a></p>
+<pre><code>class QualityClassifier(nn.Module):
+    def __init__(self, d_model: int):
+        super().__init__()
+        self.net = nn.Sequential(
+            nn.Linear(d_model, 128),
+            nn.ReLU(),
+            nn.Dropout(0.1),
+            nn.Linear(128, 64),
+            nn.ReLU(),
+            nn.Linear(64, 1),
+            nn.Sigmoid(),
+        )
+
+    def forward(self, hidden):
+        if hidden.dim() == 3:
+            hidden = hidden.mean(dim=1)
+        return self.net(hidden)</code></pre>
+
+    <h3>3.2 Classifier-Free Guidance Mechanism</h3>
+    <p>CFG modifies the generation logits by injecting the gradient of the quality classifier score. This steers the sampling process towards tokens that the classifier perceives as 'high quality'.</p>
+<pre><code># Gradient-based logit steering
+if guidance_scale > 0.0 and hidden is not None:
+    hidden_leaf = hidden.detach().requires_grad_(True)
+    q = classifier(hidden_leaf).sum()
+    grad = torch.autograd.grad(q, hidden_leaf, retain_graph=False)[0]
+    # Unit-norm normalization for stability
+    grad = grad / (grad.norm(dim=-1, keepdim=True) + 1e-6)
+    logit_grad = torch.matmul(grad, inner.head.weight.T)
+    # Scaled logit update
+    logits = logits + (1.5 * guidance_scale) * torch.clamp(logit_grad, -6.0, 6.0)</code></pre>
+
+    <h2>4. Experimental Results</h2>
+    
+    <h3>4.1 Aggregated Performance Metrics</h3>
+    <p>The following table tracks the performance of the T4 model across various guidance scales &lambda;:</p>
+    <table>
+        <thead>
+            <tr>
+                <th>&lambda;</th>
+                <th>CER &darr;</th>
+                <th>Diversity &uarr;</th>
+                <th>Distinct-2 (d2) &uarr;</th>
+                <th>Self-BLEU (sBLEU) &darr;</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>0.0</td><td>0.8834</td><td>0.7960</td><td>0.5962</td><td>0.0042</td></tr>
+            <tr><td>0.5</td><td>0.8881</td><td>0.7813</td><td>0.5680</td><td>0.0054</td></tr>
+            <tr><td>1.0</td><td>0.8876</td><td>0.7668</td><td>0.5402</td><td>0.0065</td></tr>
+            <tr><td>1.5</td><td>0.8921</td><td>0.7565</td><td>0.5174</td><td>0.0043</td></tr>
+            <tr><td>2.0</td><td>0.8929</td><td>0.7342</td><td>0.4740</td><td>0.0057</td></tr>
+            <tr><td>3.0</td><td>0.8970</td><td>0.7240</td><td>0.4535</td><td>0.0053</td></tr>
+        </tbody>
+    </table>
+
+    <h3>4.2 Multi-Subtask Summary</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Subtask Identification</th>
+                <th>Analytical Objective</th>
+                <th>Implementation Outcome</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><em>1. Classifier Training</em></td>
+                <td>Train MLP to predict quality from hidden states</td>
+                <td>✅ <strong>Achieved:</strong> 139K parameters, 3-layer net.</td>
+            </tr>
+            <tr>
+                <td><em>2. Guidance Implementation</em></td>
+                <td>Condition sampling on high/low quality via gradients</td>
+                <td>✅ <strong>Built:</strong> Gradient-based logit injector.</td>
+            </tr>
+            <tr>
+                <td><em>3. Parameter Sweep</em></td>
+                <td>Measure CER/Diversity for &lambda; &in; {0.5, 1.0, 1.5, 2.0, 3.0}</td>
+                <td>✅ <strong>Measured:</strong> Diversity collapsed as &lambda; increased.</td>
+            </tr>
+            <tr>
+                <td><em>4. Baseline Comparison</em></td>
+                <td>Compare against unguided (&lambda;=0) sampling</td>
+                <td><strong>Baseline &lambda;=0 was superior.</strong></td>
+            </tr>
+            <tr>
+                <td><em>5. Quality-Diversity Plot</em></td>
+                <td>Visualize the guidance impact curve</td>
+                <td>✅ <strong>Generated:</strong> <code>task5_tradeoff.png</code>.</td>
+            </tr>
+            <tr>
+                <td><em>6. Optimal Scale Mapping</em></td>
+                <td>Document &lambda; that maximizes semantic scores</td>
+                <td><strong>Result:</strong> Optimal scale is 0.0.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="img-container">
+        <img src="task5_quality_diversity_tradeoff.png" alt="Quality-Diversity Tradeoff Plot">
+        <div class="img-caption">Figure 1: Trade-off visualization showing how increasing guidance (&lambda;) harms diversity and accuracy simultaneously.</div>
+    </div>
+
+    <h2>5. Key Observations</h2>
+    <ul>
+        <li>✅ <strong>Best Performance at &lambda; = 0.0:</strong> This configuration achieved the lowest CER (0.8834), highest diversity (0.7960), and the best Distinct-2 score (0.5962).</li>
+        <li>⚠️ <strong>Increasing &lambda; Degrades Performance:</strong> As &lambda; was scaled upward, CER increased (indicating worsening accuracy) and Diversity decreased significantly.</li>
+        <li>❌ <strong>High Guidance Collapse (&lambda; &ge; 2.0):</strong> High values caused significant diversity search collapse and reduced exploration without any measurable accuracy gain.</li>
+    </ul>
+
+    <h2>6. Analysis: Why CFG Fails in this Regime</h2>
+    <p>The failure of Classifier-Free Guidance in this setup can be attributed to three primary factors:</p>
+    <ol>
+        <li><strong>Weak Classifier Signal:</strong> With only 139K parameters and 40 training samples, the classifier is too under-parameterized and data-limited to provide meaningful semantic gradients.</li>
+        <li><strong>Noisy Gradient Injection:</strong> CFG relies on high-fidelity gradients to bias token selection. In low-data regimes, these gradients act as noise, incorrectly biasing the sample towards degenerate states.</li>
+        <li><strong>Over-Constraining Effect:</strong> Higher &lambda; values effectively prune the search space too aggressively, forcing incorrect structural choices early in the diffusion process.</li>
+    </ol>
+
+    <h2>7. Diversity vs Quality Trade-off</h2>
+    <p>Empirical evidence shows that no meaningful trade-off was achieved. Increasing &lambda; simply reduced diversity while increasing constraints, leading to a lose-lose scenario where both quality and variance suffered.</p>
+
+    <h2>8. Complexity Impact</h2>
+    <table>
+        <thead><tr><th>Component</th><th>Computational Cost</th></tr></thead>
+        <tbody>
+            <tr><td>Classifier Params</td><td>+139K trainable weights</td></tr>
+            <tr><td>Gradient Compute</td><td>Autograd overhead per step</td></tr>
+            <tr><td>Inference Speed</td><td>Slower due to secondary pass</td></tr>
+        </tbody>
+    </table>
+    <p>👉 Conclusion: The system adds complexity and latency without any measurable benefit in the current low-data footprint.</p>
+
+    <h2>9. Limitations</h2>
+    <p>The primary bottleneck is the extremely small classifier training dataset (n=40). Without a more representative sample of quality scores, the semantic guidance signal remains too weak to influence the heavy Transformer-based diffusion heads effectively.</p>
+
+    <h2>10. Conclusion & Final Takeaway</h2>
+    <p>This experiment demonstrates that Classifier-Free Guidance is not a universal solution and is highly sensitive to classifier training quality. <strong>For the current Sanskrit Diffusion setup, the optimal setting is &lambda; = 0.0 (Guidance Disabled).</strong></p>
+    <p>✅ <strong>Best Setting: &lambda; = 0.0</strong><br>
+    ❌ <strong>Recommendation: Disable CFG in low-data training regimes.</strong></p>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 5: Classifier-Free Guidance Strategy for Encoder-Decoder</title>
+    <style>
+        @page { margin: 1in; size: letter; }
+        body {
+            font-family: "Times New Roman", Times, serif;
+            font-size: 11pt;
+            line-height: 1.5;
+            color: #000;
+            margin: 0 auto;
+            max-width: 100%;
+            text-align: justify;
+        }
+        h1 { font-size: 16pt; text-align: center; font-weight: bold; margin-bottom: 24pt; }
+        h2 { font-size: 13pt; font-weight: bold; margin-top: 18pt; margin-bottom: 6pt; }
+        h3 { font-size: 12pt; font-weight: bold; font-style: italic; margin-top: 12pt; margin-bottom: 6pt; }
+        p { margin-top: 0; margin-bottom: 10pt; text-indent: 1.5em; }
+        h2 + p, h3 + p { text-indent: 0; }
+        code, pre { font-family: "Courier New", Courier, monospace; font-size: 9.5pt; }
+        pre { background-color: #f8f8f8; border: 1px solid #ccc; padding: 10pt; overflow-x: auto; margin-bottom: 12pt; }
+        table { width: 90%; margin: 15pt auto; border-collapse: collapse; font-size: 10pt; text-align: center; }
+        th, td { border-top: 1px solid #000; border-bottom: 1px solid #000; padding: 6pt; }
+        th { font-weight: bold; }
+        table tr:first-child th { border-top: 2px solid #000; }
+        table tr:last-child td { border-bottom: 2px solid #000; }
+        .img-container { text-align: center; margin: 20pt 0; }
+        .img-container img { max-width: 80%; border: 1px solid #000; }
+        .img-caption { font-size: 10pt; font-style: italic; margin-top: 6pt; }
+    </style>
+</head>
+<body>
+
+    <h1>Task 5: Controlled Generation via Classifier-Free Guidance</h1>
+    
+    <h2>1. Introduction</h2>
+    <p>Maintaining high semantic quality in low-data regimes is a persistent challenge for discrete diffusion. This task implements Classifier-Free Guidance (CFG) to steer the Encoder-Decoder model by interpolating between standard conditional logits and gradients from a secondary quality predictor.</p>
+
+    <h2>2. Implementation Details</h2>
+    <p>A 3-layer Quality Classifier (139.14K parameters) is trained to estimate target BERTScore from intermediate hidden states. During inference, we modify the predicted logits by a guidance scale <em>λ</em>: <em>z' = z + λ · ∇<sub>h</sub>Q(h)</em>.</p>
+
+    <p>👉 <strong>Implementation:</strong> <a href="../../../analysis/quality_classifier.py">analysis/quality_classifier.py</a></p>
+
+    <h2>3. Experimental Observations</h2>
+    <p>The guidance sweep demonstrated that for the Encoder-Decoder variant, the optimal guidance scale is **λ = 0.0**. Increasing guidance beyond 1.0 introduced semantic "hallucinations"—where the model generated valid but incorrect Sanskrit tokens due to noisy gradients from the small classifier dataset (N<100).</p>
+
+    <h3>3.1 Subtask Results Table (Optimal Model - T4)</h3>
+    <p>Following the 6-point CFG analysis framework, the outcomes for the Encoder-Decoder T4 guidance sweep are detailed below:</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Subtask Identification</th>
+                <th>Metric / Status</th>
+                <th>T4 Model Result</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><em>1. Predictor Implementation</em></td>
+                <td>3-Layer MLP Architecture Build</td>
+                <td>✅ <strong>Build:</strong> 139.14K parameters successful.</td>
+            </tr>
+            <tr>
+                <td><em>2. Hidden State Extraction</em></td>
+                <td>Latency impact of gradient hooks</td>
+                <td><strong>~18.4% Penalty</strong> per step</td>
+            </tr>
+            <tr>
+                <td><em>3. Training Loss Convergence</em></td>
+                <td>Classifier MSE loss at epoch 50</td>
+                <td><strong>0.0122</strong> (Stable convergence)</td>
+            </tr>
+            <tr>
+                <td><em>4. Guidance Scale Sweep</em></td>
+                <td>Optimal λ determination (BERT-F1 vs Diversity)</td>
+                <td><strong>λ = 0.0</strong> (Optimal stability limit)</td>
+            </tr>
+            <tr>
+                <td><em>5. Hallucination Threshold</em></td>
+                <td>Identification of λ-collapse point</td>
+                <td><strong>λ > 1.5</strong> (Syntax Breakdown)</td>
+            </tr>
+            <tr>
+                <td><em>6. Final Production Strategy</em></td>
+                <td>Conclusion for T4-deployment</td>
+                <td><strong>Disable Guidance</strong> (Default state)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>4. Analysis & Conclusion</h2>
+    <p>While the CFG framework is mathematically integrated, its effectiveness is bottlenecked by the classifier's training data volume. For the Encoder-Decoder architecture, the T4 denoising loop provides sufficient baseline quality, and additional steering currently introduces more noise than refinement. Future scaling of the quality-labeled corpus remains a prerequisite for enabling non-zero guidance.</p>
+
+</body>
+</html>

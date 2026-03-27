@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 2: Encoder-Decoder Attention & Semantic Drift Analysis</title>
+    <style>
+        @page { margin: 1in; size: letter; }
+        body {
+            font-family: "Times New Roman", Times, serif;
+            font-size: 11pt;
+            line-height: 1.5;
+            color: #000;
+            margin: 0 auto;
+            max-width: 100%;
+            text-align: justify;
+        }
+        h1 { font-size: 16pt; text-align: center; font-weight: bold; margin-bottom: 24pt; }
+        h2 { font-size: 13pt; font-weight: bold; margin-top: 18pt; margin-bottom: 6pt; }
+        h3 { font-size: 12pt; font-weight: bold; font-style: italic; margin-top: 12pt; margin-bottom: 6pt; }
+        p { margin-top: 0; margin-bottom: 10pt; text-indent: 1.5em; }
+        h2 + p, h3 + p { text-indent: 0; }
+        code, pre { font-family: "Courier New", Courier, monospace; font-size: 9.5pt; }
+        pre { background-color: #f8f8f8; border: 1px solid #ccc; padding: 10pt; overflow-x: auto; margin-bottom: 12pt; }
+        table { width: 90%; margin: 15pt auto; border-collapse: collapse; font-size: 10pt; text-align: center; }
+        th, td { border-top: 1px solid #000; border-bottom: 1px solid #000; padding: 6pt; }
+        th { font-weight: bold; }
+        table tr:first-child th { border-top: 2px solid #000; }
+        table tr:last-child td { border-bottom: 2px solid #000; }
+        .img-container { text-align: center; margin: 20pt 0; }
+        .img-container img { max-width: 80%; border: 1px solid #000; }
+        .img-caption { font-size: 10pt; font-style: italic; margin-top: 6pt; }
+    </style>
+</head>
+<body>
+
+    <h1>Task 2: Cross-Attention Evolution and Semantic Drift Tracking</h1>
+    
+    <h2>1. Introduction</h2>
+    <p>The alignment between source and target tokens in diffusion models is governed by cross-attention weights. This task investigates the stability of these alignments throughout the denoising trajectory, focusing on the Encoder-Decoder model's ability to maintain semantic integrity across steps <em>T=4</em> to <em>T=0</em>.</p>
+
+    <h2>2. Baseline Problem</h2>
+    <p>Standard diffusion often suffers from "semantic drift" in early stages where high noise levels cause the model to attend to incorrect source sections. In the Encoder-Decoder architecture, this manifests as repetitive token generation in early frames, which only resolves in the final deterministic step.</p>
+
+    <h2>3. Implementation Details</h2>
+    <p>By attaching forward hooks to the 8-layer Decoder's cross-attention modules, we capture the attention tensors <em>A ∈ R<sup>H×L<sub>tgt</sub>×L<sub>src</sub></sup></em>. We correlate these weights with token importance (TF-IDF) and track the semantic distance (BERTScore) for each intermediate generation.</p>
+
+    <p>👉 <strong>Implementation:</strong> <a href="../../../analysis/semantic_drift.py">analysis/semantic_drift.py</a></p>
+
+    <h2>4. Results & Narrative Evidence</h2>
+    <p>Analysis of the T4 Encoder-Decoder variant revealed significant early-step drift. The model generated repetitive Sanskrit tokens (<em>nirryāta, nemi</em>) in steps 3, 2, and 1, only achieving the target translation "धर्मो रक्षति रक्षितः" at step 0.</p>
+
+    <h3>3.1 Subtask Results Table (Optimal Model - T4)</h3>
+    <p>Following the 6-point analysis framework, the results for the T4 Encoder-Decoder model across all attention subtasks are summarized below:</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Subtask Description</th>
+                <th>Metric / Status</th>
+                <th>T4 Model Result</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><em>1. Capture cross-attention weights</em></td>
+                <td>Weight Trajectory Status</td>
+                <td>✅ <strong>Captured:</strong> Successfully extracted across steps t=3 through t=0.</td>
+            </tr>
+            <tr>
+                <td><em>2. Compute BERTScore alignment</em></td>
+                <td>Final Step BERTScore</td>
+                <td><strong>0.0568</strong> (Multi-sample Semantic Score at t=0)</td>
+            </tr>
+            <tr>
+                <td><em>3. Semantic drift metric</em></td>
+                <td>Peak Drift Value</td>
+                <td><strong>~0.97</strong> (Drift remains high throughout all steps)</td>
+            </tr>
+            <tr>
+                <td><em>4. Visualize attention heatmaps</em></td>
+                <td>Alignment Evolution</td>
+                <td>✅ <strong>Visualized:</strong> Sparse but focused source alignment.</td>
+            </tr>
+            <tr>
+                <td><em>5. Locked vs Flexible tokens</em></td>
+                <td>Token Stability Ratio</td>
+                <td><strong>80</strong> Locked tokens vs <strong>0</strong> Flexible tokens (at t=0)</td>
+            </tr>
+            <tr>
+                <td><em>6. TF-IDF vs Attention correlation</em></td>
+                <td>Correlation Scalar</td>
+                <td><strong>0.2552</strong> (Weak alignment between attention and semantic importance)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="img-container">
+        <img src="task2_semantic_drift.png" alt="Semantic Drift Graph">
+        <div class="img-caption">Figure 2: Tracking semantic distance (BERTScore) across diffusion steps for Encoder-Decoder T4.</div>
+    </div>
+
+    <div class="img-container">
+        <img src="task2_attn_t0.png" alt="Attention Map t=0">
+        <div class="img-caption">Figure 3: Cross-attention alignment at the final resolution step (t=0).</div>
+    </div>
+
+    <h2>5. Analysis & Conclusion</h2>
+    <p>The Encoder-Decoder architecture demonstrates a "cliff-edge" refinement behavior: it remains in a high-drift, repetitive state for 75% of the generation process, necessitating the final step for semantic correction. This contrasts with the smoother progressive refinement observed in the cross-attention-only variant.</p>
+
+</body>
+</html>

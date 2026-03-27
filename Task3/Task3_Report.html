@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 3: Concept Vector Extraction using PCA and Controlled Diversity Steering</title>
+    <style>
+        @page { margin: 1in; size: letter; }
+        body { font-family: "Times New Roman", Times, serif; font-size: 11pt; line-height: 1.5; color: #000; margin: 0 auto; max-width: 100%; text-align: justify; }
+        h1 { font-size: 16pt; text-align: center; font-weight: bold; margin-bottom: 24pt; }
+        h2 { font-size: 13pt; font-weight: bold; margin-top: 18pt; margin-bottom: 6pt; border-bottom: 1px solid #ccc; padding-bottom: 3px; }
+        h3 { font-size: 12pt; font-weight: bold; font-style: italic; margin-top: 12pt; margin-bottom: 6pt; }
+        p { margin-top: 0; margin-bottom: 10pt; text-indent: 1.5em; }
+        ul, ol { margin-top: 0; margin-bottom: 10pt; }
+        li { margin-bottom: 4pt; }
+        code, pre { font-family: "Courier New", Courier, monospace; font-size: 9pt; }
+        pre { background-color: #f8f8f8; border: 1px solid #ccc; padding: 10pt; overflow-x: auto; margin-bottom: 12pt; }
+        table { width: 95%; margin: 15pt auto; border-collapse: collapse; font-size: 10pt; text-align: left; }
+        th, td { border-top: 1px solid #000; border-bottom: 1px solid #000; padding: 6pt; border-right: 1px solid #eee; border-left: 1px solid #eee; }
+        th { font-weight: bold; background-color: #f5f5f5; text-align: center; }
+        table tr:first-child th { border-top: 2px solid #000; }
+        table tr:last-child td { border-bottom: 2px solid #000; }
+        .img-container { text-align: center; margin: 20pt 0; }
+        .img-container img { max-width: 80%; border: 1px solid #000; }
+        .img-caption { font-size: 10pt; font-style: italic; margin-top: 6pt; }
+        h2 + p, h3 + p { text-indent: 0; }
+    </style>
+</head>
+<body>
+
+    <h1>Task 3: Concept Vector Extraction & Controlled Diversity Steering</h1>
+
+    <h2>1. Introduction</h2>
+    <p>Modern paraphrase and transliteration systems require controlled diversity, not random variation. Standard approaches (e.g., temperature scaling) introduce randomness but often break syntax and semantic integrity.</p>
+    <p>This task focuses on extracting interpretable latent directions from the model using Principal Component Analysis (PCA), correlation-based component selection, and controlled steering via a strength parameter (&alpha;). The ultimate goal is to enable structured diversity control without retraining the model.</p>
+
+    <h2>2. Baseline Problem</h2>
+    <p>In naive generation environments, diversity is typically controlled using temperature or sampling. However, there is no guarantee of semantic preservation. Outputs often become repetitive, grammatically invalid, and semantically unstable.</p>
+    <p><strong>Observed Issues:</strong> The current model demonstrates repetition-heavy outputs, low semantic stability (0.341), and a weak correlation between PCA direction and diversity proxies (|r| = 0.344).</p>
+
+    <h2>3. Proposed Solution</h2>
+    
+    <h3>3.1 PCA-Based Concept Space Extraction</h3>
+    <p>Hidden representations collected from approximately 1,000 paraphrase samples are projected into a lower-dimensional space to identify the major latent structure of the model.</p>
+    <p>👉 <strong>Implementation:</strong> <a href="../analysis/concept_vectors.py">analysis/concept_vectors.py</a></p>
+    <ul>
+        <li><strong>PCA Components:</strong> 50</li>
+        <li><strong>Explained Variance:</strong> 75.9%</li>
+    </ul>
+
+    <h3>3.2 Diversity Direction Identification</h3>
+    <p>We specifically identify a principal component that correlates with a diversity proxy (sequence length) using Spearman correlation analysis.</p>
+<pre><code>def find_diversity_direction(hidden_matrix, lengths, pca): 
+    from scipy.stats import spearmanr 
+    projected = pca.transform(hidden_matrix) 
+    lengths = np.array(lengths) 
+    scores = []  
+    
+    for i in range(projected.shape[1]): 
+        r, _ = spearmanr(projected[:, i], lengths) 
+        scores.append(abs(r))  
+    
+    best_pc = int(np.argmax(scores)) 
+    direction = pca.components_[best_pc] 
+    direction = direction / (np.linalg.norm(direction) + 1e-8) 
+    return direction</code></pre>
+    <p>👉 <strong>Selected Component:</strong> PC 0 | <strong>Correlation:</strong> |r| = 0.344 (Status: WEAK).</p>
+
+    <h3>3.3 Controlled Steering via (&alpha;)</h3>
+    <p>We modify the latent representations by injecting the selected diversity direction: <em>h' = h + &alpha; &middot; d</em>, where <em>h</em> is the original hidden state, <em>d</em> is the diversity direction, and <em>&alpha;</em> represents the steering strength.</p>
+
+    <h2>4. Optimized Generation Pipeline</h2>
+    <p>The steering logic is re-integrated into the cached generation loop, allowing for real-time latent manipulation during the denoising process:</p>
+<pre><code>def generate_steered(model, src, direction, alpha=0.0):
+    # ... inside diffusion loop ...
+    logits, _ = inner.forward_cached(...)
+    
+    # Inject diversity / Apply steering logic
+    if hasattr(inner, "_last_hidden") and alpha != 0.0:
+        h = inner._last_hidden
+        h = h + alpha * direction.unsqueeze(0).unsqueeze(0)
+        logits = inner.head(h)
+        
+    # Sampling / Denoising
+    probs = F.softmax(logits / temperature, dim=-1)
+    x_t = torch.argmax(probs, dim=-1) if is_last else _sample(probs)
+    return x_t</code></pre>
+
+    <h2>5. Experimental Results</h2>
+    
+    <h3>5.1 Multi-Subtask Summary (Optimal Model - T4)</h3>
+    <p>The following table tracks the implementation and performance metrics for all 6 subtasks using the T4 configuration, identified as the optimal starting point for steering:</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Subtask Identification</th>
+                <th>Analytical Objective</th>
+                <th>T4 Model Outcome</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><em>1. Feature Extraction</em></td>
+                <td>Capture cross-attention output features at multiple steps</td>
+                <td>✅ <strong>Achieved:</strong> Hidden states pooled from t=0.</td>
+            </tr>
+            <tr>
+                <td><em>2. Latent Projection</em></td>
+                <td>Perform PCA (50 components) on 1000 samples</td>
+                <td><strong>72.0% Variance Explained</strong> (Captures core structure)</td>
+            </tr>
+            <tr>
+                <td><em>3. Direction Discovery</em></td>
+                <td>Identify 'diversity direction' via Spearman correlation</td>
+                <td><strong>|r| = 0.349</strong> (Status: WEAK / Direction PC=0)</td>
+            </tr>
+            <tr>
+                <td><em>4. Latent Steering</em></td>
+                <td>Implement alpha-based latent space interpolation</td>
+                <td>✅ <strong>Built:</strong> Functional <code>generate_steered()</code> pipeline.</td>
+            </tr>
+            <tr>
+                <td><em>5. Spectrum Generation</em></td>
+                <td>Evaluate paraphrases at 5 points along &alpha; spectrum</td>
+                <td><strong>Stability = 0.325 (LOW)</strong>; Multi-sample validated.</td>
+            </tr>
+            <tr>
+                <td><em>6. Steering Evaluation</em></td>
+                <td>Compare interpolation vs explicit classifiers</td>
+                <td>❌ <strong>Result:</strong> Weak control due to latent entanglement.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="img-container">
+        <img src="task3_concept_space.png" alt="Concept Space Mapping">
+        <div class="img-caption">Figure 1: Visualization of the 2D projected concept space (PC1/PC2) for the T4 model.</div>
+    </div>
+
+    <h3>5.2 Alpha Steering Behavior Analysis</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Alpha Steering Strength (&alpha;)</th>
+                <th>Observed Generative Behavior</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>-2.0</td><td>Strong repetition, rigid loops, highly degenerate structure</td></tr>
+            <tr><td>-1.0</td><td>Slight variation, but conceptually remains unstable</td></tr>
+            <tr><td>0.0</td><td>Baseline output (Default diffusion noise path)</td></tr>
+            <tr><td>+1.0</td><td>Increased token counts, but results become incoherent</td></tr>
+        </tbody>
+    </table>
+
+    <h3>5.3 Generated Spectrum Snapshot</h3>
+    <p>Manual inspection of outputs reveals heavy token repetitions (e.g., “तैः तैः तैः…”) and a critical lack of grammatical cohesion across the &alpha; spectrum. There is no smooth semantic transition as the steering strength increases.</p>
+
+    <h2>6. All Models Comparative Performance</h2>
+    <p>To evaluate if deeper diffusion chains improve latent disentanglement, we analyzed PCA variance and diversity correlations across all model configurations.</p>
+    <div class="img-container">
+        <img src="task3_all_models_comparison.png" alt="All Models PCA Comparison">
+        <div class="img-caption">Figure 2: Explained Variance and Diversity Correlation scaling across T4 through T64.</div>
+    </div>
+
+    <h2>7. Analysis & Findings</h2>
+    <p><strong>Why PCA Direction Failed:</strong> The weak correlation (0.344) indicates the diversity direction is not semantically meaningful. PCA captures maximum variance, which in this case might correspond more to noise or artifact patterns rather than linguistic meaning.</p>
+    <p><strong>Why Outputs Are Degenerate:</strong> The latent space is not yet disentangled. Steering affects noise dimensions rather than semantic ones, resulting in chaotic changes rather than structured variation.</p>
+
+    <h2>8. Complexity & Efficiency</h2>
+    <p>The PCA steering approach adds a negligible O(D&sup2;) preprocessing cost during the characterization phase, but adds zero latency during inference, remaining fully compatible with the KV cache optimization from Task 1.</p>
+
+    <h2>9. Limitations</h2>
+    <ul>
+        <li>PCA is an unsupervised technique and provides no guarantee of semantic alignment.</li>
+        <li>Weak latent directions lead to unstable and grammatically invalid generations.</li>
+        <li>Requires far more sophisticated feature selection or supervised disentanglement.</li>
+    </ul>
+
+    <h2>10. Conclusion & Key Takeaways</h2>
+    <p>Task 3 demonstrates that while a framework for steerable generation has been successfully built at the inference level, PCA alone is insufficient for controlled Sanskrit paraphrase diversity. The weak latent directions lead to unstable generation where diversity does not equal semantic variation.</p>
+    <p><strong>Final Outcome:</strong> Functional steering pipeline was established, but diversity control remains weak due to the current representation quality. This work serves as a vital foundation for future supervised steering research.</p>
+
+    </div>
+</body>
+</html>

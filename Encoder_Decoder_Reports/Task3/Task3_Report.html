@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 3: Encoder-Decoder Concept Vector Extraction via PCA</title>
+    <style>
+        @page { margin: 1in; size: letter; }
+        body {
+            font-family: "Times New Roman", Times, serif;
+            font-size: 11pt;
+            line-height: 1.5;
+            color: #000;
+            margin: 0 auto;
+            max-width: 100%;
+            text-align: justify;
+        }
+        h1 { font-size: 16pt; text-align: center; font-weight: bold; margin-bottom: 24pt; }
+        h2 { font-size: 13pt; font-weight: bold; margin-top: 18pt; margin-bottom: 6pt; }
+        h3 { font-size: 12pt; font-weight: bold; font-style: italic; margin-top: 12pt; margin-bottom: 6pt; }
+        p { margin-top: 0; margin-bottom: 10pt; text-indent: 1.5em; }
+        h2 + p, h3 + p { text-indent: 0; }
+        code, pre { font-family: "Courier New", Courier, monospace; font-size: 9.5pt; }
+        pre { background-color: #f8f8f8; border: 1px solid #ccc; padding: 10pt; overflow-x: auto; margin-bottom: 12pt; }
+        table { width: 90%; margin: 15pt auto; border-collapse: collapse; font-size: 10pt; text-align: center; }
+        th, td { border-top: 1px solid #000; border-bottom: 1px solid #000; padding: 6pt; }
+        th { font-weight: bold; }
+        table tr:first-child th { border-top: 2px solid #000; }
+        table tr:last-child td { border-bottom: 2px solid #000; }
+        .img-container { text-align: center; margin: 20pt 0; }
+        .img-container img { max-width: 80%; border: 1px solid #000; }
+        .img-caption { font-size: 10pt; font-style: italic; margin-top: 6pt; }
+    </style>
+</head>
+<body>
+
+    <h1>Task 3: Latent Concept Vector Extraction and Controlled Steering</h1>
+    
+    <h2>1. Introduction</h2>
+    <p>Controlling diversity in diffusion generative models typically involves random sampling. This task implements a more structured approach by identifying interpretable latent directions (Concept Vectors) in the Encoder-Decoder bottleneck using Principal Component Analysis (PCA).</p>
+
+    <h2>2. Methodology</h2>
+    <p>Hidden states from 120 Sanskrit generations are collected and decomposed via PCA. We identify the principal component most correlated with sequence diversity (unique token ratio) and apply linear steering: <em>h' = h + α · v<sub>div</sub></em>.</p>
+
+    <p>👉 <strong>Implementation:</strong> <a href="../../../analysis/concept_vectors.py">analysis/concept_vectors.py</a></p>
+
+    <h2>3. Experimental Results</h2>
+    <p>The Encoder-Decoder variant demonstrated a highly structured latent space, with the first 50 components explaining **90.9%** of the total variance. This indicates a high degree of correlation between latent features in this specific architecture.</p>
+
+    <h3>3.1 Subtask Results Table (Optimal Model - T4)</h3>
+    <p>Following the 6-point PCA analysis framework, the benchmarks for the T4 Encoder-Decoder configuration are detailed below:</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Subtask Identification</th>
+                <th>Analytical Objective</th>
+                <th>T4 Model Outcome</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><em>1. Latent Vector Collection</em></td>
+                <td>Extract hidden states from decoder bottleneck</td>
+                <td>✅ <strong>Collected:</strong> 120 samples from inference.</td>
+            </tr>
+            <tr>
+                <td><em>2. PCA Variance Analysis</em></td>
+                <td>Determine variance captured in principal components</td>
+                <td><strong>90.9% Variance</strong> (Top 50 components)</td>
+            </tr>
+            <tr>
+                <td><em>3. Diversity Mode Identifying</em></td>
+                <td>Find PC most correlated with token variance</td>
+                <td><strong>PC 0</strong> (|r| = 0.565)</td>
+            </tr>
+            <tr>
+                <td><em>4. Steering Sensitivity Sweep</em></td>
+                <td>Measure impact of alpha on semantic drift</td>
+                <td><strong>Stability 0.222</strong> (High sensitivity)</td>
+            </tr>
+            <tr>
+                <td><em>5. Diversity Spectrum Analysis</em></td>
+                <td>Visualize outputs across alpha interpolation</td>
+                <td>✅ <strong>Generated:</strong> 5-point spectrum visualized.</td>
+            </tr>
+            <tr>
+                <td><em>6. Semantic Integrity Test</em></td>
+                <td>Check syntax validity under strong steering</td>
+                <td>❌ <strong>Failed:</strong> Collapses at |alpha| > 1.5.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="img-container">
+        <img src="task3_pca_explained_variance.png" alt="Explained Variance">
+        <div class="img-caption">Figure 4: Cumulative explained variance ratio across 50 PCA components.</div>
+    </div>
+
+    <div class="img-container">
+        <img src="task3_concept_space.png" alt="Concept Space Projection">
+        <div class="img-caption">Figure 5: 2D Projection of the high-dimensional latent space for Encoder-Decoder T4.</div>
+    </div>
+
+    <h2>4. Analysis & Conclusion</h2>
+    <p>While the Encoder-Decoder model captures more variance in early components than the cross-attention variant, the steered outputs often collapse into repetitive tokens at extreme alpha values (<em>α > 1.5</em>). This suggests that while the "Concept Space" is well-defined, the decoding mechanism is rigid and less receptive to latent interpolation.</p>
+
+</body>
+</html>

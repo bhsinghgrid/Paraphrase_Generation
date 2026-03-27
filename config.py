@@ -1,5 +1,8 @@
 import os
 import torch
+from env_utils import load_local_env
+
+load_local_env(__file__)
 
 # 🎛️ BASH-CONTROLLED SWITCHES (Defaults if run manually)
 MODEL = os.environ.get("MODEL_TYPE", "d3pm_cross_attention")

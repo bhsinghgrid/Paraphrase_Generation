@@ -1,27 +1,6 @@
-"""
-upload_hf_model.py
-==================
-
-Package and upload the Sanskrit D3PM checkpoint to a Hugging Face model repo.
-
-This is for the current project architecture:
-  - custom `best_model.pt` checkpoint
-  - project config/tokenizers
-  - local inference/runtime code
-
-Example:
-    ./.venv/bin/python upload_hf_model.py \
-        --repo-id your-username/sanskrit-iast-devanagari-d3pm \
-        --checkpoint results8/d3pm_cross_attention_neg_False/best_model.pt
-
-If you already ran `huggingface-cli login`, the token is optional.
-Otherwise pass `--token hf_...`.
-"""
-
 from __future__ import annotations
 
 import argparse
-import json
 import os
 import shutil
 import tempfile
@@ -29,135 +8,112 @@ from pathlib import Path
 
 from huggingface_hub import HfApi
 
-from config import CONFIG
-from export_hf_transformers import export_package
+from env_utils import load_local_env
 
 
 ROOT = Path(__file__).resolve().parent
+load_local_env(__file__)
 
 
-def find_checkpoint(explicit: str | None) -> Path:
-    if explicit:
-        ckpt = Path(explicit)
-        if not ckpt.is_file():
-            raise FileNotFoundError(f"Checkpoint not found: {ckpt}")
-        return ckpt
-
-    for base in ["results9", "results8", "results7", "results6", "results"]:
-        base_path = ROOT / base
-        if not base_path.is_dir():
-            continue
-        for subdir in sorted(base_path.iterdir(), reverse=True):
-            if not subdir.is_dir():
-                continue
-            for name in ["best_model.pt", "best_val_model.pt"]:
-                ckpt = subdir / name
-                if ckpt.is_file():
-                    return ckpt
-    raise FileNotFoundError("Could not auto-detect a checkpoint. Pass --checkpoint explicitly.")
-
-
-def copy_if_exists(src: Path, dst: Path):
+def copy_if_exists(src: Path, dst: Path) -> None:
     if src.is_file():
         dst.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(src, dst)
 
 
-def write_model_card(dst: Path, repo_id: str, ckpt_path: Path):
-    model_name = repo_id.split("/")[-1]
-    text = f"""---
-library_name: pytorch
+def stage_model_export(checkpoint: Path, repo_id: str) -> Path:
+    tmp_dir = Path(tempfile.mkdtemp(prefix="hf_model_stage_"))
+
+    copy_if_exists(checkpoint, tmp_dir / "best_model.pt")
+    for name in [
+        "config.py",
+        "inference.py",
+        "requirements.txt",
+        "env_utils.py",
+        "sanskrit_src_tokenizer.json",
+        "sanskrit_tgt_tokenizer.json",
+    ]:
+        copy_if_exists(ROOT / name, tmp_dir / name)
+
+    for folder in ["model", "diffusion"]:
+        src = ROOT / folder
+        if src.is_dir():
+            shutil.copytree(src, tmp_dir / folder, dirs_exist_ok=True)
+
+    reports_src = ROOT / "analysis" / "outputs_all_models_20260325"
+    if reports_src.is_dir():
+        shutil.copytree(reports_src, tmp_dir / "analysis_reports" / reports_src.name, dirs_exist_ok=True)
+
+    readme = f"""---
+license: mit
+language:
+- sa
+- en
 tags:
-  - sanskrit
-  - transliteration
-  - devanagari
-  - diffusion
-  - d3pm
+- sanskrit
+- diffusion
+- d3pm
+- pytorch
 ---
 
-# {model_name}
+# Sanskrit D3PM Model Package
 
-This repository contains the exported checkpoint and runtime files for the Sanskrit
-IAST -> Devanagari D3PM cross-attention model from this project.
+This model repo was exported from `final_folder`.
 
-## Included Files
+## Included
 
-- `best_model.pt`: primary demo checkpoint
-- `best_val_model.pt`: best validation-loss checkpoint (if available)
-- `quality_predictor.pt`: Task 5 quality predictor (if available)
-- `project_config.json`: serialized training/inference config
-- `sanskrit_src_tokenizer_v1000.json`
-- `sanskrit_tgt_tokenizer_v2000.json`
+- `best_model.pt`
+- `config.py`
 - `inference.py`
-- `models/`
+- `model/`
 - `diffusion/`
+- tokenizers
+- compact analysis reports
 
-## Local Load Example
+## Local Usage
 
 ```bash
-git clone https://huggingface.co/{repo_id}
-cd {model_name}
 python inference.py --model best_model.pt --cli
 ```
 
-## Python Example
+## Repo
 
-```python
-from huggingface_hub import snapshot_download
-repo_dir = snapshot_download("{repo_id}")
-print("Downloaded to:", repo_dir)
-```
-
-The checkpoint exported here came from:
-
-`{ckpt_path.as_posix()}`
+`{repo_id}`
 """
-    dst.write_text(text)
-
-
-def stage_export(repo_id: str, checkpoint: Path) -> Path:
-    exp_dir = checkpoint.parent
-    tmp_dir = Path(tempfile.mkdtemp(prefix="hf_export_", dir=str(ROOT / "analysis" / "outputs" if (ROOT / "analysis" / "outputs").exists() else ROOT)))
-    export_package(tmp_dir, checkpoint)
-    copy_if_exists(exp_dir / "best_val_model.pt", tmp_dir / "best_val_model.pt")
-    copy_if_exists(exp_dir / "quality_predictor.pt", tmp_dir / "quality_predictor.pt")
-    copy_if_exists(exp_dir / "summary.txt", tmp_dir / "summary.txt")
-    copy_if_exists(exp_dir / "split_metadata.json", tmp_dir / "split_metadata.json")
-    copy_if_exists(ROOT / "pyproject.toml", tmp_dir / "pyproject.toml")
-    (tmp_dir / "project_config.json").write_text(json.dumps(CONFIG, indent=2))
-    write_model_card(tmp_dir / "README.md", repo_id=repo_id, ckpt_path=checkpoint)
+    (tmp_dir / "README.md").write_text(readme, encoding="utf-8")
     return tmp_dir
 
 
 def build_parser() -> argparse.ArgumentParser:
-    p = argparse.ArgumentParser(description="Upload this Sanskrit D3PM model to Hugging Face.")
+    p = argparse.ArgumentParser(description="Upload model files from final_folder to a Hugging Face model repo.")
+    p.add_argument("--repo-id", required=True, help="Target HF model repo id")
     p.add_argument(
-        "--repo-id",
-        required=True,
-        help="Target Hugging Face model repo, e.g. your-username/sanskrit-iast-devanagari-d3pm",
+        "--checkpoint",
+        default=os.getenv("HF_MODEL_CHECKPOINT", "ablation_results/T4/best_model.pt"),
+        help="Path to checkpoint file",
     )
-    p.add_argument("--checkpoint", default=None, help="Path to best_model.pt. Auto-detected if omitted.")
-    p.add_argument("--token", default=os.getenv("HF_TOKEN"), help="HF token. Uses HF_TOKEN env var if omitted.")
-    p.add_argument("--private", action="store_true", help="Create the model repo as private.")
-    p.add_argument("--message", default="Upload Sanskrit D3PM model export", help="Commit message for the upload.")
+    p.add_argument("--token", default=os.getenv("HF_TOKEN"), help="HF token")
+    p.add_argument("--private", action="store_true", help="Create repo as private")
+    p.add_argument("--message", default="Upload model package from final_folder", help="Commit message")
     return p
 
 
-def main():
+def main() -> None:
     args = build_parser().parse_args()
-    checkpoint = find_checkpoint(args.checkpoint)
-    export_dir = stage_export(args.repo_id, checkpoint)
+    checkpoint = (ROOT / args.checkpoint).resolve() if not os.path.isabs(args.checkpoint) else Path(args.checkpoint)
+    if not checkpoint.is_file():
+        raise FileNotFoundError(f"Checkpoint not found: {checkpoint}")
 
+    staged = stage_model_export(checkpoint, args.repo_id)
     api = HfApi(token=args.token) if args.token else HfApi()
     api.create_repo(args.repo_id, repo_type="model", private=args.private, exist_ok=True)
     api.upload_folder(
-        folder_path=str(export_dir),
+        folder_path=str(staged),
         repo_id=args.repo_id,
         repo_type="model",
         commit_message=args.message,
     )
     print(f"Uploaded model to https://huggingface.co/{args.repo_id}")
-    print(f"Staged export: {export_dir}")
 
 
 if __name__ == "__main__":

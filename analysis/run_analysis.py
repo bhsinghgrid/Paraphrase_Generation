@@ -27,17 +27,67 @@ import torch
 import os, sys, argparse, json
 import numpy as np
 import time
+import gc
+import tracemalloc
+import threading
+import resource
+from difflib import SequenceMatcher
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+try:
+    import psutil
+except Exception:
+    psutil = None
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from config import CONFIG
-from inference import load_model
+from inference import load_model, _decode_with_cleanup, _iast_to_deva
 from model.tokenizer import SanskritSourceTokenizer, SanskritTargetTokenizer
 
 OUTPUT_DIR = "analysis/outputs"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+# Keep caches writable/project-local for laptops and sandboxed runners.
+_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+os.environ.setdefault("HF_HOME", os.path.join(_ROOT, ".hf_cache"))
+os.environ.setdefault("HF_DATASETS_CACHE", os.path.join(_ROOT, ".hf_cache", "datasets"))
+os.environ.setdefault("HF_HUB_CACHE", os.path.join(_ROOT, ".hf_cache", "hub"))
+os.environ.setdefault("MPLCONFIGDIR", os.path.join(_ROOT, ".mplconfig"))
+for _p in [
+    os.environ["HF_HOME"],
+    os.environ["HF_DATASETS_CACHE"],
+    os.environ["HF_HUB_CACHE"],
+    os.environ["MPLCONFIGDIR"],
+]:
+    os.makedirs(_p, exist_ok=True)
+
+
+def _process_mem_mb() -> float:
+    if psutil is not None:
+        try:
+            return float(psutil.Process(os.getpid()).memory_info().rss / (1024 * 1024))
+        except Exception:
+            pass
+    # Linux fallback: /proc/self/statm current RSS pages.
+    try:
+        with open("/proc/self/statm", "r", encoding="utf-8") as f:
+            parts = f.read().strip().split()
+        if len(parts) >= 2:
+            rss_pages = int(parts[1])
+            page_size = os.sysconf("SC_PAGE_SIZE")
+            return float(rss_pages * page_size / (1024 * 1024))
+    except Exception:
+        pass
+    # Unix fallback: max RSS from resource (platform-dependent units).
+    try:
+        ru = float(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
+        # Heuristic: macOS tends to return bytes, Linux tends KB.
+        if ru > 10_000_000:
+            return ru / (1024 * 1024)
+        return ru / 1024.0
+    except Exception:
+        return 0.0
 
 
 # ── Shared loader ─────────────────────────────────────────────────────
@@ -135,7 +185,7 @@ def _generate_ids_compat(model, src, num_steps=None, temperature=0.8, top_k=40,
             return model.generate(src)
 
 
-def _decode_ids(tgt_tok, out_ids):
+def _decode_ids(tgt_tok, out_ids, src_text=None, inf_cfg=None):
     ids = []
     for x in out_ids[0].tolist():
         # stop at PAD/SEP once decoding started
@@ -143,13 +193,17 @@ def _decode_ids(tgt_tok, out_ids):
             break
         if x > 4:
             ids.append(x)
-    return tgt_tok.decode(ids).strip(), ids
+    if src_text is not None and inf_cfg is not None:
+        txt = _decode_with_cleanup(tgt_tok, ids, src_text, inf_cfg)
+    else:
+        txt = tgt_tok.decode(ids).strip()
+    return txt, ids
 
 
 def _cer(a: str, b: str) -> float:
-    if not b:
-        return 1.0 if a else 0.0
     m, n = len(a), len(b)
+    if m == 0 and n == 0:
+        return 0.0
     dp = list(range(n + 1))
     for i in range(1, m + 1):
         prev, dp[0] = dp[0], i
@@ -157,7 +211,7 @@ def _cer(a: str, b: str) -> float:
             tmp = dp[j]
             dp[j] = prev if a[i-1] == b[j-1] else 1 + min(prev, dp[j], dp[j-1])
             prev = tmp
-    return dp[n] / max(1, n)
+    return float(dp[n]) / max(1, m, n)
 
 
 # ── Task 1 ────────────────────────────────────────────────────────────
@@ -180,6 +234,30 @@ def run_task1(model, src_tok, device):
             fn()
             vals.append(time.perf_counter() - t0)
         return float(np.mean(vals))
+
+    def _trace_peak_bytes(fn, repeat=8):
+        gc.collect()
+        tracemalloc.start()
+        for _ in range(max(1, int(repeat))):
+            fn()
+        _, peak = tracemalloc.get_traced_memory()
+        tracemalloc.stop()
+        return int(peak)
+
+    def _torch_cpu_mem_bytes(fn):
+        try:
+            from torch.profiler import profile, ProfilerActivity
+            with profile(activities=[ProfilerActivity.CPU], profile_memory=True, record_shapes=False) as prof:
+                fn()
+            mem = 0
+            for ev in prof.key_averages():
+                try:
+                    mem += max(0, int(getattr(ev, "self_cpu_memory_usage", 0)))
+                except Exception:
+                    pass
+            return int(mem)
+        except Exception:
+            return 0
 
     results = {}
     for L in src_lens:
@@ -217,10 +295,10 @@ def run_task1(model, src_tok, device):
         )
         print(f"  src_len={L:>3d}  standard={t_std:.3f}s  cached={t_cache:.3f}s  speedup={speedup:.2f}x  encoder%={encoder_pct:.1f}")
 
-    # Memory profiling (GPU only). CPU memory differs by allocator and is noisy.
-    mem_note = "N/A (CPU/MPS)"
+    # Memory profiling (GPU preferred, CPU/MPS fallback via process RSS delta).
+    mem_note = "N/A"
     mem_red = None
-    if torch.cuda.is_available():
+    if torch.cuda.is_available() and str(device).startswith("cuda"):
         L = 64
         src = torch.randint(5, src_vocab, (1, L), device=device)
         torch.cuda.reset_peak_memory_stats(device)
@@ -231,8 +309,120 @@ def run_task1(model, src_tok, device):
                                   repetition_penalty=1.2, diversity_penalty=0.0)
         m_cache = torch.cuda.max_memory_allocated(device)
         mem_red = 100.0 * (m_std - m_cache) / max(m_std, 1)
-        mem_note = f"{mem_red:.1f}% reduction @ src_len=64"
+        mem_note = f"GPU peak alloc reduction: {mem_red:.1f}% @ src_len=64"
         print(f"  Memory reduction: {mem_note}")
+    elif has_cached and _process_mem_mb() > 0.0:
+        L = 64
+        src = torch.randint(5, src_vocab, (1, L), device=device)
+
+        def _peak_rss_while(fn, poll_s=0.01):
+            done = {"v": False}
+            peak = {"v": _process_mem_mb()}
+
+            def _poll():
+                while not done["v"]:
+                    peak["v"] = max(peak["v"], _process_mem_mb())
+                    time.sleep(poll_s)
+            th = threading.Thread(target=_poll, daemon=True)
+            gc.collect()
+            base = _process_mem_mb()
+            th.start()
+            try:
+                fn()
+            finally:
+                done["v"] = True
+                th.join(timeout=0.1)
+            gc.collect()
+            return base, peak["v"], max(0.0, peak["v"] - base)
+
+        b_std, p_std, d_std = _peak_rss_while(
+            lambda: _generate_ids_compat(model, src, temperature=0.8, top_k=40)
+        )
+        b_c, p_c, d_c = _peak_rss_while(
+            lambda: model.generate_cached(
+                src, num_steps=64, temperature=0.8, top_k=40,
+                repetition_penalty=1.2, diversity_penalty=0.0
+            )
+        )
+        if d_std > 0.0:
+            mem_red = 100.0 * (d_std - d_c) / d_std
+            mem_note = (
+                f"RSS peak reduction: {mem_red:.1f}% @ src_len=64 "
+                f"(std_peak={p_std:.1f}MB, cache_peak={p_c:.1f}MB)"
+            )
+        else:
+            # Secondary fallback: Python allocator peak (always available).
+            peak_std = _trace_peak_bytes(
+                lambda: _generate_ids_compat(model, src, temperature=0.8, top_k=40), repeat=10
+            )
+            peak_cache = _trace_peak_bytes(
+                lambda: model.generate_cached(src, num_steps=64, temperature=0.8, top_k=40,
+                                              repetition_penalty=1.2, diversity_penalty=0.0),
+                repeat=10
+            )
+            if peak_std >= 256 * 1024:
+                mem_red = 100.0 * (peak_std - peak_cache) / peak_std
+                mem_note = (
+                    f"Py alloc peak reduction: {mem_red:.1f}% @ src_len=64 "
+                    f"(std={peak_std/1024**2:.1f}MB, cache={peak_cache/1024**2:.1f}MB)"
+                )
+            else:
+                cpu_std = _torch_cpu_mem_bytes(
+                    lambda: _generate_ids_compat(model, src, temperature=0.8, top_k=40)
+                )
+                cpu_cache = _torch_cpu_mem_bytes(
+                    lambda: model.generate_cached(src, num_steps=64, temperature=0.8, top_k=40,
+                                                  repetition_penalty=1.2, diversity_penalty=0.0)
+                )
+                if cpu_std > 0:
+                    mem_red = 100.0 * (cpu_std - cpu_cache) / max(cpu_std, 1)
+                    mem_note = (
+                        f"Torch CPU mem-event reduction: {mem_red:.1f}% @ src_len=64 "
+                        f"(std={cpu_std/1024**2:.1f}MB, cache={cpu_cache/1024**2:.1f}MB)"
+                    )
+                else:
+                    mem_note = "Memory estimate unavailable (RSS/tracemalloc/torch-profiler flat)"
+        print(f"  Memory reduction: {mem_note}")
+    elif has_cached:
+        # Final fallback (CPU-safe): Python allocation peak via tracemalloc.
+        # This does not include all native tensor allocator memory, but still
+        # gives a consistent relative signal when psutil/CUDA stats are absent.
+        L = 64
+        src = torch.randint(5, src_vocab, (1, L), device=device)
+        peak_std = _trace_peak_bytes(
+            lambda: _generate_ids_compat(model, src, temperature=0.8, top_k=40), repeat=10
+        )
+        peak_cache = _trace_peak_bytes(
+            lambda: model.generate_cached(src, num_steps=64, temperature=0.8, top_k=40,
+                                          repetition_penalty=1.2, diversity_penalty=0.0),
+            repeat=10
+        )
+        # Ignore extremely small peaks; they are noise for tensor-heavy paths.
+        if peak_std >= 256 * 1024:
+            mem_red = 100.0 * (peak_std - peak_cache) / peak_std
+            mem_note = (
+                f"Py alloc peak reduction: {mem_red:.1f}% @ src_len=64 "
+                f"(std={peak_std/1024**2:.1f}MB, cache={peak_cache/1024**2:.1f}MB)"
+            )
+        else:
+            cpu_std = _torch_cpu_mem_bytes(
+                lambda: _generate_ids_compat(model, src, temperature=0.8, top_k=40)
+            )
+            cpu_cache = _torch_cpu_mem_bytes(
+                lambda: model.generate_cached(src, num_steps=64, temperature=0.8, top_k=40,
+                                              repetition_penalty=1.2, diversity_penalty=0.0)
+            )
+            if cpu_std > 0:
+                mem_red = 100.0 * (cpu_std - cpu_cache) / max(cpu_std, 1)
+                mem_note = (
+                    f"Torch CPU mem-event reduction: {mem_red:.1f}% @ src_len=64 "
+                    f"(std={cpu_std/1024**2:.1f}MB, cache={cpu_cache/1024**2:.1f}MB)"
+                )
+            else:
+                mem_note = "Py alloc peak too small/noisy to estimate (no psutil/CUDA profiler)"
+        print(f"  Memory reduction: {mem_note}")
+    else:
+        mem_note = "Profiler unavailable (cached path missing)"
 
     # Subtask graphs
     lens = sorted(results.keys())
@@ -289,7 +479,7 @@ def run_task1(model, src_tok, device):
 
 # ── Task 2 ────────────────────────────────────────────────────────────
 
-def run_task2(model, src_tok, tgt_tok, device, input_text, corpus_inputs=None):
+def run_task2(model, src_tok, tgt_tok, device, input_text, cfg, corpus_inputs=None):
     print("\n" + "="*65)
     print("  TASK 2 — Attention Visualization + Semantic Drift")
     print("="*65)
@@ -313,7 +503,11 @@ def run_task2(model, src_tok, tgt_tok, device, input_text, corpus_inputs=None):
         outs = {}
         for s in step_list:
             out = _generate_ids_compat(model, src, num_steps=s, temperature=0.8, top_k=40)
-            txt, _ = _decode_ids(tgt_tok, out)
+            txt, _ = _decode_ids(
+                tgt_tok, out,
+                src_text=input_text,
+                inf_cfg=cfg.get("inference", {"temperature": 0.8, "top_k": 40})
+            )
             outs[s] = txt
         final = outs[1]
         drift = [(_cer(outs[s], final), s) for s in step_list]
@@ -346,7 +540,6 @@ def run_task2(model, src_tok, tgt_tok, device, input_text, corpus_inputs=None):
 
     src_ids    = src_tok.encode(input_text)
     src_tensor = torch.tensor([src_ids], dtype=torch.long, device=device)
-    src_chars  = list(input_text.strip())
 
     from analysis.attention_viz import (
         AttentionCapture,
@@ -367,26 +560,38 @@ def run_task2(model, src_tok, tgt_tok, device, input_text, corpus_inputs=None):
                 break
             if x > 4:
                 out.append(x)
-        return tgt_tok.decode(out).strip(), out
+        raw_txt = tgt_tok.decode(out).strip()
+        clean_txt = _decode_with_cleanup(
+            tgt_tok, out, input_text, cfg.get("inference", {"temperature": 0.8, "top_k": 40})
+        )
+        return raw_txt, clean_txt, out
 
     decoded = {}
+    decoded_raw = {}
     for t_val, ids_t in step_outputs_ids.items():
-        txt, ids = _decode_tensor_ids(ids_t)
-        decoded[t_val] = (txt, ids)
-    final_out = decoded[min(decoded.keys())][0]
-    tgt_chars = list(final_out)
+        raw_txt, clean_txt, ids = _decode_tensor_ids(ids_t)
+        decoded_raw[t_val] = (raw_txt, ids)
+        decoded[t_val] = (clean_txt, ids)
+    final_step = min(decoded.keys())
+    final_out, final_ids = decoded[final_step]
+    final_out_raw = decoded_raw[final_step][0]
+    src_labels = []
+    for sid in src_ids[:20]:
+        tok = src_tok.decode([sid]).strip()
+        src_labels.append(tok if tok else f"id{sid}")
+    tgt_labels = [f"y{i}" for i in range(min(20, len(final_ids)))]
     print(f"  Output: {final_out}")
 
     # Heatmap t=max, layer 0
     first_t = max(step_weights.keys())
     w_first = step_weights[first_t][0][0]
     w0 = step_weights[0][0][0]
-    n_src = min(len(src_chars), w_first.shape[1], 20)
-    n_tgt = min(len(tgt_chars), w_first.shape[0], 20)
+    n_src = min(len(src_labels), w_first.shape[1], 20)
+    n_tgt = min(len(tgt_labels), w_first.shape[0], 20)
     plt.figure(figsize=(max(8, n_src * 0.35), max(6, n_tgt * 0.3)))
     plt.imshow(w_first[:n_tgt, :n_src], aspect="auto", cmap="YlOrRd")
-    plt.xticks(range(n_src), src_chars[:n_src], rotation=45, ha="right", fontsize=8)
-    plt.yticks(range(n_tgt), tgt_chars[:n_tgt], fontsize=8)
+    plt.xticks(range(n_src), src_labels[:n_src], rotation=45, ha="right", fontsize=8)
+    plt.yticks(range(n_tgt), tgt_labels[:n_tgt], fontsize=8)
     plt.title(f"Attention t={first_t} Layer 0")
     plt.tight_layout()
     plt.savefig(os.path.join(OUTPUT_DIR, f"task2_attn_t{first_t}.png"), dpi=150, bbox_inches="tight")
@@ -394,8 +599,8 @@ def run_task2(model, src_tok, tgt_tok, device, input_text, corpus_inputs=None):
 
     plt.figure(figsize=(max(8, n_src * 0.35), max(6, n_tgt * 0.3)))
     plt.imshow(w0[:n_tgt, :n_src], aspect="auto", cmap="YlOrRd")
-    plt.xticks(range(n_src), src_chars[:n_src], rotation=45, ha="right", fontsize=8)
-    plt.yticks(range(n_tgt), tgt_chars[:n_tgt], fontsize=8)
+    plt.xticks(range(n_src), src_labels[:n_src], rotation=45, ha="right", fontsize=8)
+    plt.yticks(range(n_tgt), tgt_labels[:n_tgt], fontsize=8)
     plt.title("Attention t=0 Layer 0")
     plt.tight_layout()
     plt.savefig(os.path.join(OUTPUT_DIR, "task2_attn_t0.png"), dpi=150, bbox_inches="tight")
@@ -436,9 +641,9 @@ def run_task2(model, src_tok, tgt_tok, device, input_text, corpus_inputs=None):
     plt.savefig(os.path.join(OUTPUT_DIR, "task2_attn_evolution.png"), dpi=150, bbox_inches="tight")
     plt.close()
 
-    # Drift (CER to final across steps)
+    # Drift (CER to final across steps) on RAW decoded trajectory to expose true diffusion.
     t_vals = sorted(decoded.keys(), reverse=True)
-    cer_vals = [_cer(decoded[t][0], final_out) for t in t_vals]
+    cer_vals = [_cer(decoded_raw[t][0], final_out_raw) for t in t_vals]
     plt.figure(figsize=(8, 4))
     plt.plot(t_vals, cer_vals, marker="o")
     plt.gca().invert_xaxis()
@@ -454,7 +659,7 @@ def run_task2(model, src_tok, tgt_tok, device, input_text, corpus_inputs=None):
     src_align = last_layer_t0.mean(axis=0)[:n_src]
     plt.figure(figsize=(8, 3))
     plt.bar(np.arange(len(src_align)), src_align)
-    plt.xticks(range(n_src), src_chars[:n_src], rotation=45, ha="right", fontsize=8)
+    plt.xticks(range(n_src), src_labels[:n_src], rotation=45, ha="right", fontsize=8)
     plt.title("Source Alignment Importance (t=0, last layer)")
     plt.tight_layout()
     plt.savefig(os.path.join(OUTPUT_DIR, "task2_source_alignment.png"), dpi=150, bbox_inches="tight")
@@ -466,7 +671,21 @@ def run_task2(model, src_tok, tgt_tok, device, input_text, corpus_inputs=None):
     tfidf_info = tfidf_attention_correlation(input_text, step_weights, corpus_texts=corpus_inputs)
     tfidf_corr = tfidf_info.get("corr")
     tfidf_status = tfidf_info.get("status", "UNKNOWN")
-    traj = compute_trajectory_metrics(step_outputs_ids, tgt_tok, reference_text=input_text)
+    traj = compute_trajectory_metrics(
+        step_outputs_ids,
+        tgt_tok,
+        reference_text=_iast_to_deva(input_text),
+    )
+    # Keep trajectory semantic scoring on raw decoded text to avoid masking drift.
+    ref_text = _iast_to_deva(input_text)
+    for row in traj:
+        t_cur = row["step"]
+        raw_txt = decoded_raw.get(t_cur, ("", []))[0]
+        if raw_txt:
+            sim = max(0.0, 1.0 - _cer(raw_txt, ref_text))
+            row["text"] = raw_txt
+            row["bert"] = sim
+            row["drift"] = 1.0 - sim
 
     # TF-IDF vs attention graph (subtask visualization)
     tfidf_vec = np.asarray(tfidf_info.get("tfidf_scores", []), dtype=np.float32)
@@ -493,12 +712,41 @@ def run_task2(model, src_tok, tgt_tok, device, input_text, corpus_inputs=None):
         plt.close()
 
     lock_in_t = next((t for t, c in zip(t_vals[::-1], cer_vals[::-1]) if c <= 0.05), t_vals[-1])
+    if tfidf_corr is not None and abs(float(tfidf_corr)) < 0.10:
+        tfidf_status = "WEAK"
+    has_semantic = any(float(r.get("bert", 0.0)) > 0.05 for r in traj)
+    # Degeneracy score on final output
+    toks = [t for t in final_out.split() if t]
+    uniq_ratio = len(set(toks)) / max(1, len(toks))
+    degenerate = (len(toks) >= 8 and uniq_ratio < 0.35)
+
+    # Small multi-sample stability check (prevents overclaim from one example)
+    multi_scores = []
+    if corpus_inputs:
+        sample_texts = [s for s in corpus_inputs[:8] if isinstance(s, str) and s.strip()]
+        for txt in sample_texts:
+            src_i = torch.tensor([src_tok.encode(txt)], dtype=torch.long, device=device)
+            out_i = _generate_ids_compat(model, src_i, num_steps=min(16, cfg.get("inference", {}).get("num_steps", 16)),
+                                         temperature=0.8, top_k=40)
+            pred_i, _ = _decode_ids(tgt_tok, out_i)
+            multi_scores.append(max(0.0, 1.0 - _cer(pred_i, _iast_to_deva(txt))))
+    multi_sem = float(np.mean(multi_scores)) if multi_scores else 0.0
+
+    quality_status = (
+        "VALID"
+        if len(final_out.strip()) > 0 and n_flex + n_locked > 0 and has_semantic and not degenerate and multi_sem >= 0.05
+        else "WEAK"
+    )
     report = os.path.join(OUTPUT_DIR, "task2_report.txt")
     with open(report, "w", encoding="utf-8") as f:
         f.write("TASK 2 — ATTENTION + DRIFT REPORT\n" + "=" * 50 + "\n\n")
         f.write(f"Input : {input_text}\n")
         f.write(f"Output: {final_out}\n\n")
         f.write(f"Captured steps: {len(t_vals)}\n")
+        f.write(f"Analysis quality: {quality_status}\n")
+        f.write(f"Final output uniq-ratio: {uniq_ratio:.3f}\n")
+        f.write(f"Degenerate output: {'YES' if degenerate else 'NO'}\n")
+        f.write(f"Multi-sample semantic score (n<={len(multi_scores)}): {multi_sem:.4f}\n")
         f.write(f"Lock-in step (CER<=0.05): t={lock_in_t}\n")
         f.write(f"Locked tokens: {n_locked}  Flexible tokens: {n_flex}\n")
         corr_txt = f"{tfidf_corr:.4f}" if tfidf_corr is not None else "N/A"
@@ -580,13 +828,15 @@ def run_task3(model, src_tok, tgt_tok, device, src_list, ref_list, n_samples=500
     direction = find_diversity_direction(hidden, lengths, pca)
     proj = pca.transform(hidden)
     corr = float(np.corrcoef(proj[:, 0], np.array(lengths))[0, 1]) if len(lengths) > 2 else 0.0
+    if not np.isfinite(corr):
+        corr = 0.0
     best_pc = 0
 
     # Plot concept space
     plt.figure(figsize=(8, 6))
     sc = plt.scatter(proj[:, 0], proj[:, 1] if proj.shape[1] > 1 else np.zeros_like(proj[:, 0]),
                      c=lengths, cmap="viridis", s=14)
-    plt.colorbar(sc, label="Output length")
+    plt.colorbar(sc, label="Output diversity proxy")
     plt.title("Task3 Concept Space")
     plt.xlabel("PC1")
     plt.ylabel("PC2")
@@ -606,18 +856,33 @@ def run_task3(model, src_tok, tgt_tok, device, src_list, ref_list, n_samples=500
     plt.savefig(os.path.join(OUTPUT_DIR, "task3_pca_explained_variance.png"), dpi=150, bbox_inches="tight")
     plt.close()
 
-    # Generate diversity spectrum for first example
-    print("\n  Diversity spectrum for first example:")
-    src0  = src_list[0]
-    inp0  = src_tok.decode([x for x in src0[0].tolist() if x > 4])
-    print(f"  Input: {inp0}")
-    spectrum = generate_diversity_spectrum(
-        model, src0.to(device), direction, tgt_tok,
-        alphas=[-2.0, -1.0, 0.0, 1.0, 2.0])
+    # Generate diversity spectrum on multiple seeds for more stable conclusions
+    seed_k = min(5, len(src_list))
+    uniq_list = []
+    sem_list = []
+    all_spectra = []
+    for i in range(seed_k):
+        src_i = src_list[i]
+        spec_i = generate_diversity_spectrum(
+            model, src_i.to(device), direction, tgt_tok,
+            alphas=[-2.0, -1.0, 0.0, 1.0, 2.0]
+        )
+        all_spectra.append(spec_i)
+        spec_items = sorted(spec_i.items())
+        spec_texts = [t for _, t in spec_items]
+        uniq_list.append(len(set(spec_texts)) / max(1, len(spec_texts)))
+        pivot = spec_texts[2] if len(spec_texts) >= 3 else (spec_texts[0] if spec_texts else "")
+        sims = [SequenceMatcher(None, txt, pivot).ratio() for txt in spec_texts if txt]
+        sem_list.append(float(np.mean(sims)) if sims else 0.0)
+    uniq_ratio = float(np.mean(uniq_list)) if uniq_list else 0.0
+    semantic_stability = float(np.mean(sem_list)) if sem_list else 0.0
+    steering_valid = (abs(corr) >= 0.20) and (uniq_ratio >= 0.55) and (semantic_stability >= 0.40)
+    # use first seed spectrum for visualization table
+    spectrum = all_spectra[0] if all_spectra else {}
 
     # Subtask graph: alpha vs decoded length
     a_vals = sorted(spectrum.keys())
-    l_vals = [len(spectrum[a]) for a in a_vals]
+    l_vals = [len(spectrum[a]) for a in a_vals] if spectrum else []
     plt.figure(figsize=(7, 3.5))
     plt.plot(a_vals, l_vals, marker="o")
     plt.xlabel("Steering alpha")
@@ -635,7 +900,10 @@ def run_task3(model, src_tok, tgt_tok, device, src_list, ref_list, n_samples=500
         f.write("TASK 3 — CONCEPT VECTORS + PCA STEERING\n" + "="*50 + "\n\n")
         f.write(f"PCA: {pca.n_components_} components, "
                 f"{pca.explained_variance_ratio_.sum()*100:.1f}% variance\n")
-        f.write(f"Diversity PC: {best_pc}  (|r|={corr:.3f} with output length)\n\n")
+        f.write(f"Diversity PC: {best_pc}  (|r|={corr:.3f} with diversity proxy)\n\n")
+        f.write(f"Direction validity: {'VALID' if steering_valid else 'WEAK'}\n")
+        f.write(f"Spectrum unique ratio (mean over {seed_k} seeds): {uniq_ratio:.3f}\n")
+        f.write(f"Spectrum semantic stability (mean over {seed_k} seeds): {semantic_stability:.3f}\n\n")
         f.write("Saved graphs:\n")
         f.write("  - task3_concept_space.png\n")
         f.write("  - task3_pca_explained_variance.png\n")
@@ -679,6 +947,10 @@ def run_task4(phase, model, src_tok, tgt_tok, device, cfg,
     if phase == "analyze":
         existing = [T for T in [4, 8, 16, 32, 64]
                     if os.path.exists(f"ablation_results/T{T}/best_model.pt")]
+        only_t = os.environ.get("TASK4_ONLY_T")
+        if only_t and only_t.isdigit():
+            t_req = int(only_t)
+            existing = [T for T in existing if T == t_req]
         if not existing:
             print("  No ablation models found at ablation_results/T*/best_model.pt")
             return
@@ -724,13 +996,13 @@ def run_task4(phase, model, src_tok, tgt_tok, device, cfg,
 
 # ── Task 5 ────────────────────────────────────────────────────────────
 
-def run_task5(model, src_tok, tgt_tok, device, cfg, src_list, ref_list):
+def run_task5(model, src_tok, tgt_tok, device, cfg, src_list, ref_list, task5_samples=500):
     print("\n" + "="*65)
     print("  TASK 5 — Classifier-Free Guidance")
     print("="*65)
     if not hasattr(model.model, 'encode_source'):
         print("  Compatibility mode: classifier-guidance unavailable; sweeping decoding controls.")
-        n = min(100, len(src_list), len(ref_list))
+        n = min(100, int(task5_samples), len(src_list), len(ref_list))
         lambdas = [0.0, 0.5, 1.0, 1.5, 2.0, 3.0]
         results = []
         for lam in lambdas:
@@ -778,7 +1050,7 @@ def run_task5(model, src_tok, tgt_tok, device, cfg, src_list, ref_list):
             train_quality_classifier, sweep_guidance_scales)
     except Exception:
         print("  Quality-classifier API mismatch; using compatibility sweep.")
-        n = min(50, len(src_list))
+        n = min(50, int(task5_samples), len(src_list))
         scales = [0.0, 0.5, 1.0, 1.5, 2.0, 3.0]
         results = []
         for lam in scales:
@@ -832,7 +1104,7 @@ def run_task5(model, src_tok, tgt_tok, device, cfg, src_list, ref_list):
         quality = data["quality"]
     else:
         print("  Collecting quality data (this takes a few minutes)...")
-        n       = min(2000, len(src_list))
+        n       = min(int(task5_samples), len(src_list))
         hidden, quality = collect_quality_data(
             model, src_list[:n], ref_list[:n], tgt_tok,
             t_capture=0, max_samples=n)
@@ -855,14 +1127,17 @@ def run_task5(model, src_tok, tgt_tok, device, cfg, src_list, ref_list):
 
     # Step 3: guidance scale sweep
     print("\n  Guidance scale sweep (λ ∈ {0.0, 0.5, 1.0, 1.5, 2.0, 3.0})...")
-    n_sweep = min(50, len(src_list))
+    n_sweep = min(80, int(task5_samples), len(src_list))
     results = sweep_guidance_scales(
         model, clf, src_list[:n_sweep], ref_list[:n_sweep],
         tgt_tok, scales=[0.0, 0.5, 1.0, 1.5, 2.0, 3.0],
         n_samples=n_sweep, device=device, output_dir=OUTPUT_DIR)
 
-    # Find optimal scale
-    best_scale = min(results, key=lambda s: results[s]["mean_cer"])
+    # Find optimal scale (quality + anti-collapse diversity)
+    def _score(s):
+        r = results[s]
+        return (r["mean_cer"] - 0.05 * r.get("diversity", 0.0))
+    best_scale = min(results, key=_score)
     print(f"\n  Optimal guidance scale: λ={best_scale:.1f}  "
           f"CER={results[best_scale]['mean_cer']:.4f}")
 
@@ -872,12 +1147,15 @@ def run_task5(model, src_tok, tgt_tok, device, cfg, src_list, ref_list):
         f.write(f"Classifier params: {sum(p.numel() for p in clf.parameters())}\n")
         f.write(f"Training samples : {len(hidden)}\n\n")
         f.write("Guidance scale sweep:\n")
-        f.write(f"  {'λ':>6}  {'CER':>8}  {'diversity':>10}\n")
-        f.write("  " + "-"*28 + "\n")
+        f.write(f"  {'λ':>6}  {'CER':>8}  {'diversity':>10}  {'d2':>6}  {'sBLEU':>8}\n")
+        f.write("  " + "-"*52 + "\n")
         for s in sorted(results.keys()):
             r = results[s]
             marker = " ← optimal" if s == best_scale else ""
-            f.write(f"  {s:>6.1f}  {r['mean_cer']:>8.4f}  {r['diversity']:>10.3f}{marker}\n")
+            f.write(
+                f"  {s:>6.1f}  {r['mean_cer']:>8.4f}  {r['diversity']:>10.3f}  "
+                f"{r.get('distinct2', 0.0):>6.3f}  {r.get('self_bleu', 0.0):>8.3f}{marker}\n"
+            )
     print(f"  Report: {report}")
 
 
@@ -903,6 +1181,8 @@ def main():
         help="Samples for Task 4 dry/full evaluation")
     parser.add_argument("--task3_samples", type=int, default=500,
         help="Samples for Task 3 hidden-state collection")
+    parser.add_argument("--task5_samples", type=int, default=500,
+        help="Samples for Task 5 classifier data + sweep")
     args = parser.parse_args()
 
     OUTPUT_DIR = args.output_dir
@@ -944,14 +1224,17 @@ def main():
         if task == "1":
             run_task1(model, src_tok, device)
         elif task == "2":
-            run_task2(model, src_tok, tgt_tok, device, args.input, corpus_inputs=inp_list)
+            run_task2(model, src_tok, tgt_tok, device, args.input, cfg, corpus_inputs=inp_list)
         elif task == "3":
             run_task3(model, src_tok, tgt_tok, device, src_list, ref_list, n_samples=args.task3_samples)
         elif task == "4":
             run_task4(args.phase, model, src_tok, tgt_tok, device, cfg,
                       src_list, ref_list, n_samples=args.task4_samples)
         elif task == "5":
-            run_task5(model, src_tok, tgt_tok, device, cfg, src_list, ref_list)
+            run_task5(
+                model, src_tok, tgt_tok, device, cfg, src_list, ref_list,
+                task5_samples=args.task5_samples
+            )
 
     print(f"\n{'='*65}")
     print(f"  All outputs saved to: {OUTPUT_DIR}/")

@@ -188,12 +188,18 @@ This uses:
 - Some checkpoints may produce noisy raw output; the final displayed output may come from cleanup/fallback.
 - For demo use, keep the Hugging Face model repo as the source of truth for released checkpoints.
 
+## Deployment
+
+- [Interact with my model ui](https://huggingface.co/spaces/bhsinghgrid/devflow)
+- [Model d3pm_Cross_attention architecture](https://huggingface.co/bhsinghgrid/devaflow)
+- [Model d3pm_encoder_decoder_architecture](https://huggingface.co/bhsinghgrid/devflow2)
+
 ## Main Files
 
-- [app.py](/Users/bhsingh/Documents/Final_Paraphrase/Exclude_Negative/final_folder/app.py)
-- [inference.py](/Users/bhsingh/Documents/Final_Paraphrase/Exclude_Negative/final_folder/inference.py)
-- [train.py](/Users/bhsingh/Documents/Final_Paraphrase/Exclude_Negative/final_folder/train.py)
-- [analysis/run_analysis.py](/Users/bhsingh/Documents/Final_Paraphrase/Exclude_Negative/final_folder/analysis/run_analysis.py)
-- [run_all_tasks.sh](/Users/bhsingh/Documents/Final_Paraphrase/Exclude_Negative/final_folder/run_all_tasks.sh)
-- [analysis/run_all_ablation_tasks.sh](/Users/bhsingh/Documents/Final_Paraphrase/Exclude_Negative/final_folder/analysis/run_all_ablation_tasks.sh)
-- [deploy_hf_easy.sh](/Users/bhsingh/Documents/Final_Paraphrase/Exclude_Negative/final_folder/deploy_hf_easy.sh)
+- [app.py](/final_folder/app.py)
+- [inference.py](/final_folder/inference.py)
+- [train.py](/final_folder/train.py)
+- [analysis/run_analysis.py](/final_folder/analysis/run_analysis.py)
+- [run_all_tasks.sh](/final_folder/run_all_tasks.sh)
+- [analysis/run_all_ablation_tasks.sh](/final_folder/analysis/run_all_ablation_tasks.sh)
+- [deploy_hf_easy.sh](/final_folder/deploy_hf_easy.sh)

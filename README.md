@@ -19,6 +19,7 @@ It is designed so another user can clone this folder on a new laptop, create a v
 - `model/`, `diffusion/`, `data/`: core model and data code
 - `Task1/` to `Task5/`: prepared reports and figures
 - `upload_hf_model.py`, `upload_hf_space.py`: Hugging Face upload helpers
+-  `sh folder/`,: inside this folder contain the all the `.sh` by which you run whole project in easy way first remove all file from this folder into the original folder
 
 ## Before You Start
 

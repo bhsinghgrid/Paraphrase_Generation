@@ -104,7 +104,20 @@ for t in timesteps:
         <div class="img-caption">Figure 1: Speedup multipliers across sequence lengths for Encoder-Decoder architecture.</div>
     </div>
 
-    <h3>4.2 Hardware Performance Profiling (Unified Memory MPS)</h3>
+    <h3>4.2 Additional Benchmark Figures</h3>
+    <p>To preserve the full evidence package, the encoder-decoder report also includes the complementary runtime and cost plots generated during the KV-cache benchmark.</p>
+
+    <div class="img-container">
+        <img src="task1_time_comparison.png" alt="Time Comparison">
+        <div class="img-caption">Figure 2: Baseline versus cached runtime under the evaluated settings.</div>
+    </div>
+
+    <div class="img-container">
+        <img src="task1_encoder_cost.png" alt="Encoder Cost Share">
+        <div class="img-caption">Figure 3: Encoder contribution to total inference cost before and after caching.</div>
+    </div>
+
+    <h3>4.3 Hardware Performance Profiling (Unified Memory MPS)</h3>
     <p>Analysis on <strong>Apple Silicon (Metal/MPS)</strong> confirms that the Encoder-Decoder architecture particularly benefits from KV caching due to the unified memory model. By caching the dense memory representation once, we eliminate the high-latency CPU-GPU synchronization required for repetitive encoder activations. This ensures that the denoising loop operates at peak memory bandwidth, reaching a hardware utility efficiency of <strong>~82%</strong>.</p>
 
     <h2>5. Analysis & Conclusion</h2>

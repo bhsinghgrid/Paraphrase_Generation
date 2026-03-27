@@ -44,6 +44,19 @@
 
     <p>👉 <strong>Implementation:</strong> <a href="../../../analysis/concept_vectors.py">analysis/concept_vectors.py</a></p>
 
+    <h3>2.1 Core Code Snippet</h3>
+<pre><code>representations = analyzer.extract(hidden_states)
+pca = PCA(n_components=50)
+projected = pca.fit_transform(representations)
+
+diversity_scores = np.array(unique_token_ratios)
+best_pc = np.argmax([
+    abs(np.corrcoef(projected[:, i], diversity_scores)[0, 1])
+    for i in range(projected.shape[1])
+])
+diversity_direction = pca.components_[best_pc]
+steered_hidden = hidden + alpha * diversity_direction</code></pre>
+
     <h2>3. Experimental Results & Evidence</h2>
     <p>To ensure high statistical rigor and satisfy academic standards for reproducibility, all measurements were conducted over <strong>N=5 independent randomized seeds</strong>. Results are reported as mean metrics alongside their standard deviation (±1σ).</p>
 
@@ -93,6 +106,16 @@
     <div class="img-container">
         <img src="task3_pca_explained_variance.png" alt="Explained Variance">
         <div class="img-caption">Figure 4: Cumulative explained variance ratio across 50 PCA components.</div>
+    </div>
+
+    <div class="img-container">
+        <img src="task3_concept_space.png" alt="Concept Space Projection">
+        <div class="img-caption">Figure 5: Two-dimensional projection of the encoder-decoder concept space.</div>
+    </div>
+
+    <div class="img-container">
+        <img src="task3_diversity_curve.png" alt="Diversity Curve">
+        <div class="img-caption">Figure 6: Diversity response across the steering coefficient spectrum.</div>
     </div>
 
     <h3>3.2 Hardware Performance Profiling (Latent Projection on MPS)</h3>

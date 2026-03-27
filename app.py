@@ -30,10 +30,11 @@ from model.tokenizer import SanskritSourceTokenizer, SanskritTargetTokenizer
 load_local_env(__file__)
 
 
-RESULTS_DIR = os.environ.get("RESULTS_DIR", "generated_results")
-DEFAULT_ANALYSIS_OUT = os.environ.get("DEFAULT_ANALYSIS_OUT", "analysis_outputs/T4")
+RESULTS_DIR = "generated_results"
+DEFAULT_ANALYSIS_OUT = "analysis_outputs/outputs_all_models_20260325/T4"
 os.makedirs(RESULTS_DIR, exist_ok=True)
 _BG_JOBS = {}
+_CHECKPOINT_CACHE = None
 
 try:
     import mlflow
@@ -129,26 +130,84 @@ def _task5_cfg(lambda_min, lambda_max, lambda_step, task5_samples):
 
 HF_DEFAULT_MODEL_REPO = os.environ.get("HF_DEFAULT_MODEL_REPO", "bhsinghgrid/DevaFlow")
 HF_DEFAULT_MODEL_FILE = os.environ.get("HF_DEFAULT_MODEL_FILE", "best_model.pt")
+HF_CHECKPOINT_REPO = os.environ.get("HF_CHECKPOINT_REPO", "bhsinghgrid/devflow2")
+HF_CHECKPOINT_FILE = os.environ.get("HF_CHECKPOINT_FILE", "best_model.pt")
+HF_MODEL_REPOS = [
+    repo.strip()
+    for repo in os.environ.get("HF_MODEL_REPOS", "bhsinghgrid/DevaFlow,bhsinghgrid/devflow2").split(",")
+    if repo.strip()
+]
+HF_DEFAULT_MODEL_TYPE = os.environ.get("HF_DEFAULT_MODEL_TYPE", "d3pm_cross_attention")
+HF_DEFAULT_INCLUDE_NEG = os.environ.get("HF_DEFAULT_INCLUDE_NEG", "false")
+HF_DEFAULT_NUM_STEPS = os.environ.get("HF_DEFAULT_NUM_STEPS")
+HF_DEFAULT_MODEL_SETTINGS_FILE = os.environ.get("HF_DEFAULT_MODEL_SETTINGS_FILE", "model_settings.json")
 
 
-def _download_hf_default_checkpoint():
+def _download_hf_model_settings():
     try:
         cache_dir = Path(".hf_model_cache")
         cache_dir.mkdir(parents=True, exist_ok=True)
-        ckpt = hf_hub_download(
+        settings_path = hf_hub_download(
             repo_id=HF_DEFAULT_MODEL_REPO,
-            filename=HF_DEFAULT_MODEL_FILE,
+            filename=HF_DEFAULT_MODEL_SETTINGS_FILE,
             local_dir=str(cache_dir),
-            local_dir_use_symlinks=False,
         )
-        return ckpt
+        with open(settings_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        return data if isinstance(data, dict) else {}
+    except Exception:
+        return {}
+
+
+HF_DEFAULT_SETTINGS = _download_hf_model_settings()
+
+
+def _repo_cache_dir(repo_id: str) -> Path:
+    safe = repo_id.replace("/", "__")
+    path = Path(".hf_model_cache") / safe
+    path.mkdir(parents=True, exist_ok=True)
+    return path
+
+
+def _download_hf_checkpoint(repo_id: str, filename: str = "best_model.pt"):
+    try:
+        cache_dir = _repo_cache_dir(repo_id)
+        return hf_hub_download(
+            repo_id=repo_id,
+            filename=filename,
+            local_dir=str(cache_dir),
+        )
     except Exception:
         return None
 
 
+def _download_hf_settings_for_repo(repo_id: str):
+    try:
+        cache_dir = _repo_cache_dir(repo_id)
+        settings_path = hf_hub_download(
+            repo_id=repo_id,
+            filename=HF_DEFAULT_MODEL_SETTINGS_FILE,
+            local_dir=str(cache_dir),
+        )
+        with open(settings_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        return data if isinstance(data, dict) else {}
+    except Exception:
+        return {}
+
+
 def discover_checkpoints():
+    global _CHECKPOINT_CACHE
+    if _CHECKPOINT_CACHE is not None:
+        return list(_CHECKPOINT_CACHE)
     found = []
-    for root in ("ablation_results", "results7", "results"):
+    local_roots = [
+        ("ablation_results", "cross_attention"),
+        (os.path.join("ablation_results", "encoder_decoder"), "encoder_decoder"),
+        ("results7", "other"),
+        ("results", "other"),
+    ]
+    for root, family in local_roots:
         if not os.path.isdir(root):
             continue
         for entry in sorted(os.listdir(root)):
@@ -161,30 +220,55 @@ def discover_checkpoints():
                     "path": ckpt,
                     "experiment": entry,
                     "root": root,
+                    "family": family,
                 }
             )
-    # Space-safe fallback: always expose one downloadable checkpoint option.
-    hf_ckpt = _download_hf_default_checkpoint()
-    if hf_ckpt and os.path.exists(hf_ckpt):
+    for repo_id in HF_MODEL_REPOS:
+        settings = _download_hf_settings_for_repo(repo_id)
+        model_type = settings.get("model_type", "")
+        family = "encoder_decoder" if model_type == "d3pm_encoder_decoder" else "cross_attention"
+        num_steps = settings.get("num_steps", HF_DEFAULT_NUM_STEPS)
+        step_label = f"T{num_steps}" if num_steps else "HF"
         found.append(
             {
-                "label": f"HF default  [{HF_DEFAULT_MODEL_REPO}]",
-                "path": hf_ckpt,
-                "experiment": "hf_default",
+                "label": f"{repo_id}  [{family}:{step_label}]",
+                "path": None,
+                "experiment": step_label,
                 "root": "hf",
+                "family": family,
+                "repo_id": repo_id,
+                "repo_file": HF_CHECKPOINT_FILE,
+                "hf_settings": settings,
             }
         )
-    return found
+    _CHECKPOINT_CACHE = list(found)
+    return list(found)
 
 
-def _guess_analysis_dir(experiment: str, ckpt_path: str) -> str:
+def _guess_analysis_dir(experiment: str, ckpt_path: str, family: str = "cross_attention", settings: dict | None = None) -> str:
+    settings = settings or {}
     base = Path("analysis_outputs")
+    packaged = base / "outputs_all_models_20260325"
+    step = None
+    if experiment and experiment.startswith("T") and experiment[1:].isdigit():
+        step = experiment
+    elif settings.get("num_steps"):
+        step = f"T{int(settings['num_steps'])}"
+    else:
+        for part in Path(ckpt_path or "").parts:
+            if part.startswith("T") and part[1:].isdigit():
+                step = part
+                break
+    if packaged.exists() and step:
+        if family == "encoder_decoder" and (packaged / "encoder_decoder" / step).is_dir():
+            return str(packaged / "encoder_decoder" / step)
+        if (packaged / step).is_dir():
+            return str(packaged / step)
     if base.exists():
-        if experiment and (base / experiment).is_dir():
-            return str(base / experiment)
-        for part in Path(ckpt_path).parts:
-            if part.startswith("T") and part[1:].isdigit() and (base / part).is_dir():
-                return str(base / part)
+        if family == "encoder_decoder" and step and (base / "encoder_decoder" / step).is_dir():
+            return str(base / "encoder_decoder" / step)
+        if step and (base / step).is_dir():
+            return str(base / step)
         if (base / "T4").is_dir():
             return str(base / "T4")
     return os.path.join("analysis", "outputs_ui", experiment or "default")
@@ -199,7 +283,11 @@ def default_checkpoint_label():
     if not cps:
         return None
     for item in cps:
-        if item["path"].endswith("ablation_results/T4/best_model.pt"):
+        path = item.get("path")
+        if path and path.endswith("ablation_results/T4/best_model.pt"):
+            return item["label"]
+    for item in cps:
+        if item.get("repo_id") == HF_DEFAULT_MODEL_REPO:
             return item["label"]
     return cps[0]["label"]
 
@@ -228,12 +316,47 @@ def infer_include_negative(experiment_name: str, root: str = "") -> bool:
     return CONFIG["data"]["include_negative_examples"]
 
 
-def build_runtime_cfg(ckpt_path: str):
-    experiment = os.path.basename(os.path.dirname(ckpt_path))
-    root = os.path.basename(os.path.dirname(os.path.dirname(ckpt_path)))
+def build_runtime_cfg(ckpt_path: str, item: dict | None = None):
+    item = item or {}
+    if item.get("root") == "hf":
+        experiment = item.get("experiment", "hf")
+        root = "hf"
+        hf_settings = item.get("hf_settings", {})
+    else:
+        experiment = os.path.basename(os.path.dirname(ckpt_path))
+        root = os.path.basename(os.path.dirname(os.path.dirname(ckpt_path)))
+        hf_settings = {}
     cfg = copy.deepcopy(CONFIG)
-    cfg["model_type"] = infer_model_type(experiment, root=root)
-    cfg["data"]["include_negative_examples"] = infer_include_negative(experiment, root=root)
+    if root == "hf":
+        cfg["model_type"] = (
+            hf_settings.get("model_type")
+            or os.environ.get("HF_DEFAULT_MODEL_TYPE")
+            or HF_DEFAULT_SETTINGS.get("model_type")
+            or HF_DEFAULT_MODEL_TYPE
+        )
+        include_neg_raw = str(
+            hf_settings.get(
+                "include_negative_examples",
+                os.environ.get(
+                    "HF_DEFAULT_INCLUDE_NEG",
+                    HF_DEFAULT_SETTINGS.get("include_negative_examples", HF_DEFAULT_INCLUDE_NEG),
+                ),
+            )
+        )
+        cfg["data"]["include_negative_examples"] = include_neg_raw.lower() == "true"
+        t_raw = (
+            hf_settings.get("num_steps")
+            or os.environ.get("HF_DEFAULT_NUM_STEPS")
+            or HF_DEFAULT_SETTINGS.get("num_steps")
+            or HF_DEFAULT_NUM_STEPS
+        )
+        if t_raw:
+            t_val = int(t_raw)
+            cfg["model"]["diffusion_steps"] = t_val
+            cfg["inference"]["num_steps"] = t_val
+    else:
+        cfg["model_type"] = infer_model_type(experiment, root=root)
+        cfg["data"]["include_negative_examples"] = infer_include_negative(experiment, root=root)
 
     if root == "ablation_results" and experiment.startswith("T") and experiment[1:].isdigit():
         t_val = int(experiment[1:])
@@ -265,14 +388,23 @@ def load_selected_model(checkpoint_label):
     if checkpoint_label not in mapping:
         raise gr.Error("Selected checkpoint not found. Click refresh.")
 
-    ckpt_path = mapping[checkpoint_label]["path"]
-    cfg, device, experiment = build_runtime_cfg(ckpt_path)
+    item = mapping[checkpoint_label]
+    ckpt_path = item.get("path")
+    if item.get("root") == "hf":
+        ckpt_path = _download_hf_checkpoint(item["repo_id"], item.get("repo_file", HF_CHECKPOINT_FILE))
+        if not ckpt_path or not os.path.exists(ckpt_path):
+            raise gr.Error(f"Failed to download checkpoint from {item['repo_id']}.")
+        item["path"] = ckpt_path
+    cfg, device, experiment = build_runtime_cfg(ckpt_path, item=item)
     model, cfg = load_model(ckpt_path, cfg, device)
     src_tok, tgt_tok = _build_tokenizers(cfg)
 
     bundle = {
         "ckpt_path": ckpt_path,
         "experiment": experiment,
+        "family": item.get("family", "cross_attention"),
+        "repo_id": item.get("repo_id"),
+        "hf_settings": item.get("hf_settings", {}),
         "device": str(device),
         "cfg": cfg,
         "model": model,
@@ -291,9 +423,16 @@ def load_selected_model(checkpoint_label):
         "d_model": cfg["model"]["d_model"],
         "n_layers": cfg["model"]["n_layers"],
         "n_heads": cfg["model"]["n_heads"],
+        "family": item.get("family", "cross_attention"),
+        "repo_id": item.get("repo_id"),
     }
     status = f"Loaded `{experiment}` on `{device}` (`{cfg['model_type']}`)"
-    suggested_out = _guess_analysis_dir(experiment, ckpt_path)
+    suggested_out = _guess_analysis_dir(
+        experiment,
+        ckpt_path,
+        family=item.get("family", "cross_attention"),
+        settings=item.get("hf_settings", {}),
+    )
     return bundle, status, model_info, cfg["inference"]["num_steps"], suggested_out
 
 
@@ -305,26 +444,6 @@ def apply_preset(preset_name):
         "Creative": (0.90, 80, 1.05, 0.2),
     }
     return presets.get(preset_name, presets["Balanced"])
-
-
-def clean_generated_text(text: str, max_consecutive: int = 2) -> str:
-    text = " ".join(text.split())
-    if not text:
-        return text
-    tokens = text.split()
-    cleaned = []
-    prev = None
-    run = 0
-    for tok in tokens:
-        if tok == prev:
-            run += 1
-        else:
-            prev = tok
-            run = 1
-        if run <= max_consecutive:
-            cleaned.append(tok)
-    out = " ".join(cleaned).replace(" ।", "।").replace(" ॥", "॥")
-    return " ".join(out.split())
 
 
 def save_generation(experiment, record):
@@ -374,29 +493,11 @@ def generate_from_ui(
     )
     out = run_inference(model_bundle["model"], input_ids, cfg)
 
-    # # Use the exact inference decode/cleanup logic for parity with inference.py
-    # raw_output_text = _decode_clean(tgt_tok, out[0].tolist())
-    # if clean_output:
-    #     output_text = _decode_with_cleanup(
-    #         tgt_tok, out[0].tolist(), input_text.strip(), cfg["inference"]
-    #     )
-    # else:
-    #     output_text = raw_output_text
-    gen_ids = model_bundle["model"].generate(
-        input_ids,
-        num_steps=cfg["inference"]["num_steps"],
-        temperature=cfg["inference"]["temperature"],
-        top_k=cfg["inference"]["top_k"],
-        repetition_penalty=cfg["inference"]["repetition_penalty"],
-        diversity_penalty=cfg["inference"]["diversity_penalty"],
-    )
-
-    pred_ids = [x for x in gen_ids[0].tolist() if x > 4]
-    raw_output_text = tgt_tok.decode(pred_ids).strip()
-
+    # Use the exact inference decode/cleanup logic for parity with inference.py
+    raw_output_text = _decode_clean(tgt_tok, out[0].tolist())
     if clean_output:
         output_text = _decode_with_cleanup(
-            tgt_tok, gen_ids[0].tolist(), input_text.strip(), cfg["inference"]
+            tgt_tok, out[0].tolist(), input_text.strip(), cfg["inference"]
         )
     else:
         output_text = raw_output_text
@@ -516,7 +617,12 @@ def _run_analysis_cmd(task, ckpt_path, output_dir, input_text="dharmo rakṣati 
 
 
 def _bundle_task_outputs(model_bundle, output_dir):
-    src_dir = _guess_analysis_dir(model_bundle.get("experiment", ""), model_bundle.get("ckpt_path", ""))
+    src_dir = _guess_analysis_dir(
+        model_bundle.get("experiment", ""),
+        model_bundle.get("ckpt_path", ""),
+        family=model_bundle.get("family", "cross_attention"),
+        settings=model_bundle.get("hf_settings", {}),
+    )
     if not os.path.isdir(src_dir):
         return
     os.makedirs(output_dir, exist_ok=True)
@@ -889,36 +995,6 @@ def run_single_task(model_bundle, task, output_dir, input_text, task4_phase, tas
     return status, log, task_states, flow
 
 
-def run_all_tasks(model_bundle, output_dir, input_text, task4_phase, task5_cfg, quick_mode):
-    if not model_bundle:
-        raise gr.Error("Load a model first.")
-    logs = []
-    failures = 0
-    used_bundled_any = False
-    for task in ["1", "2", "3", "4", "5"]:
-        if quick_mode:
-            code, log, used_bundled = _run_quick_task(task, model_bundle, input_text, task5_cfg)
-        else:
-            code, log, used_bundled = _run_analysis_cmd(
-                task, model_bundle["ckpt_path"], output_dir, input_text, task4_phase, task5_cfg.get("samples", 50)
-            )
-        logs.append(f"\n\n{'='*22} TASK {task} {'='*22}\n{log}")
-        used_bundled_any = used_bundled_any or used_bundled
-        if code != 0:
-            failures += 1
-    if failures or used_bundled_any:
-        _bundle_task_outputs(model_bundle, output_dir)
-    if failures:
-        logs.append(f"\n\n--- Live input summary ---\n{_live_input_summary(model_bundle, input_text)}")
-    if failures:
-        status = f"Run-all finished with {failures} fallback task(s)."
-    elif used_bundled_any:
-        status = "Run-all loaded from bundled analysis outputs."
-    else:
-        status = "All 5 tasks completed."
-    return status, "".join(logs)
-
-
 def _read_text(path):
     if not os.path.exists(path):
         return "Not found."
@@ -1032,6 +1108,37 @@ def _generate_with_flow(
     return out_text, status, meta, flow
 
 
+def load_selected_model_with_outputs(checkpoint_label):
+    bundle, status, info, steps, out_dir = load_selected_model(checkpoint_label)
+    outputs = _safe_refresh_task_outputs(out_dir)
+    flow = _build_flow_markdown(model_loaded=True, inference_ready=False, task_states={})
+    return bundle, status, info, steps, out_dir, flow, *outputs
+
+
+def auto_load_default_with_outputs():
+    choices = list(checkpoint_map().keys())
+    if not choices:
+        empty = _safe_refresh_task_outputs(DEFAULT_ANALYSIS_OUT)
+        return None, "No checkpoints found.", {}, 64, DEFAULT_ANALYSIS_OUT, _build_flow_markdown(model_loaded=False, inference_ready=False, task_states={}), *empty
+    return load_selected_model_with_outputs(default_checkpoint_label())
+
+
+def safe_load_selected_model_with_outputs(checkpoint_label):
+    try:
+        return load_selected_model_with_outputs(checkpoint_label)
+    except Exception as e:
+        outputs = _safe_refresh_task_outputs(DEFAULT_ANALYSIS_OUT)
+        return (
+            None,
+            f"Load failed: {e}",
+            {},
+            64,
+            DEFAULT_ANALYSIS_OUT,
+            _build_flow_markdown(model_loaded=False, inference_ready=False, task_states={}),
+            *outputs,
+        )
+
+
 CUSTOM_CSS = """
 :root {
   --bg1: #f5fbff;
@@ -1058,7 +1165,7 @@ CUSTOM_CSS = """
 """
 
 
-with gr.Blocks(title="Sanskrit Diffusion Client Demo", css=CUSTOM_CSS) as demo:
+with gr.Blocks(title="Sanskrit Diffusion Model", css=CUSTOM_CSS) as demo:
     model_state = gr.State(None)
     bg_job_state = gr.State("")
 
@@ -1184,22 +1291,35 @@ with gr.Blocks(title="Sanskrit Diffusion Client Demo", css=CUSTOM_CSS) as demo:
             )
 
     def refresh_checkpoints():
+        global _CHECKPOINT_CACHE
+        _CHECKPOINT_CACHE = None
         choices = list(checkpoint_map().keys())
         value = default_checkpoint_label() if choices else None
         msg = f"Found {len(choices)} checkpoint(s)." if choices else "No checkpoints found."
         return gr.Dropdown(choices=choices, value=value), msg
 
-    def auto_load_default():
-        choices = list(checkpoint_map().keys())
-        if not choices:
-            return None, "No checkpoints found.", {}, 64, DEFAULT_ANALYSIS_OUT
-        return load_selected_model(default_checkpoint_label())
-
     refresh_btn.click(fn=refresh_checkpoints, outputs=[checkpoint_dropdown, load_status])
     load_btn.click(
-        fn=load_selected_model,
+        fn=safe_load_selected_model_with_outputs,
         inputs=[checkpoint_dropdown],
-        outputs=[model_state, load_status, model_info, num_steps, analysis_output_dir],
+        outputs=[
+            model_state,
+            load_status,
+            model_info,
+            num_steps,
+            analysis_output_dir,
+            flow_box,
+            task1_box,
+            task2_box,
+            task2_drift_img,
+            task2_attn_img,
+            task2_tmax_img,
+            task2_evolution_img,
+            task3_box,
+            task3_img,
+            task5_box,
+            task4_img,
+        ],
     )
 
     preset.change(
@@ -1305,13 +1425,14 @@ with gr.Blocks(title="Sanskrit Diffusion Client Demo", css=CUSTOM_CSS) as demo:
         ],
     )
     demo.load(
-        fn=auto_load_default,
-        outputs=[model_state, load_status, model_info, num_steps, analysis_output_dir],
-    )
-    demo.load(
-        fn=_safe_refresh_task_outputs,
-        inputs=[analysis_output_dir],
+        fn=auto_load_default_with_outputs,
         outputs=[
+            model_state,
+            load_status,
+            model_info,
+            num_steps,
+            analysis_output_dir,
+            flow_box,
             task1_box,
             task2_box,
             task2_drift_img,

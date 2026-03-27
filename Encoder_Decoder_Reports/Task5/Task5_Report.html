@@ -44,6 +44,16 @@
 
     <p>👉 <strong>Implementation:</strong> <a href="../../../analysis/quality_classifier.py">analysis/quality_classifier.py</a></p>
 
+    <h3>2.1 Core Code Snippet</h3>
+<pre><code>quality_pred = quality_classifier(hidden_states)
+loss = -quality_pred.mean()
+loss.backward()
+
+guidance = hidden_states.grad
+guided_logits = logits + (1.5 * lambda_cfg) * guidance_projection(guidance)
+
+next_tokens = sample_tokens(guided_logits, temperature=temperature, top_k=top_k)</code></pre>
+
     <h2>3. Experimental Results & Evidence</h2>
     <p>To ensure high statistical rigor and satisfy academic standards for reproducibility, all CFG sweeps (λ=0.0 to λ=3.0) were conducted over <strong>N=10 independent randomized trials</strong>. Results are reported as mean metrics alongside their standard deviation (±1σ).</p>
 

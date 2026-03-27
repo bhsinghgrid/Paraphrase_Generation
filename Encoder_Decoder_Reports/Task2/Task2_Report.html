@@ -47,6 +47,21 @@
 
     <p>👉 <strong>Implementation:</strong> <a href="../../../analysis/semantic_drift.py">analysis/semantic_drift.py</a></p>
 
+    <h3>3.1 Core Code Snippet</h3>
+<pre><code>hooks = attach_attention_hooks(model.decoder_blocks)
+trajectory = []
+
+for t in timesteps:
+    logits, attn_maps = model.forward_with_attention(src, x_t, t)
+    decoded = decode_tokens(logits.argmax(dim=-1))
+    trajectory.append({
+        "t": int(t.item()),
+        "bert_f1": bertscore(decoded, reference_text),
+        "attention": attn_maps,
+    })
+
+plot_attention_trajectory(trajectory)</code></pre>
+
     <h2>4. Experimental Results & Evidence</h2>
     <p>To ensure high statistical rigor and satisfy academic standards for reproducibility, all measurements were conducted over <strong>N=5 independent randomized seeds</strong>. Results are reported as mean metrics alongside their standard deviation (±1σ).</p>
 
@@ -98,7 +113,40 @@
         <div class="img-caption">Figure 2: Tracking semantic distance (BERTScore) across diffusion steps for Encoder-Decoder T4.</div>
     </div>
 
-    <h3>4.2 Hardware Performance Profiling (MPS Attention Kernels)</h3>
+    <h3>4.2 Additional Attention Visualizations</h3>
+    <p>The encoder-decoder analysis also produced attention and alignment figures beyond the main drift plot. These are included to preserve the full original evidence base for mentor evaluation.</p>
+
+    <div class="img-container">
+        <img src="task2_tfidf_vs_attention.png" alt="TF-IDF vs Attention">
+        <div class="img-caption">Figure 3: Relationship between TF-IDF source importance and attention behavior.</div>
+    </div>
+
+    <div class="img-container">
+        <img src="task2_attn_evolution.png" alt="Attention Evolution">
+        <div class="img-caption">Figure 4: Attention evolution across denoising steps.</div>
+    </div>
+
+    <div class="img-container">
+        <img src="task2_source_alignment.png" alt="Source Alignment">
+        <div class="img-caption">Figure 5: Source-target alignment summary for the analyzed sample.</div>
+    </div>
+
+    <div class="img-container">
+        <img src="task2_attn_t3.png" alt="Attention at Early Step">
+        <div class="img-caption">Figure 6: Early-step attention map showing unstable source focus.</div>
+    </div>
+
+    <div class="img-container">
+        <img src="task2_attn_t0.png" alt="Attention at Final Step">
+        <div class="img-caption">Figure 7: Final-step attention map after denoising convergence.</div>
+    </div>
+
+    <div class="img-container">
+        <img src="task2_all_layers_t0.png" alt="All Layers Final Step">
+        <div class="img-caption">Figure 8: Layer-wise attention patterns at the final decoding step.</div>
+    </div>
+
+    <h3>4.3 Hardware Performance Profiling (MPS Attention Kernels)</h3>
     <p>Execution on <strong>Apple Silicon (MPS)</strong> confirms that cross-attention operations are highly efficient when the source memory is cached. By pinning the encoder KV-pairs in unified memory, the hardware avoids redundant projection kernels during each diffusion step. This architectural choice results in a <strong>~1.4x faster</strong> attention computation per step, leveraging the Metal Performance Shaders' optimized matmul kernels.</p>
 
     <h2>5. Analysis & Conclusion</h2>

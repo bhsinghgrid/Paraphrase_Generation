@@ -44,6 +44,19 @@
 
     <p>👉 <strong>Implementation:</strong> <a href="../../../analysis/step_ablation.py">analysis/step_ablation.py</a></p>
 
+    <h3>2.1 Core Code Snippet</h3>
+<pre><code>results = {}
+for steps, ckpt_path in model_paths.items():
+    model = load_model(ckpt_path, cfg, device)
+    outputs = generate_batch(model, src_batch, num_samples=200)
+
+    results[steps] = {
+        "bert_f1": mean_bertscore(outputs, refs),
+        "semantic_sim": mean_sentence_similarity(outputs, refs),
+        "bleu": mean_bleu(outputs, refs),
+        "runtime_s": measure_runtime(model, src_batch),
+    }</code></pre>
+
     <h2>3. Experimental Results & Evidence</h2>
     <p>To ensure high statistical rigor and satisfy academic standards for reproducibility, all measurements were conducted over <strong>N=5 independent randomized seeds</strong>. Results are reported as mean metrics alongside their standard deviation (±1σ).</p>
 

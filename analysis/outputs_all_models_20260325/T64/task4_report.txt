@@ -1,0 +1,14 @@
+TASK 4 — SEMANTIC ROBUSTNESS ABLATION
+==================================================
+
+Optimal diffusion steps = 64
+
+     T     BERT-F1     SEM_SIM      BLEU    sec/sample
+  --------------------------------------------------------
+    64      0.2482      0.0580    0.0007        5.6116
+
+Marginal gains (BERT-F1):
+
+Saved plots/files:
+  - task4_3d.png
+  - task4_raw_results.json

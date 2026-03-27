@@ -1,5 +1,4 @@
 """
-reverse_process.py  — Final Correct Version
 =============================================
 
 KEY PRINCIPLE: generate() must be byte-for-byte identical to run_inference()
@@ -19,17 +18,6 @@ CRITICAL BUG IN PREVIOUS VERSION:
 
   Fix: do NOT pass inference_mode. Let it default to False, exactly
   as run_inference() did.
-
-BUGS FIXED (vs original reverse_process.py)
---------------------------------------------
-BUG 1  generate_beam() used for D3PM → all-Ṛ repetition.
-       Use generate() (iterative refinement) from app1.py instead.
-BUG 2  apply_diversity_penalty used logits.var() → noise injection.
-       Fixed to logits - penalty * logits.mean(dim=1) — global suppression.
-BUG 3  x0_hint (self-conditioning) never passed to model.
-       Fixed: generate() passes x0_hint=hint every step.
-BUG 4  params not forwarded from generate_beam() to p_sample_step().
-       Fixed in generate_beam() (kept for reference, not for production use).
 """
 
 import torch

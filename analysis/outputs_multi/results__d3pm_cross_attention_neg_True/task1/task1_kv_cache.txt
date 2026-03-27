@@ -1,0 +1,10 @@
+TASK 1 — KV CACHE BENCHMARK
+========================================
+
+ src_len   standard(s)   cached(s)   speedup   encoder%   mem-save%
+      16         2.548       2.464     1.03x      31.6%       50.0%
+          source-mem before=0.070MB  after=0.035MB
+      32         3.222       2.952     1.09x      37.8%       50.0%
+          source-mem before=0.141MB  after=0.070MB
+      64         4.121       4.335     0.95x      33.6%       50.0%
+          source-mem before=0.281MB  after=0.141MB

@@ -1,0 +1,15 @@
+TASK 1 — KV CACHE BENCHMARK
+========================================
+
+has_generate_cached=True
+memory_profile=Torch CPU mem-event reduction: 22.4% @ src_len=64 (std=577.8MB, cache=448.4MB)
+
+ src_len   standard(s)   cached(s)   speedup   encoder%
+      16         0.469       0.336     1.40x      37.2%
+      32         0.334       0.247     1.35x      33.6%
+      64         0.445       0.755     0.59x      33.4%
+
+Saved graphs:
+  - task1_time_comparison.png
+  - task1_speedup.png
+  - task1_encoder_cost.png

@@ -12,12 +12,23 @@ __pycache__/
 *.pt
 
 generated_results/
+analysis/outputs/ablation/
 analysis/outputs/
-analysis/outputs_*/
-analysis_outputs/
+analysis/outputs_best_t4_fix/
+analysis/outputs_cross_attention_full/
+analysis/outputs_dryrun/
+analysis/outputs_dryrun2/
+analysis/outputs_dynamic_test/
+analysis/outputs_latest/
+analysis/outputs_t8_best_final_20260324/
+analysis/outputs_t8_latest/
+Submission_Package/
+#analysis/outputs_*/
+#analysis_outputs/
 
 mlruns/
 *.log
+pyproject.toml
 
 # Large local checkpoints and artifacts should be stored via Hugging Face or Git LFS.
 ablation_results/**/train.log

@@ -1,5 +1,4 @@
 """
-dataset.py  — Cross-Script Translation Fix
 ==========================================
 INPUT  : quote_text       (Roman/IAST transliteration of Sanskrit)
 TARGET : quote_devanagari (Devanagari script)

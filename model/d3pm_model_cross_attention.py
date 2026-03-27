@@ -1,5 +1,4 @@
 """
-d3pm_model_cross_attention.py  — Cross-Script + Generation-Fixed
 =================================================================
 INPUT  : quote_text       tokens  (Roman script, src_vocab_size)
 OUTPUT : quote_devanagari tokens  (Devanagari script, tgt_vocab_size)

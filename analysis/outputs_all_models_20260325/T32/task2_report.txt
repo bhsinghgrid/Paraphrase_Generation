@@ -1,0 +1,35 @@
+TASK 2 — ATTENTION + DRIFT REPORT
+==================================================
+
+Input : dharmo rakṣati rakṣitaḥ
+Output: धर्मो रक्षति रक्षितः
+
+Captured steps: 32
+Analysis quality: WEAK
+Final output uniq-ratio: 1.000
+Degenerate output: NO
+Multi-sample semantic score (n<=8): 0.0627
+Lock-in step (CER<=0.05): t=0
+Locked tokens: 75  Flexible tokens: 5
+TF-IDF vs attention stability corr: -0.0869
+TF-IDF status: WEAK
+
+Saved graphs:
+  - task2_attn_t*.png / task2_all_layers_t0.png
+  - task2_attn_evolution.png
+  - task2_semantic_drift.png
+  - task2_source_alignment.png
+  - task2_tfidf_vs_attention.png
+
+Step trajectory (first 10 rows)
+------------------------------------------------------------
+t= 31  bert=0.0167  drift=0.9833  text=तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ 
+t= 30  bert=0.0167  drift=0.9833  text=तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ 
+t= 29  bert=0.0167  drift=0.9833  text=तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ 
+t= 28  bert=0.0167  drift=0.9833  text=तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ 
+t= 27  bert=0.0167  drift=0.9833  text=तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ 
+t= 26  bert=0.0167  drift=0.9833  text=तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ 
+t= 25  bert=0.0167  drift=0.9833  text=तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ 
+t= 24  bert=0.0167  drift=0.9833  text=तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ 
+t= 23  bert=0.0167  drift=0.9833  text=तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ 
+t= 22  bert=0.0167  drift=0.9833  text=तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ तृ 

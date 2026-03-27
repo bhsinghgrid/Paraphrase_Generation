@@ -1,0 +1,35 @@
+TASK 2 — ATTENTION + DRIFT REPORT
+==================================================
+
+Input : dharmo rakṣati rakṣitaḥ
+Output: धर्मो रक्षति रक्षितः
+
+Captured steps: 16
+Analysis quality: WEAK
+Final output uniq-ratio: 1.000
+Degenerate output: NO
+Multi-sample semantic score (n<=8): 0.1471
+Lock-in step (CER<=0.05): t=0
+Locked tokens: 38  Flexible tokens: 42
+TF-IDF vs attention stability corr: 0.9294
+TF-IDF status: OK
+
+Saved graphs:
+  - task2_attn_t*.png / task2_all_layers_t0.png
+  - task2_attn_evolution.png
+  - task2_semantic_drift.png
+  - task2_source_alignment.png
+  - task2_tfidf_vs_attention.png
+
+Step trajectory (first 10 rows)
+------------------------------------------------------------
+t= 15  bert=0.0475  drift=0.9525  text=धर्मो ति रक्ष रक्षि तः तः तः तः ितः तः धर्मो धर्मो धर्मो धर्
+t= 14  bert=0.0478  drift=0.9522  text=धर्मो ति रक्ष रक्षि तः तः तः तः ितः तः धर्मो धर्मो धर्मो धर्
+t= 13  bert=0.0478  drift=0.9522  text=धर्मो ति रक्ष रक्षि तः तः तः तः ितः तः धर्मो धर्मो धर्मो धर्
+t= 12  bert=0.0478  drift=0.9522  text=धर्मो ति रक्ष रक्षि तः तः तः तः ितः तः धर्मो धर्मो धर्मो धर्
+t= 11  bert=0.0478  drift=0.9522  text=धर्मो ति रक्ष रक्षि तः तः तः तः ितः तः धर्मो धर्मो धर्मो धर्
+t= 10  bert=0.0478  drift=0.9522  text=धर्मो ति रक्ष रक्षि तः तः तः तः ितः तः धर्मो धर्मो धर्मो धर्
+t=  9  bert=0.0478  drift=0.9522  text=धर्मो ति रक्ष रक्षि तः तः तः तः ितः तः धर्मो धर्मो धर्मो धर्
+t=  8  bert=0.0478  drift=0.9522  text=धर्मो ति रक्ष रक्षि तः तः तः तः ितः तः धर्मो धर्मो धर्मो धर्
+t=  7  bert=0.0478  drift=0.9522  text=धर्मो ति रक्ष रक्षि तः तः तः तः ितः तः धर्मो धर्मो धर्मो धर्
+t=  6  bert=0.0478  drift=0.9522  text=धर्मो ति रक्ष रक्षि तः तः तः तः ितः तः धर्मो धर्मो धर्मो धर्

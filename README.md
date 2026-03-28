@@ -185,9 +185,10 @@ This uses:
 
 ## Notes
 
-- Current inference uses cleanup and fallback logic in `inference.py`.
+- Current inference uses cleanup and fallback logic in `inference.py` or `app.py`.
 - Some checkpoints may produce noisy raw output; the final displayed output may come from cleanup/fallback.
 - For demo use, keep the Hugging Face model repo as the source of truth for released checkpoints.
+- Model output is good for the `cross attention architecture` but not good for the `encoder decoder architecture` in the infererence `encoder decoder architecture` provide a lot of garbage that's is handle by the `fallback` or mean cleaning the outputs or align the proper sanskrit word with the english words
 
 ## Deployment
 
